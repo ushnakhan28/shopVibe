@@ -45,12 +45,15 @@ const Category = () => {
         para="Discover amazing products across our carefully curated categories"
       />
       <div className="justify grid md:grid-cols-3 grid-cols-1 gap-10 md:mt-20 mt-10 md:mx-20 mx-10">
-        {visibleCategories?.map((item, index) => (
-          <div className="bg-[#f8f8f8] rounded-xl group duration-[0.3s] overflow-hidden hover:shadow-xl">
-            <div key={index} className="relative overflow-hidden">
+        {visibleCategories?.map((item) => (
+          <div
+            key={item.id}
+            className="bg-[#f8f8f8] rounded-xl group duration-[0.3s] overflow-hidden hover:shadow-xl">
+            <div className="relative overflow-hidden">
               <img
                 className="group-hover:scale-105 rounded-t-xl duration-[0.3s] w-full h-[150px] md:h-[250px]"
                 src={item.img}
+                alt={item.name}
               />
               <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 group-hover:opacity-30 duration-[0.3s]"></div>
               <div></div>

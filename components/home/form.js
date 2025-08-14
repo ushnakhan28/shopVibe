@@ -32,7 +32,7 @@ const Form = () => {
             <IconConfetti color="white" size={40} />
             <h1 className="text-white font-bold text-xl">Thank You!</h1>
             <p className="text-[#eeeeee] text-center px-3 md:px-0">
-              You've successfully subscribed to our newsletter.
+              You&apos;ve successfully subscribed to our newsletter.
             </p>
             <Btn click={handle} text="Unsubscribe" icon1={<IconSend />} />
           </div>

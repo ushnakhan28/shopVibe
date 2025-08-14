@@ -8,10 +8,15 @@ import {
 
 const Footer = () => {
   const data = ["About Us", "Contact", "Privacy Policy", "Terms of Service"];
+  // const icons = [
+  //   <IconBrandFacebook size={28} />,
+  //   <IconBrandTwitter size={28} />,
+  //   <IconBrandInstagram size={28} />,
+  // ];
   const icons = [
-    <IconBrandFacebook size={28} />,
-    <IconBrandTwitter size={28} />,
-    <IconBrandInstagram size={28} />,
+    { icon: IconBrandFacebook, name: "Facebook" },
+    { icon: IconBrandTwitter, name: "Twitter" },
+    { icon: IconBrandInstagram, name: "Instagram" },
   ];
   return (
     <div className="px-6 py-12 bg-[#0B1120]">
@@ -23,6 +28,18 @@ const Footer = () => {
             prices, and excellent customer service.
           </p>
           <div className="flex gap-x-5">
+            {icons.map((item, index) => {
+              const IconComp = item.icon;
+              return (
+                <div
+                  key={item.name}
+                  className="cursor-pointer text-[#adadad] hover:text-[#fff] hover:scale-110 duration-[0.3s]">
+                  <IconComp size={28} />
+                </div>
+              );
+            })}
+          </div>
+          {/* <div className="flex gap-x-5">
             {icons.map((icon, index) => (
               <div
                 key={index}
@@ -30,7 +47,7 @@ const Footer = () => {
                 {icon}
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
 
         <div className="flex flex-col gap-y-3 text-center md:text-left md:mr-20">
