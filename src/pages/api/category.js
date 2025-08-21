@@ -29,9 +29,9 @@ export default function handler(req, res) {
       badge: "Fashion Collection",
       icon: "IconShirt",
       stats: [
-        { icon: "IconTshirt", title: "40+", subtitle: "Clothing Items" },
+        { icon: "IconShirt", title: "40+", subtitle: "Clothing Items" },
         { icon: "IconShoe", title: "25+", subtitle: "Footwear" },
-        { icon: "IconHandbag", title: "24+", subtitle: "Accessories" },
+        { icon: "IconShoppingBag", title: "24+", subtitle: "Accessories" },
       ],
     },
     {
@@ -97,8 +97,8 @@ export default function handler(req, res) {
       badge: "Gaming Collection",
       icon: "IconGamepad",
       stats: [
-        { icon: "IconDeviceGamepad", title: "35+", subtitle: "Consoles" },
-        { icon: "IconJoystick", title: "30+", subtitle: "Controllers" },
+        { icon: "IconDeviceGamepad2", title: "35+", subtitle: "Consoles" },
+        { icon: "IconDeviceGamepad", title: "30+", subtitle: "Controllers" },
         { icon: "IconHeadset", title: "20+", subtitle: "Gaming Headsets" },
       ],
     },
@@ -114,7 +114,7 @@ export default function handler(req, res) {
       badge: "Accessories Collection",
       icon: "IconHandbag",
       stats: [
-        { icon: "IconWatch", title: "20+", subtitle: "Watches" },
+        { icon: "IconDeviceWatch", title: "20+", subtitle: "Watches" },
         { icon: "IconSunglasses", title: "22+", subtitle: "Sunglasses" },
         { icon: "IconWallet", title: "20+", subtitle: "Wallets" },
       ],
@@ -132,7 +132,7 @@ export default function handler(req, res) {
       icon: "IconBabyCarriage",
       stats: [
         { icon: "IconBabyBottle", title: "30+", subtitle: "Baby Care" },
-        { icon: "IconToyHorse", title: "34+", subtitle: "Toys" },
+        { icon: "IconPuzzle", title: "34+", subtitle: "Toys" },
         { icon: "IconShirt", title: "30+", subtitle: "Kids Clothing" },
       ],
     },
@@ -148,7 +148,7 @@ export default function handler(req, res) {
       badge: "Music Collection",
       icon: "IconMusic",
       stats: [
-        { icon: "IconGuitar", title: "20+", subtitle: "Guitars" },
+        { icon: "IconMusic", title: "20+", subtitle: "Guitars" },
         { icon: "IconPiano", title: "15+", subtitle: "Keyboards" },
         { icon: "IconMicrophone", title: "21+", subtitle: "Audio Gear" },
       ],
@@ -166,7 +166,7 @@ export default function handler(req, res) {
       icon: "IconCamera",
       stats: [
         { icon: "IconCamera", title: "30+", subtitle: "Cameras" },
-        { icon: "IconLens", title: "25+", subtitle: "Lenses" },
+        { icon: "IconDeviceCctv", title: "25+", subtitle: "Lenses" },
         { icon: "IconDrone", title: "18+", subtitle: "Drones" },
       ],
     },
@@ -182,9 +182,9 @@ export default function handler(req, res) {
       badge: "Kitchen Collection",
       icon: "IconChefHat",
       stats: [
-        { icon: "IconOven", title: "35+", subtitle: "Appliances" },
+        { icon: "IconHomeCog", title: "35+", subtitle: "Appliances" },
         { icon: "IconCup", title: "40+", subtitle: "Cookware" },
-        { icon: "IconKnife", title: "33+", subtitle: "Utensils" },
+        { icon: "IconCup", title: "33+", subtitle: "Utensils" },
       ],
     },
     {
@@ -200,8 +200,8 @@ export default function handler(req, res) {
       badge: "Books Collection",
       icon: "IconBook",
       stats: [
-        { icon: "IconBook2", title: "40+", subtitle: "Fiction" },
-        { icon: "IconBookOpen", title: "35+", subtitle: "Non-Fiction" },
+        { icon: "IconBook", title: "40+", subtitle: "Fiction" },
+        { icon: "IconBook2", title: "35+", subtitle: "Non-Fiction" },
         { icon: "IconBookDownload", title: "26+", subtitle: "E-Books" },
       ],
     },

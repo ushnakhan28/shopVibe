@@ -4,11 +4,11 @@ import Header from "../../../components/home/header";
 import Footer from "../../../components/home/footer";
 import CategoryBnr from "../../../components/category/categoryBnr";
 import {
+  IconAdjustmentsHorizontal,
   IconEye,
   IconHeart,
   IconHeartFilled,
   IconLoader2,
-  IconReload,
   IconShieldCheck,
   IconShoppingCart,
   IconStarFilled,
@@ -16,7 +16,6 @@ import {
   IconX,
 } from "@tabler/icons-react";
 import { Badge } from "@mantine/core";
-import AppBadge from "../../../components/home/badge";
 
 export default function CategoryPage() {
   const router = useRouter();
@@ -25,9 +24,9 @@ export default function CategoryPage() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [categoryData, setCategoryData] = useState(null);
-  const [removingId, setRemovingId] = useState(null);
   const [products, setProducts] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [filter, setfilter] = useState(null);
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("wishlist")) || [];
@@ -66,16 +65,23 @@ export default function CategoryPage() {
       });
   }, [slug]);
 
-  if (!categoryData) return <div className="p-5">Loading...</div>;
+  if (!categoryData)
+    return (
+      <div className="p-5 flex items-center h-[100vh] justify-center">
+        <IconLoader2 size={50} className="animate-spin text-[#9333EA]" />
+      </div>
+    );
 
   const handlepopup = (product) => {
     setSelectedProduct(product);
     setQuantity(1);
     setshowpopup(true);
+    document.body.style.overflow = "hidden";
   };
 
   const closepopup = () => {
     setshowpopup(false);
+    document.body.style.overflow = "auto";
   };
 
   const decrease = () => {
@@ -86,6 +92,58 @@ export default function CategoryPage() {
       setQuantity(quantity + 1);
   };
 
+  const data = [
+    "Under $25",
+    "$25 - $50",
+    "$50 - $100",
+    "$100 - $200",
+    "Over $200",
+  ];
+  const finalFilteredProducts = products.filter((product) => {
+    // Price filter
+    if (filter) {
+      if (filter === "Under $25") {
+        return (
+          (product.discount > 0 && product.discountedPrice < 25) ||
+          (product.discount === 0 && product.price < 25)
+        );
+      }
+      if (filter === "$25 - $50") {
+        return (
+          (product.discount > 0 &&
+            product.discountedPrice >= 25 &&
+            product.discountedPrice < 50) ||
+          (product.discount === 0 && product.price >= 25 && product.price < 50)
+        );
+      }
+      if (filter === "$50 - $100") {
+        return (
+          (product.discount > 0 &&
+            product.discountedPrice >= 50 &&
+            product.discountedPrice < 100) ||
+          (product.discount === 0 && product.price >= 50 && product.price < 100)
+        );
+      }
+      if (filter === "$100 - $200") {
+        return (
+          (product.discount > 0 &&
+            product.discountedPrice >= 100 &&
+            product.discountedPrice < 200) ||
+          (product.discount === 0 &&
+            product.price >= 100 &&
+            product.price < 200)
+        );
+      }
+      if (filter === "Over $200") {
+        return (
+          (product.discount > 0 && product.discountedPrice >= 200) ||
+          (product.discount === 0 && product.price >= 200)
+        );
+      }
+    }
+
+    return true;
+  });
   return (
     <div className="w-full">
       <Header />
@@ -96,95 +154,151 @@ export default function CategoryPage() {
             text={categoryData.badge}
             head={categoryData.bannerHead}
             para={categoryData.bannerPara}
+            stats={categoryData.stats}
           />
         </center>
       </div>
-      <div className="mx-20 my-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-5 mt-5 gap-x-5">
-          {products?.map((product) => (
-            <div key={product?.id} className="h-[380px]">
-              <div className="h-full flex flex-col justify-between border border-[#d3d3d3] p-3 rounded-xl group hover:shadow-xl duration-300">
-                <div className="relative overflow-hidden rounded-xl">
-                  <img
-                    src={product.img}
-                    className="w-full h-[200px] object-cover rounded-xl group-hover:scale-105 duration-300"
-                    alt={product.title}
-                  />
-                  {product.discount !== 0 && (
-                    <div className="absolute top-2 left-2 z-10">
-                      <Badge
-                        color="red"
-                        variant="filled"
-                        radius="xl"
-                        size="lg"
-                        className="bg-red-600 text-white">
-                        {product.discount}%
-                      </Badge>
-                    </div>
-                  )}
-                  <div className="absolute top-2 right-2 flex flex-col gap-y-2 items-end opacity-100 md:opacity-0 group-hover:md:opacity-100 duration-300 z-10">
-                    <div className="bg-white p-1 rounded-full cursor-pointer shadow-xl relative">
-                      <div onClick={() => toggleFavorite(product.id)}>
-                        {favorites.includes(product.id) ? (
-                          <IconHeartFilled color="red" size={18} />
-                        ) : (
-                          <IconHeart color="gray" size={18} />
-                        )}
-                      </div>
-                    </div>
-                    <div className="bg-white p-3 rounded-full cursor-pointer shadow-xl relative">
-                      <IconEye
-                        onClick={() => handlepopup(product)}
-                        color="gray"
-                        size={18}
-                        className="absolute top-[3px] right-[3px]"
-                      />
-                    </div>
-                  </div>
-                </div>
+      <div className="my-15">
+        <div className="flex flex-col md:flex-row md:items-center flex-wrap sm:mx-10 mx-5  md:mx-10 border border-b-[#c9c9c9] py-3 border-l-0 border-r-0 border-t-[#c9c9c9] mt-15 md:mt-20 gap-x-20">
+          {/* Filters heading */}
+          <div className="flex gap-x-2 md:gap-x-3 items-center">
+            <IconAdjustmentsHorizontal size={20} color="#aaaaaa" />
+            <h1 className="font-semibold text-sm md:text-base text-[#747474]">
+              Filters:
+            </h1>
+          </div>
 
-                <div className="md:mt-5 flex flex-col gap-y-2">
-                  <Badge color="#7C3AED" variant="light" radius="xl" size="md">
-                    {product.category}
-                  </Badge>
-                  <p className="text-lg font-bold">{product.title}</p>
-                  <p className="flex gap-x-1 items-center">
-                    <IconStarFilled color="orange" />
-                    {product.rating}
-                  </p>
-                  <div className="flex justify-between items-center">
-                    {product.discount > 0 ? (
-                      <div className="flex items-center gap-x-3">
-                        <p className="text-xl font-semibold">
-                          <span>$</span>
-                          {product.discountedPrice}
-                        </p>
-                        <p className="font-lg line-through font-thin text-[#8f8f8f]">
-                          <span>$</span>
-                          {product.price}
-                        </p>
+          {/* Price filter */}
+          <div className="flex flex-wrap gap-2 items-center">
+            <h1 className="text-sm md:text-base text-[#747474]">Price:</h1>
+            <div className="flex flex-wrap gap-2">
+              {data?.map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => setfilter(item)}
+                  className={`px-2 md:px-3 py-[1px] rounded-xl cursor-pointer ${
+                    filter === item ? "bg-[#7D2AE8] text-white" : "bg-[#f0f0f0]"
+                  }`}>
+                  <span className="text-xs md:text-sm">{item}</span>
+                </div>
+              ))}
+              <Badge
+                color="#7C3AED"
+                variant="light"
+                radius="xl"
+                size="md"
+                className="mt-1">
+                <span className="flex gap-x-2">
+                  {finalFilteredProducts.length}
+                  {finalFilteredProducts.length > 1 ? (
+                    <p>products found</p>
+                  ) : (
+                    <p>product found</p>
+                  )}
+                </span>
+              </Badge>
+            </div>
+          </div>
+        </div>
+        <div className="md:mx-20 mx-10 my-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-5 mt-5 gap-x-5">
+            {finalFilteredProducts?.length > 0 ? (
+              finalFilteredProducts?.map((product) => (
+                <div key={product?.id} className="h-[380px]">
+                  <div className="h-full flex flex-col justify-between border border-[#d3d3d3] p-3 rounded-xl group hover:shadow-xl duration-300">
+                    <div className="relative overflow-hidden rounded-xl">
+                      <img
+                        src={product.img}
+                        className="w-full h-[200px] object-cover rounded-xl group-hover:scale-105 duration-300"
+                        alt={product.title}
+                      />
+                      {product.discount !== 0 && (
+                        <div className="absolute top-2 left-2 z-10">
+                          <Badge
+                            color="red"
+                            variant="filled"
+                            radius="xl"
+                            size="lg"
+                            className="bg-red-600 text-white">
+                            {product.discount}%
+                          </Badge>
+                        </div>
+                      )}
+                      <div className="absolute top-2 right-2 flex flex-col gap-y-2 items-end opacity-100 md:opacity-0 group-hover:md:opacity-100 duration-300 z-10">
+                        <div className="bg-white p-1 rounded-full cursor-pointer shadow-xl relative">
+                          <div onClick={() => toggleFavorite(product.id)}>
+                            {favorites.includes(product.id) ? (
+                              <IconHeartFilled color="red" size={18} />
+                            ) : (
+                              <IconHeart color="gray" size={18} />
+                            )}
+                          </div>
+                        </div>
+                        <div className="bg-white p-3 rounded-full cursor-pointer shadow-xl relative">
+                          <IconEye
+                            onClick={() => handlepopup(product)}
+                            color="gray"
+                            size={18}
+                            className="absolute top-[3px] right-[3px]"
+                          />
+                        </div>
                       </div>
-                    ) : (
-                      <div>
-                        <p className="text-xl flex items-center font-semibold">
-                          <span>$</span>
-                          {product.price}
-                        </p>
+                    </div>
+
+                    <div className="md:mt-5 flex flex-col gap-y-2">
+                      <Badge
+                        color="#7C3AED"
+                        variant="light"
+                        radius="xl"
+                        size="md">
+                        {product.category}
+                      </Badge>
+                      <p className="text-lg font-bold">{product.title}</p>
+                      <p className="flex gap-x-1 items-center">
+                        <IconStarFilled color="orange" />
+                        {product.rating}
+                      </p>
+                      <div className="flex justify-between items-center">
+                        {product.discount > 0 ? (
+                          <div className="flex items-center gap-x-3">
+                            <p className="text-xl font-semibold">
+                              <span>$</span>
+                              {product.discountedPrice}
+                            </p>
+                            <p className="font-lg line-through font-thin text-[#8f8f8f]">
+                              <span>$</span>
+                              {product.price}
+                            </p>
+                          </div>
+                        ) : (
+                          <div>
+                            <p className="text-xl flex items-center font-semibold">
+                              <span>$</span>
+                              {product.price}
+                            </p>
+                          </div>
+                        )}
+                        <button className="text-white px-3 py-2 flex gap-x-2 rounded-xl bg-[#7D2AE8] hover:scale-105 duration-200">
+                          <IconShoppingCart className="w-5 h-5" /> Add
+                        </button>
                       </div>
-                    )}
-                    <button className="text-white px-3 py-2 flex gap-x-2 rounded-xl bg-[#7D2AE8] hover:scale-105 duration-200">
-                      <IconShoppingCart className="w-5 h-5" /> Add
-                    </button>
+                    </div>
                   </div>
                 </div>
+              ))
+            ) : (
+              <div className="col-span-full flex justify-center items-center h-40">
+                <p className="text-center text-[#a0a0a0]">
+                  No products found matching your criteria
+                </p>
               </div>
-            </div>
-          ))}
+            )}
+          </div>
         </div>
         {showpopup && selectedProduct && (
           <div className="fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center">
             <div className="absolute w-full h-full bg-black/80 backdrop-blur-[1px] pointer-events-none"></div>
-            <div className="mx-3 relative z-10 bg-white rounded-xl shadow-lg p-8 max-w-4xl h-[80vh] md:max-h-[90vh] overflow-y-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="mx-3 relative z-10 bg-white rounded-xl shadow-lg p-8 max-w-4xl h-[83vh] md:max-h-[90vh] overflow-y-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8">
               <button
                 onClick={closepopup}
                 className="cursor-pointer absolute top-3 right-3 bg-[#7D2AE8] text-white p-2 rounded-full shadow-md hover:scale-105 transition z-20">
@@ -194,7 +308,7 @@ export default function CategoryPage() {
               <div>
                 <img
                   src={selectedProduct.img}
-                  className="w-[550px] h-[400px] object-cover rounded-xl"
+                  className="w-[550px] h-[445px] object-cover rounded-xl"
                   alt={selectedProduct.title}
                 />
               </div>

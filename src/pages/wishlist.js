@@ -1,5 +1,6 @@
 import {
   IconEye,
+  IconHeart,
   IconHeartFilled,
   IconLoader2,
   IconReload,
@@ -12,6 +13,7 @@ import {
 import Header from "../../components/home/header";
 import { useEffect, useState } from "react";
 import { Badge } from "@mantine/core";
+import BackBtn from "../../components/home/backBtn";
 
 const Wishlist = () => {
   const [showpopup, setshowpopup] = useState(false);
@@ -41,6 +43,7 @@ const Wishlist = () => {
     setloading(true);
     setshowpopup(true);
     setselectedproduct(product);
+    document.body.style.overflow = "hidden";
 
     setTimeout(() => {
       setloading(false);
@@ -49,6 +52,7 @@ const Wishlist = () => {
 
   const closepopup = () => {
     setshowpopup(false);
+    document.body.style.overflow = "auto";
   };
 
   const decrease = () => {
@@ -66,11 +70,14 @@ const Wishlist = () => {
   return (
     <div id="wishlist">
       <Header />
-      <section className="mt-30 md:mt-20 mx-10">
-        <h1 className="flex gap-x-3 text-2xl font-bold items-center">
-          <IconHeartFilled color="red" /> My Favourites
-        </h1>
 
+      <section className="mt-40 lg:mt-30 lg:mx-9 md:mx-4 sm:mx-5 mx-4">
+        <div className="flex flex-col gap-y-6">
+          <BackBtn />
+          <h1 className="flex gap-x-3 text-2xl font-bold items-center">
+            <IconHeart color="red" /> My Favourites
+          </h1>
+        </div>
         <div>
           {wishlist.length === 0 ? (
             <p className="mt-3 text-[#adadad]">No items in Favourites.</p>
@@ -177,7 +184,7 @@ const Wishlist = () => {
         {showpopup && selectedproduct && (
           <div className="fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center">
             <div className="absolute w-full h-full bg-black/80 backdrop-blur-[1px] pointer-events-none"></div>
-            <div className="mx-3 relative z-10 bg-white rounded-xl shadow-lg p-8 max-w-4xl h-[80vh] md:max-h-[90vh] overflow-y-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="mx-3 relative z-10 bg-white rounded-xl shadow-lg p-8 max-w-4xl h-[83vh] md:max-h-[90vh] overflow-y-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8">
               <button
                 onClick={closepopup}
                 className="cursor-pointer absolute top-3 right-3 bg-[#7D2AE8] text-white p-2 rounded-full shadow-md hover:scale-105 transition z-20">
@@ -187,7 +194,7 @@ const Wishlist = () => {
               <div>
                 <img
                   src={selectedproduct.img}
-                  className="w-[550px] h-[400px] object-cover rounded-xl"
+                  className="w-[550px] h-[445px] object-cover rounded-xl"
                   alt={selectedproduct.title}
                 />
               </div>

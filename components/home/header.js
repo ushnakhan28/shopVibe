@@ -40,7 +40,7 @@ const Header = () => {
         </h1>
 
         {/* NavLinks */}
-        <div className="hidden md:ml-16 md:flex md:gap-x-8 text-gray-600 text-sm lg:text-base flex-shrink-0 whitespace-nowrap">
+        <div className="hidden lg:ml-16 lg:flex lg:gap-x-8 text-gray-600 text-sm lg:text-base flex-shrink-0 whitespace-nowrap">
           {data.map((item, index) => (
             <a
               key={index}
@@ -55,7 +55,7 @@ const Header = () => {
         </div>
 
         {/* Search Bar */}
-        <div className="relative hidden sm:block md:ml-16 w-full sm:w-[200px] md:w-[250px] lg:w-[300px] xl:w-[400px]">
+        <div className="relative hidden lg:block lg:ml-16 w-full lg:w-[300px] xl:w-[400px]">
           <IconSearch
             className="absolute left-3 top-2"
             size={18}
@@ -78,7 +78,7 @@ const Header = () => {
         </div>
 
         <div className="flex items-center gap-2 ml-auto">
-          <div className="hidden md:flex gap-2">
+          <div className="hidden lg:flex gap-2">
             <div
               onClick={() => router.push("/wishlist")}
               className={`cursor-pointer p-1.5 rounded-xl ${
@@ -103,13 +103,13 @@ const Header = () => {
           {/* Menu Button */}
           <button
             onClick={() => setopenmenu(!openmenu)}
-            className="cursor-pointer block md:hidden">
+            className="cursor-pointer block lg:hidden">
             {openmenu ? <IconX size={24} /> : <IconMenu2 size={24} />}
           </button>
         </div>
       </div>
 
-      <div className="sm:hidden px-4 pb-3">
+      <div className="block lg:hidden px-4 pb-3">
         <div className="relative w-full">
           <IconSearch
             className="absolute left-3 top-2.5"
@@ -135,7 +135,7 @@ const Header = () => {
 
       {/* Mobile Dropdown Menu */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ${
+        className={`lg:hidden overflow-hidden transition-all duration-300 ${
           openmenu ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         }`}>
         <div className="px-6 py-4 flex flex-col gap-y-3 bg-[#bb73ff] text-white text-base">

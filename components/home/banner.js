@@ -24,7 +24,9 @@ const Banner = () => {
     },
   ];
   return (
-    <div className="bg-[#9333EA] py-16 mt-14 px-4 md:px-10" id="banner">
+    <div
+      className="bg-[#9333EA] py-16 lg:mt-14 mt-25 px-4 md:px-10"
+      id="banner">
       <center>
         <BnrBadge
           icon="IconTarget"

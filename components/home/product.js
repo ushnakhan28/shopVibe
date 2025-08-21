@@ -60,7 +60,7 @@ const Product = () => {
   const [noproduct, setnoproduct] = useState(false);
   const [dropdown, setdropdown] = useState(false);
   const [columns3, setcolumns3] = useState(false);
-  const [columns4, setcolumns4] = useState(true);
+  const [columns4, setcolumns4] = useState(false);
   const [showall, setshowall] = useState(false);
   const [loading, setloading] = useState(false);
 
@@ -78,10 +78,12 @@ const Product = () => {
   const handlepopup = (product) => {
     setshowpopup(true);
     setselectedproduct(product);
+    document.body.style.overflow = "hidden";
   };
 
   const closepopup = () => {
     setshowpopup(false);
+    document.body.style.overflow = "auto";
   };
 
   function bgfilled(id, product) {
@@ -240,7 +242,7 @@ const Product = () => {
         para="Explore our top-selling and most-loved products, handpicked just for you."
       />
 
-      <div className="flex flex-col md:flex-row md:justify-between md:items-center flex-wrap mx-4 sm:mx-10 md:mx-23 border border-b-[#c9c9c9] py-3 border-l-0 border-r-0 border-t-[#c9c9c9] mt-4 md:mt-8 gap-4">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center flex-wrap sm:mx-10 mx-5  md:mx-10 border border-b-[#c9c9c9] py-3 border-l-0 border-r-0 border-t-[#c9c9c9] mt-4 md:mt-8 gap-4">
         {/* Filters heading */}
         <div className="flex gap-x-2 md:gap-x-3 items-center">
           <IconAdjustmentsHorizontal size={20} color="#aaaaaa" />
@@ -306,7 +308,7 @@ const Product = () => {
             }}
           />
         </div>
-        <div className="w-17 flex items-center overflow-hidden border-2 border-[#e5d6fb] rounded-xl bg-white">
+        <div className="w-17 hidden lg:block flex items-center overflow-hidden border-2 border-[#e5d6fb] rounded-xl bg-white">
           <button
             onClick={() => {
               setcolumns3(false);
@@ -352,8 +354,8 @@ const Product = () => {
             </Slider>
           ) : (
             <div
-              className={`grid grid-cols-1 sm:grid-cols-2 ${
-                columns3 ? "md:grid-cols-3" : "md:grid-cols-4"
+              className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ${
+                columns3 ? "lg:grid-cols-3" : "lg:grid-cols-4"
               }`}>
               {visibleCategories.map((card) => (
                 <ProductCard
@@ -406,7 +408,7 @@ const Product = () => {
       {showpopup && selectedproduct && (
         <div className="fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center">
           <div className="absolute w-full h-full bg-black/80 backdrop-blur-[1px] pointer-events-none"></div>
-          <div className="mx-3 relative z-10 bg-white rounded-xl shadow-lg p-8 max-w-4xl max-h-[90vh] overflow-y-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="mx-3 relative z-10 bg-white rounded-xl shadow-lg p-8 max-w-4xl max-h-[83vh] overflow-y-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8">
             <button
               onClick={closepopup}
               className="cursor-pointer absolute top-3 right-3 bg-[#7D2AE8] text-white p-2 rounded-full shadow-md hover:scale-105 transition z-20">
@@ -416,7 +418,7 @@ const Product = () => {
             <div>
               <img
                 src={selectedproduct.img}
-                className="w-[550px] h-[400px] object-cover rounded-xl"
+                className="w-[550px] h-[445px] object-cover rounded-xl"
                 alt={selectedproduct.title}
               />
             </div>
@@ -593,7 +595,12 @@ const ProductCard = ({ card, showbg, bgfilled, bgstroke, handlepopup }) => {
           </div>
         </div>
         <div className="md:mt-5 flex flex-col gap-y-2">
-          <Badge color="#7C3AED" variant="light" radius="xl" size="md">
+          <Badge
+            className="mt-3 md:mt-0"
+            color="#7C3AED"
+            variant="light"
+            radius="xl"
+            size="md">
             {card.category}
           </Badge>
           <p className="text-lg font-bold">{card.title}</p>
