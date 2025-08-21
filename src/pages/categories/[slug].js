@@ -9,6 +9,7 @@ import {
   IconHeart,
   IconHeartFilled,
   IconLoader2,
+  IconReload,
   IconShieldCheck,
   IconShoppingCart,
   IconStarFilled,
