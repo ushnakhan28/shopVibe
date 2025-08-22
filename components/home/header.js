@@ -3,10 +3,12 @@ import {
   IconMenu2,
   IconSearch,
   IconShoppingCart,
+  IconUser,
   IconX,
 } from "@tabler/icons-react";
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const router = useRouter();
@@ -21,6 +23,16 @@ const Header = () => {
   const [openmenu, setopenmenu] = useState(false);
   const [search, setsearch] = useState("");
   const [active, setactive] = useState("#");
+  const [isLoggedIn, setisLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const loggedIn = localStorage.getItem("isLoggedIn");
+    if (loggedIn === "true") {
+      setisLoggedIn(true);
+    } else {
+      setisLoggedIn(false);
+    }
+  }, [router.pathname]);
 
   const handlebtn = () => {
     setsearch("");
@@ -40,7 +52,7 @@ const Header = () => {
         </h1>
 
         {/* NavLinks */}
-        <div className="hidden lg:ml-16 lg:flex lg:gap-x-8 text-gray-600 text-sm lg:text-base flex-shrink-0 whitespace-nowrap">
+        <div className="hidden lg:ml-5 mt-1 lg:flex lg:gap-x-8 text-gray-600 text-sm lg:text-base flex-shrink-0 whitespace-nowrap">
           {data.map((item, index) => (
             <a
               key={index}
@@ -55,7 +67,7 @@ const Header = () => {
         </div>
 
         {/* Search Bar */}
-        <div className="relative hidden lg:block lg:ml-16 w-full lg:w-[300px] xl:w-[400px]">
+        <div className="relative hidden lg:block lg:ml-5 w-full lg:w-[300px] xl:w-[400px]">
           <IconSearch
             className="absolute left-3 top-2"
             size={18}
@@ -77,8 +89,8 @@ const Header = () => {
           )}
         </div>
 
-        <div className="flex items-center gap-2 ml-auto">
-          <div className="hidden lg:flex gap-2">
+        <div className="flex items-center gap-10 ml-auto">
+          <div className="hidden lg:flex gap-8">
             <div
               onClick={() => router.push("/wishlist")}
               className={`cursor-pointer p-1.5 rounded-xl ${
@@ -98,6 +110,25 @@ const Header = () => {
               }`}>
               <IconShoppingCart size={20} />
             </div>
+
+            {isLoggedIn ? (
+              <div
+                onClick={() => router.push("/profile")}
+                className={`cursor-pointer p-1.5 rounded-xl ${
+                  router.pathname === "/profile"
+                    ? "bg-[#ded4ff] text-[#7C3AED]"
+                    : "hover:bg-[#e9e9e9]"
+                }`}>
+                {" "}
+                <IconUser size={20} />
+              </div>
+            ) : (
+              <Link href={"/form"}>
+                <button className="hidden lg:flex items-center cursor-pointer text-white px-4 py-[5px] text-sm gap-x-2 rounded-lg bg-[#7D2AE8] hover:bg-[#8b32ff] duration-200">
+                  Login
+                </button>
+              </Link>
+            )}
           </div>
 
           {/* Menu Button */}
@@ -154,10 +185,29 @@ const Header = () => {
               className="cursor-pointer p-2 rounded-xl bg-white text-[#bb73ff]">
               <IconHeart />
             </div>
-            <div className="cursor-pointer p-2 rounded-xl bg-white text-[#bb73ff]">
+            <div
+              onClick={() => router.push("/addToCart")}
+              className="cursor-pointer p-2 rounded-xl bg-white text-[#bb73ff]">
               <IconShoppingCart />
             </div>
+            {isLoggedIn ? (
+              <div
+                onClick={() => router.push("/profile")}
+                className="cursor-pointer p-2 rounded-xl bg-white text-[#bb73ff]">
+                <IconUser />
+              </div>
+            ) : null}
           </div>
+
+          {!isLoggedIn && (
+            <div className="mt-3">
+              <Link href={"/form"}>
+                <button className="block lg:hidden items-center cursor-pointer text-white px-8 py-[5px] text-sm gap-x-2 rounded-lg bg-[#7D2AE8] hover:bg-[#8b32ff] duration-200">
+                  Login
+                </button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>
