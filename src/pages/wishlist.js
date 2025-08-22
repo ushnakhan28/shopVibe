@@ -14,6 +14,7 @@ import Header from "../../components/home/header";
 import { useEffect, useState } from "react";
 import { Badge } from "@mantine/core";
 import BackBtn from "../../components/home/backBtn";
+import Link from "next/link";
 
 const Wishlist = () => {
   const [showpopup, setshowpopup] = useState(false);
@@ -168,9 +169,12 @@ const Wishlist = () => {
                             </p>
                           </div>
                         )}
-                        <button className="text-white px-3 py-2 flex gap-x-2 rounded-xl bg-[#7D2AE8] hover:scale-105 duration-200">
-                          <IconShoppingCart className="w-5 h-5" /> Add
-                        </button>
+                        <Link href={"/addToCart"}>
+                          <button className="items-center cursor-pointer text-white px-3 py-2 hover:bg-[#8b32ff] duration-300 flex gap-x-2 rounded-xl bg-[#7D2AE8] hover:scale-105">
+                            <IconShoppingCart size={19} className="w-5 h-5" />{" "}
+                            Add
+                          </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -267,9 +271,12 @@ const Wishlist = () => {
                   </div>
                 </div>
                 <div className="flex flex-wrap md:flex-nowrap justify-between gap-3 mt-5">
-                  <button className="flex-1 flex items-center justify-center gap-x-2 px-4 py-2 rounded-xl text-white bg-[#7D2AE8] hover:bg-[#6c21d4] transition">
-                    <IconShoppingCart size={19} /> Add to Cart
-                  </button>
+                  <Link href={"/addToCart"}>
+                    <button className="items-center cursor-pointer text-white px-3 py-2 flex gap-x-2 rounded-xl bg-[#7D2AE8] hover:bg-[#8b32ff] duration-300">
+                      <IconShoppingCart size={19} className="w-5 h-5" /> Add To
+                      Cart
+                    </button>
+                  </Link>
 
                   <button className="flex-1 px-4 py-2 rounded-xl border border-[#adadad] font-semibold hover:bg-[#f5f5f5] transition">
                     Buy Now

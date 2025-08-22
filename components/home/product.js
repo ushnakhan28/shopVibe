@@ -34,7 +34,7 @@ const NextArrow = (props) => {
   return (
     <div
       onClick={onClick}
-      className="absolute right-[-25px] top-[40%] z-10 cursor-pointer bg-[#7D2AE8] text-white p-2 rounded-full hover:scale-105 duration-300">
+      className="absolute right-[-25px] top-[40%] z-10 cursor-pointer bg-[#7D2AE8] hover:bg-[#8b32ff] text-white p-2 rounded-full hover:scale-105 duration-300">
       <IconChevronRight />
     </div>
   );
@@ -45,7 +45,7 @@ const PrevArrow = (props) => {
   return (
     <div
       onClick={onClick}
-      className="absolute left-[-25px] top-[40%] z-10 cursor-pointer bg-[#7D2AE8] text-white p-2 rounded-full hover:scale-105 duration-300">
+      className="absolute left-[-25px] top-[40%] z-10 cursor-pointer bg-[#7D2AE8] hover:bg-[#8b32ff] text-white p-2 rounded-full hover:scale-105 duration-300">
       <IconChevronLeft />
     </div>
   );
@@ -492,7 +492,7 @@ const Product = () => {
               <div className="flex justify-between mt-5">
                 <div>
                   <Link href={"/addToCart"}>
-                    <button className="cursor-pointer flex items-center gap-x-2 px-8 rounded-xl py-2 text-white bg-[#7D2AE8]">
+                    <button className="cursor-pointer flex items-center gap-x-2 px-8 rounded-xl py-2 hover:bg-[#8b32ff] duration-300 text-white bg-[#7D2AE8]">
                       <IconShoppingCart size={19} /> Add to Cart
                     </button>
                   </Link>
@@ -632,7 +632,7 @@ const ProductCard = ({ card, showbg, bgfilled, bgstroke, handlepopup }) => {
               </div>
             )}
             <Link href={"/addToCart"}>
-              <button className="items-center cursor-pointer text-white px-3 py-2 flex gap-x-2 rounded-xl bg-[#7D2AE8] hover:scale-105 duration-200">
+              <button className="items-center cursor-pointer text-white px-3 hover:bg-[#8b32ff] duration-200 py-2 flex gap-x-2 rounded-xl bg-[#7D2AE8] hover:scale-105">
                 <IconShoppingCart size={19} className="w-5 h-5" /> Add
               </button>
             </Link>

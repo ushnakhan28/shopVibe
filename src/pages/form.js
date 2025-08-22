@@ -40,7 +40,10 @@ const Form = () => {
   });
   return (
     <div className="flex items-center justify-center h-[100vh]">
-      <div className="shadow-2xl px-5 border border-[#dddddd] py-15 rounded-xl w-[450px]">
+      <div
+        className="shadow-2xl sm:px-5 px-3 border border-[#dddddd] sm:py-15 py-10 rounded-xl 
+  w-[450px] 
+  max-[480px]:w-[90%]">
         <h1 className="font-bold text-2xl text-center">Welcome back</h1>
         <p className="text-md text-center mt-2 text-[#adadad]">
           Sign in to your account to continue shopping
@@ -50,7 +53,11 @@ const Form = () => {
             <div className="flex flex-col gap-y-2 mt-5">
               <label className="font-semibold">Email:</label>
               <div className="flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[10px] rounded-xl">
-                <IconMail className="" size={20} color="#b9b9b9" />
+                <IconMail
+                  className="sm:block hidden"
+                  size={20}
+                  color="#b9b9b9"
+                />
                 <input
                   onBlur={formik.handleBlur}
                   name="email"
@@ -67,8 +74,12 @@ const Form = () => {
             </div>
             <div className="flex flex-col gap-y-2 mt-5">
               <label className="font-semibold">Password:</label>
-              <div className="flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-2 rounded-xl">
-                <IconPhone className="" size={20} color="#b9b9b9" />
+              <div className="flex gap-x-0 sm:gap-x-3 items-center w-full border border-[#adadad] px-3 py-2 rounded-xl">
+                <IconPhone
+                  className="sm:block hidden"
+                  size={20}
+                  color="#b9b9b9"
+                />
                 <input
                   onBlur={formik.handleBlur}
                   type={showEyeIcon ? "text" : "password"}
