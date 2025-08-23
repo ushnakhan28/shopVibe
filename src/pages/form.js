@@ -1,14 +1,18 @@
 import {
+  IconArrowLeft,
+  IconArrowRight,
   IconEye,
   IconEyeOff,
   IconLoader2,
   IconMail,
   IconPhone,
+  IconUser,
 } from "@tabler/icons-react";
 import { useFormik } from "formik";
 import { useState } from "react";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Form = () => {
   const [showEyeIcon, setshowEyeIcon] = useState(false);
@@ -20,8 +24,12 @@ const Form = () => {
     initialValues: {
       email: "",
       password: "",
+      name: "",
     },
     validationSchema: Yup.object({
+      name: Yup.string()
+        .min(3, "Username must be at least 3 characters")
+        .required("Username is required"),
       email: Yup.string()
         .email("Enter valid email")
         .required("Email is required"),
@@ -33,13 +41,19 @@ const Form = () => {
       setloading(true);
       setTimeout(() => {
         localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("userName", values.name);
+        localStorage.setItem("email", values.email);
         router.push("/profile");
         setloading(false);
       }, 3000);
     },
   });
   return (
-    <div className="flex items-center justify-center h-[100vh]">
+    <div className="flex gap-y-3 flex-col items-center justify-center h-[100vh]">
+      <Link href="/" className="items-center flex gap-x-2 text-[#999999]">
+        <IconArrowLeft size={20} />{" "}
+        <span className="hover:underline">Back to ShopVibe</span>
+      </Link>
       <div
         className="shadow-2xl sm:px-5 px-3 border border-[#dddddd] sm:py-15 py-10 rounded-xl 
   w-[450px] 
@@ -50,7 +64,29 @@ const Form = () => {
         </p>
         <form onSubmit={formik.handleSubmit}>
           <div>
-            <div className="flex flex-col gap-y-2 mt-5">
+            <div className="flex flex-col gap-y-2 mt-2">
+              <label className="font-semibold">UserName:</label>
+              <div className="flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[10px] rounded-xl">
+                <IconUser
+                  className="sm:block hidden"
+                  size={20}
+                  color="#b9b9b9"
+                />
+                <input
+                  onBlur={formik.handleBlur}
+                  name="name"
+                  placeholder="Enter your usename"
+                  className="flex-1 outline-none focus:ring-0"
+                  onChange={formik.handleChange}
+                  autoComplete="off"
+                  value={formik.values.name}
+                />
+              </div>
+              {formik.touched.email && formik.errors.email && (
+                <p className="text-red-500 text-sm">{formik.errors.name}</p>
+              )}
+            </div>
+            <div className="flex flex-col gap-y-2 mt-2">
               <label className="font-semibold">Email:</label>
               <div className="flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[10px] rounded-xl">
                 <IconMail
@@ -72,7 +108,7 @@ const Form = () => {
                 <p className="text-red-500 text-sm">{formik.errors.email}</p>
               )}
             </div>
-            <div className="flex flex-col gap-y-2 mt-5">
+            <div className="flex flex-col gap-y-2 mt-2">
               <label className="font-semibold">Password:</label>
               <div className="flex gap-x-0 sm:gap-x-3 items-center w-full border border-[#adadad] px-3 py-2 rounded-xl">
                 <IconPhone

@@ -28,7 +28,7 @@ const Footer = () => {
               return (
                 <div
                   key={item.name}
-                  className="cursor-pointer text-[#adadad] hover:text-[#fff] hover:scale-110 hover:rotate-[360deg] duration-[0.3s]">
+                  className="cursor-pointer text-[#adadad] hover:text-[#fff] hover:scale-110 hover:rotate-[360deg] duration-[0.6s]">
                   <IconComp size={28} />
                 </div>
               );
