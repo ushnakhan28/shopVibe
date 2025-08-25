@@ -36,6 +36,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Badge } from "@mantine/core";
 import Wishlist from "./wishlist";
+import LogoutPopup from "../../components/home/logoutPopup";
 
 const Profile = () => {
   const router = useRouter();
@@ -263,12 +264,33 @@ const Profile = () => {
       status: "Processing",
     },
   ];
+  const [settings, setSettings] = useState({
+    email: false,
+    sms: false,
+    marketing: false,
+  });
 
+  useEffect(() => {
+    const savedSettings = localStorage.getItem("settings");
+    if (savedSettings) {
+      setSettings(JSON.parse(savedSettings));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("settings", JSON.stringify(settings));
+  }, [settings]);
+
+  const handleToggle = (key) => {
+    setSettings((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
   return (
     <div className="flex bg-[#f0f0f0]">
       <Header />
 
-      {/* 👇 Mobile menu toggle button */}
       <button
         className="lg:hidden fixed top-[8px] left-4 z-50 bg-gradient-to-r from-pink-500 to-purple-500 text-white p-2 rounded-lg shadow"
         onClick={() => setSidebarOpen(!sidebarOpen)}>
@@ -279,7 +301,6 @@ const Profile = () => {
           className="fixed inset-0 bg-black/40 z-30 lg:hidden"
           onClick={() => setSidebarOpen(false)}></div>
       )}
-      {/* 👇 Sidebar */}
       <div
         className={`bg-[#fcfcfc] fixed lg:-top-2 md:top-10 top-8 left-0 h-full xs:w-[100%] sm:w-[30%] lg:w-[20%] mt-[70px] overflow-y-auto shadow-lg z-40 transform transition-transform duration-300 
       ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}>
@@ -290,7 +311,7 @@ const Profile = () => {
               className="mx-3"
               onClick={() => {
                 setactiveTab(item.sidebarContent);
-                setSidebarOpen(false); // mobile pe close ho jaye
+                setSidebarOpen(false);
               }}>
               <div
                 className={`flex gap-x-4 cursor-pointer items-center px-3 py-3 rounded-xl hover:bg-[#f0f0f0] w-full font-semibold text-md ${
@@ -660,11 +681,13 @@ const Profile = () => {
 
         <div>
           {activeTab === "Payment Methods" && (
-            <div className="lg:mx-10 mx-5 bg-white shadow-sm rounded-xl md:px-6 px-4 py-5">
+            <div className="bg-[#fcfcfc] m-4 sm:m-10 px-4 sm:px-8 py-6 sm:py-8 rounded-xl border border-[#e0e0e0] shadow-sm">
               <div className="flex justify-between items-center mb-5">
                 <div>
-                  <h2 className="text-xl font-semibold">Payment Methods</h2>
-                  <p className="text-gray-500 text-sm">
+                  <h1 className="font-bold text-2xl sm:text-3xl">
+                    Payment Methods
+                  </h1>
+                  <p className="text-[#616161] text-sm sm:text-base tracking-[1.2px]">
                     Manage your payment options
                   </p>
                 </div>
@@ -714,15 +737,113 @@ const Profile = () => {
 
         <div>
           {activeTab === "Settings" && (
-            <div className="mt-20">
+            <div>
+              <div className="bg-[#fcfcfc] m-4 sm:m-10 px-4 sm:px-8 py-6 sm:py-8 rounded-xl border border-[#e0e0e0] shadow-sm">
+                <h1 className="font-bold text-2xl sm:text-3xl">
+                  Account Settings
+                </h1>
+                <p className="text-[#616161] text-sm sm:text-base tracking-[1.2px]">
+                  Configure your account preferences
+                </p>
+
+                <div className="flex justify-between items-center border-b border-[#adadad] py-5">
+                  <div>
+                    <h1 className="text-lg font-semibold">
+                      Email Notifications
+                    </h1>
+                    <p className="text-sm text-gray-600">
+                      Receive updates about orders and promotions
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => handleToggle("email")}
+                    className={`w-12 h-6 flex items-center rounded-full p-1 duration-300 ${
+                      settings.email ? "bg-[#7D2AE8]" : "bg-gray-300"
+                    }`}>
+                    <div
+                      className={`bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ${
+                        settings.email ? "translate-x-6" : "translate-x-0"
+                      }`}></div>
+                  </button>
+                </div>
+
+                {/* SMS Notifications */}
+                <div className="flex justify-between items-center border-b border-[#adadad] py-5">
+                  <div>
+                    <h1 className="text-lg font-semibold">SMS Notifications</h1>
+                    <p className="text-sm text-gray-600">
+                      Get text updates about your orders
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => handleToggle("sms")}
+                    className={`w-12 h-6 flex items-center rounded-full p-1 duration-300 ${
+                      settings.sms ? "bg-[#7D2AE8]" : "bg-gray-300"
+                    }`}>
+                    <div
+                      className={`bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ${
+                        settings.sms ? "translate-x-6" : "translate-x-0"
+                      }`}></div>
+                  </button>
+                </div>
+
+                {/* Marketing Emails */}
+                <div className="flex justify-between items-center pt-5">
+                  <div>
+                    <h1 className="text-lg font-semibold">Marketing Emails</h1>
+                    <p className="text-sm text-gray-600">
+                      Receive promotional offers and deals
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => handleToggle("marketing")}
+                    className={`w-12 h-6 flex items-center rounded-full p-1 duration-300 ${
+                      settings.marketing ? "bg-[#7D2AE8]" : "bg-gray-300"
+                    }`}>
+                    <div
+                      className={`bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ${
+                        settings.marketing ? "translate-x-6" : "translate-x-0"
+                      }`}></div>
+                  </button>
+                </div>
+              </div>
+
+              <div className="bg-[#fcfcfc] mt-8 m-4 sm:m-10 px-4 sm:px-8 py-6 sm:py-8 rounded-xl border border-[#e0e0e0] shadow-sm">
+                <h1 className="font-bold text-2xl sm:text-3xl">Security</h1>
+                <p className="text-[#616161] text-sm sm:text-base tracking-[1.2px]">
+                  Manage your account security
+                </p>
+                <div className="mt-5 flex flex-col gap-y-3">
+                  <div className="flex gap-x-3 items-center border border-[#adadad] cursor-pointer rounded-xl px-3 py-2">
+                    <IconSettings size={20} color="#9333EA" />
+                    <span>Change Password</span>
+                  </div>
+                  <div className="flex gap-x-3 items-center border border-[#adadad] cursor-pointer rounded-xl px-3 py-2">
+                    <IconSettings size={20} color="#9333EA" />
+                    <span>Two-Factor Authentication</span>
+                  </div>
+                  <div className="flex gap-x-3 items-center border border-[#adadad] cursor-pointer rounded-xl px-3 py-2">
+                    <IconTrash size={20} color="#ff3939" />
+                    <span>Delete Account</span>
+                  </div>
+                </div>
+              </div>
               <div className="flex sm:mx-10 mx-6 justify-center">
                 <button
                   onClick={() => setpopup(true)}
-                  className="mt-10 w-full flex gap-x-2 justify-center items-center cursor-pointer text-white py-2 sm:text-base rounded-lg bg-[#7D2AE8] hover:bg-[#8b32ff] duration-200">
-                  Logout
+                  className="w-full flex gap-x-2 justify-center items-center cursor-pointer text-white py-2 sm:text-base rounded-lg bg-[#7D2AE8] hover:bg-[#8b32ff] duration-200">
+                  Logout{" "}
                 </button>
-              </div>{" "}
+              </div>
             </div>
+          )}
+        </div>
+
+        {/* ----------Settings---------- */}
+
+        <div>
+          {activeTab === "Logout" && (
+            <LogoutPopup setactiveTab={setactiveTab} />
           )}
         </div>
 

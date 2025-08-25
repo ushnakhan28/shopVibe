@@ -59,7 +59,7 @@ const Form = () => {
     <div className="flex gap-y-3 flex-col items-center justify-center h-[100vh]">
       <Link
         href="/"
-        className="mt-60 md:mt-20 items-center flex gap-x-2 text-[#999999]">
+        className="mt-30 md:mt-1 items-center flex gap-x-2 text-[#999999]">
         <IconArrowLeft size={20} />{" "}
         <span className="hover:underline">Back to ShopVibe</span>
       </Link>
