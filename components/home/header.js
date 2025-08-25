@@ -47,7 +47,10 @@ const Header = () => {
       {/* Top Navbar */}
       <div className="flex justify-between items-center px-4 md:px-10 py-3 gap-4 flex-wrap md:flex-nowrap">
         {/* Logo */}
-        <h1 className="text-xl md:text-2xl font-bold text-[#7C3AED] whitespace-nowrap">
+        <div className="lg:hidden fixed text-sm top-[8px] left-4 z-50 bg-purple-600 text-white p-2 rounded-lg shadow">
+          SV
+        </div>
+        <h1 className="text-xl md:text-2xl md:ml-6 lg:ml-0 ml-12 font-bold text-[#7C3AED] whitespace-nowrap">
           ShopVibe
         </h1>
 
@@ -92,7 +95,7 @@ const Header = () => {
         <div className="flex items-center gap-10 ml-auto">
           <div className="hidden lg:flex gap-8">
             <div
-              onClick={() => router.push("/wishlist")}
+              onClick={() => router.push("/headerWishlist")}
               className={`cursor-pointer p-1.5 rounded-xl ${
                 router.pathname === "/wishlist"
                   ? "bg-[#ded4ff] text-[#7C3AED]"
@@ -181,7 +184,7 @@ const Header = () => {
           ))}
           <div className="flex gap-4 pt-3">
             <div
-              onClick={() => router.push("/wishlist")}
+              onClick={() => router.push("/headerWishlist")}
               className="cursor-pointer p-2 rounded-xl bg-white text-[#bb73ff]">
               <IconHeart />
             </div>

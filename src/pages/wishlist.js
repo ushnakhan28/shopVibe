@@ -70,7 +70,7 @@ const Wishlist = () => {
 
   return (
     <div id="wishlist">
-      <Header />
+      {/* <Header /> */}
 
       <section className="mt-40 lg:mt-30 lg:mx-9 md:mx-4 sm:mx-5 mx-4">
         <div className="flex flex-col gap-y-6">
