@@ -378,7 +378,18 @@ const Header = () => {
                     <IconLoader2 className="animate-spin" size={20} />
                   </div>
                 ) : (
-                  <IconShoppingCart size={20} />
+                  <div>
+                    {cartCount > 0 ? (
+                      <div className="relative">
+                        <IconShoppingCart size={20} />
+                        <div className="rounded-xl absolute bottom-[18px] left-[18px] bg-red-500 w-5 h-5 flex justify-center items-center text-white text-[10px]">
+                          {cartCount}
+                        </div>
+                      </div>
+                    ) : (
+                      <IconShoppingCart size={20} />
+                    )}
+                  </div>
                 )}{" "}
               </div>
             </div>

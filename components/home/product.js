@@ -340,7 +340,7 @@ const Product = () => {
             }}
           />
         </div>
-        <div className="w-17 lg:block flex items-center overflow-hidden border-2 border-[#e5d6fb] rounded-xl bg-white">
+        <div className="w-17 lg:block items-center overflow-hidden hidden border-2 border-[#e5d6fb] rounded-xl bg-white">
           <button
             onClick={() => {
               setcolumns3(false);
