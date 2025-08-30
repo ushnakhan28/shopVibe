@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IconShoppingCart, IconTrash } from "@tabler/icons-react";
+import { IconLoader2, IconShoppingCart, IconTrash } from "@tabler/icons-react";
 import Header from "../../components/home/header";
 import WithOutLogin from "../../components/home/withoutLogin";
 import BackBtn from "../../components/home/backBtn";
@@ -8,7 +8,7 @@ const AddToCart = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cart, setCart] = useState([]);
   const [quantity, setquantity] = useState(1);
-
+  const [loading, setloading] = useState(null);
   // 🔹 Check login status
   useEffect(() => {
     const loggedIn = localStorage.getItem("isLoggedIn");
@@ -69,12 +69,12 @@ const AddToCart = () => {
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <section className="mt-40 lg:mt-30 lg:mx-9 md:mx-4 sm:mx-5 mx-4">
         {isLoggedIn ? (
           <div>
             {cart.length === 0 ? (
-              <div className="-mt-30">
+              <div className="lg:-mt-30 -mt-40">
                 <WithOutLogin
                   icon={<IconShoppingCart size={60} color="#9333EA" />}
                   type="Your Cart is Empty"
@@ -150,9 +150,23 @@ const AddToCart = () => {
 
                             <div className="text-sm">
                               <button
-                                onClick={() => handleRemoveFromCart(item.id)}
+                                onClick={() => {
+                                  setloading(item.id);
+                                  setTimeout(() => {
+                                    handleRemoveFromCart(item.id);
+                                    setloading(null);
+                                  }, 2000);
+                                }}
                                 className="cursor-pointer flex gap-x-2 items-center rounded-xl px-4 py-2 bg-[#9333EA] text-white w-full sm:w-auto justify-center">
-                                <IconTrash size={16} /> Remove
+                                {loading === item.id ? (
+                                  <IconLoader2
+                                    size={16}
+                                    className="animate-spin"
+                                  />
+                                ) : (
+                                  <IconTrash size={16} />
+                                )}{" "}
+                                Remove
                               </button>
                             </div>
                           </div>
@@ -165,7 +179,7 @@ const AddToCart = () => {
             )}
           </div>
         ) : (
-          <div className="-mt-30">
+          <div className="lg:-mt-30 -mt-40">
             <WithOutLogin
               icon={<IconShoppingCart size={60} color="#9333EA" />}
               type="Sign In to View Your Cart"

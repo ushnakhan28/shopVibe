@@ -911,6 +911,7 @@ import {
   IconLogout,
   IconLogout2,
   IconMenu2,
+  IconShoppingCart,
 } from "@tabler/icons-react";
 import Header from "../../components/home/header";
 import { useEffect, useState } from "react";
@@ -921,6 +922,7 @@ import * as Yup from "yup";
 import { Badge } from "@mantine/core";
 import Wishlist from "./wishlist";
 import LogoutPopup from "../../components/home/logoutPopup";
+import AddToCart from "./addToCart";
 
 const Profile = () => {
   const router = useRouter();
@@ -1086,6 +1088,10 @@ const Profile = () => {
     {
       icon: <IconHeart />,
       sidebarContent: "Wishlist",
+    },
+    {
+      icon: <IconShoppingCart />,
+      sidebarContent: "Cart",
     },
     {
       icon: <IconMapPin />,
@@ -1509,6 +1515,16 @@ const Profile = () => {
           )}
         </div>
 
+        {/* ----------Cart---------- */}
+
+        <div>
+          {activeTab === "Cart" && (
+            <div className="mt-20">
+              <AddToCart />
+            </div>
+          )}
+        </div>
+
         {/* ----------Addresses---------- */}
 
         <div className="lg:mt-22 mt-32">
@@ -1656,7 +1672,6 @@ const Profile = () => {
                   </button>
                 </div>
 
-                {/* SMS Notifications */}
                 <div className="flex justify-between items-center border-b border-[#adadad] py-5">
                   <div>
                     <h1 className="text-lg font-semibold">SMS Notifications</h1>

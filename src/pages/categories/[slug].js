@@ -28,6 +28,8 @@ export default function CategoryPage() {
   const [products, setProducts] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [filter, setfilter] = useState(null);
+  const [added, setAdded] = useState(false);
+  const [addedItems, setAddedItems] = useState({});
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("wishlist")) || [];
@@ -46,6 +48,9 @@ export default function CategoryPage() {
 
     localStorage.setItem("wishlist", JSON.stringify(stored));
     setFavorites(stored.map((p) => p.id));
+
+    // 🔔 Header wishlist count update
+    window.dispatchEvent(new Event("wishlistUpdated"));
   };
 
   useEffect(() => {
@@ -72,6 +77,15 @@ export default function CategoryPage() {
         <IconLoader2 size={50} className="animate-spin text-[#9333EA]" />
       </div>
     );
+  const handleAdd = (product, quantity = 1) => {
+    if (!product) return;
+    addToCart(product, quantity);
+
+    setAddedItems((prev) => ({
+      ...prev,
+      [product.id]: true,
+    }));
+  };
 
   const handlepopup = (product) => {
     setSelectedProduct(product);
@@ -91,6 +105,26 @@ export default function CategoryPage() {
   const increase = () => {
     if (selectedProduct && quantity < selectedProduct.stock)
       setQuantity(quantity + 1);
+  };
+  const addToCart = (product, quantity = 1) => {
+    if (typeof window !== "undefined") {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const existingItemIndex = cart.findIndex(
+        (item) => item.id === product.id
+      );
+
+      if (existingItemIndex !== -1) {
+        cart[existingItemIndex].quantity += quantity;
+      } else {
+        cart.push({ ...product, quantity });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      // 🔔 Header ko update karne ke liye event
+      window.dispatchEvent(new Event("cartUpdated"));
+    }
   };
 
   const data = [
@@ -279,8 +313,17 @@ export default function CategoryPage() {
                             </p>
                           </div>
                         )}
-                        <button className="text-white px-3 py-2 flex gap-x-2 rounded-xl bg-[#7D2AE8] hover:scale-105 duration-200">
-                          <IconShoppingCart className="w-5 h-5" /> Add
+                        <button
+                          onClick={() => handleAdd(product, 1)}
+                          disabled={addedItems[product.id]} // sirf current product disable
+                          className={`flex items-center justify-center gap-x-2 px-3 py-2 rounded-xl text-white 
+    ${
+      addedItems[product.id]
+        ? "bg-gray-400 cursor-not-allowed"
+        : "bg-[#7D2AE8] hover:bg-[#6c21d4] transition"
+    }`}>
+                          <IconShoppingCart size={19} />
+                          {addedItems[product.id] ? "Added" : "Add"}
                         </button>
                       </div>
                     </div>
@@ -382,8 +425,17 @@ export default function CategoryPage() {
                   </div>
                 </div>
                 <div className="flex flex-wrap md:flex-nowrap justify-between gap-3 mt-5">
-                  <button className="flex-1 flex items-center justify-center gap-x-2 px-4 py-2 rounded-xl text-white bg-[#7D2AE8] hover:bg-[#6c21d4] transition">
-                    <IconShoppingCart size={19} /> Add to Cart
+                  <button
+                    onClick={() => handleAdd(selectedProduct, quantity)}
+                    disabled={addedItems[selectedProduct.id]} // same status use karo
+                    className={`flex-1 flex items-center justify-center gap-x-2 px-4 py-2 rounded-xl text-white 
+    ${
+      addedItems[selectedProduct.id]
+        ? "bg-gray-400 cursor-not-allowed"
+        : "bg-[#7D2AE8] hover:bg-[#6c21d4] transition"
+    }`}>
+                    <IconShoppingCart size={19} />
+                    {addedItems[selectedProduct.id] ? "Added" : "Add to Cart"}
                   </button>
 
                   <button className="flex-1 px-4 py-2 rounded-xl border border-[#adadad] font-semibold hover:bg-[#f5f5f5] transition">

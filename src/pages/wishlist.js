@@ -24,11 +24,6 @@ const Wishlist = () => {
   const [removingId, setRemovingId] = useState(null);
   const [quantity, setquantity] = useState(1);
 
-  // const handlebtn = (id) => {
-  //   const updatedWishlist = wishlist.filter((item) => item?.id !== id);
-  //   localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
-  //   setwishlist(updatedWishlist);
-  // };
   const handlebtn = (id) => {
     if (typeof window !== "undefined") {
       const updatedWishlist = wishlist.filter((item) => item?.id !== id);
@@ -48,23 +43,11 @@ const Wishlist = () => {
     }, 2000);
   }, []);
 
-  // window.dispatchEvent(new Event("wishlist-updated"));
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.dispatchEvent(new Event("wishlist-updated"));
     }
   }, []);
-
-  // const handlepopup = (product) => {
-  //   setloading(true);
-  //   setshowpopup(true);
-  //   setselectedproduct(product);
-  //   document.body.style.overflow = "hidden";
-
-  //   setTimeout(() => {
-  //     setloading(false);
-  //   }, 1500);
-  // };
 
   const handlepopup = (product) => {
     setloading(true);
@@ -79,11 +62,6 @@ const Wishlist = () => {
       setloading(false);
     }, 1500);
   };
-
-  // const closepopup = () => {
-  //   setshowpopup(false);
-  //   document.body.style.overflow = "auto";
-  // };
 
   const closepopup = () => {
     setshowpopup(false);
@@ -106,12 +84,10 @@ const Wishlist = () => {
 
   return (
     <div id="wishlist">
-      {/* <Header /> */}
-
       <section className="mt-40 lg:mt-30 lg:mx-9 md:mx-4 sm:mx-5 mx-4">
         <div>
           {wishlist.length === 0 ? (
-            <div className="-mt-30">
+              <div className="lg:-mt-30 -mt-40">
               <WithOutLogin
                 icon={<IconHeart size={60} color="#9333EA" />}
                 type="Your Wishlist is Empty"

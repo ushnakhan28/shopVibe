@@ -76,9 +76,7 @@ const LogoutPopup = ({ setactiveTab }) => {
           Are you sure you want to sign out of your account?
         </p>
 
-        {/* Info Cards */}
         <div className="flex flex-col gap-y-3 sm:gap-y-4 items-center">
-          {/* Name + Email + Initials */}
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-x-4 items-center sm:items-center border-[#adadad] rounded-xl w-full px-4 sm:px-5 border py-3 sm:h-20">
             <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black flex items-center justify-center text-white font-semibold text-lg sm:text-xl rounded-full">
               {initials}
@@ -89,7 +87,6 @@ const LogoutPopup = ({ setactiveTab }) => {
             </div>
           </div>
 
-          {/* Info with Shield */}
           <div className="flex gap-x-3 sm:gap-x-4 items-center border-[#adadad] rounded-xl w-full px-4 sm:px-5 border py-2 sm:py-3">
             <div className="flex-shrink-0">
               <IconShield size={24} className="sm:size-[28px] text-green-600" />
@@ -101,7 +98,6 @@ const LogoutPopup = ({ setactiveTab }) => {
           </div>
         </div>
 
-        {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-2">
           <button
             onClick={handleCancel}
@@ -125,7 +121,6 @@ const LogoutPopup = ({ setactiveTab }) => {
           </button>
         </div>
 
-        {/* Footer Text */}
         <p className="text-[10px] sm:text-xs text-center text-[#adadad] mt-1 sm:mt-2">
           Your data will remain secure and available when you return.
         </p>

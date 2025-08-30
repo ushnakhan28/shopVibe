@@ -35,8 +35,8 @@ const Header = () => {
   const [wishlistCount, setWishlistCount] = useState(0);
   const [cartCount, setCartCount] = useState(0);
 
+  // 🔹 Wishlist count listener
   useEffect(() => {
-    // function jo count update karega
     const updateWishlistCount = () => {
       const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
       setWishlistCount(storedWishlist.length);
@@ -44,19 +44,17 @@ const Header = () => {
 
     updateWishlistCount(); // initial run
 
-    // jab bhi product ya wishlist se "wishlist-updated" event fire ho
-    window.addEventListener("wishlist-updated", updateWishlistCount);
+    window.addEventListener("wishlistUpdated", updateWishlistCount);
 
-    // cleanup
     return () => {
-      window.removeEventListener("wishlist-updated", updateWishlistCount);
+      window.removeEventListener("wishlistUpdated", updateWishlistCount);
     };
   }, []);
 
+  // 🔹 Cart count listener
   useEffect(() => {
     const updateCartCount = () => {
       const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-      // har item ki quantity bhi add karni hai
       const totalItems = storedCart.reduce(
         (sum, item) => sum + item.quantity,
         0
@@ -71,7 +69,6 @@ const Header = () => {
       window.removeEventListener("cartUpdated", updateCartCount);
     };
   }, []);
-
   const handleClick = (path) => {
     setsigninloader(true); // Loader on
     setTimeout(() => {
@@ -211,16 +208,16 @@ const Header = () => {
               onClick={() => {
                 setcartLoader(true);
                 setTimeout(() => {
-                  router.push("/addToCart");
+                  router.push("/headerCart");
                   setcartLoader(false);
                 }, 2000);
               }}
               className={`cursor-pointer p-1.5 rounded-xl ${
-                router.pathname === "/addToCart"
+                router.pathname === "/headerCart"
                   ? "bg-[#ded4ff] text-[#7C3AED]"
                   : "hover:bg-[#e9e9e9]"
               }`}>
-              {cartLoader && router.pathname !== "/addToCart" ? (
+              {cartLoader && router.pathname !== "/headerCart" ? (
                 <div className="text-[#9333EA]">
                   <IconLoader2 className="animate-spin" size={20} />
                 </div>
@@ -368,12 +365,12 @@ const Header = () => {
                 onClick={() => {
                   setcartLoader(true);
                   setTimeout(() => {
-                    router.push("/addToCart");
+                    router.push("/headerCart");
                     setcartLoader(false);
                   }, 2000);
                 }}
                 className="cursor-pointer p-2 rounded-xl bg-white text-[#bb73ff]">
-                {cartLoader && router.pathname !== "/addToCart" ? (
+                {cartLoader && router.pathname !== "/headerCart" ? (
                   <div className="text-[#9333EA]">
                     <IconLoader2 className="animate-spin" size={20} />
                   </div>
