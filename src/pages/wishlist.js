@@ -24,10 +24,17 @@ const Wishlist = () => {
   const [removingId, setRemovingId] = useState(null);
   const [quantity, setquantity] = useState(1);
 
+  // const handlebtn = (id) => {
+  //   const updatedWishlist = wishlist.filter((item) => item?.id !== id);
+  //   localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+  //   setwishlist(updatedWishlist);
+  // };
   const handlebtn = (id) => {
-    const updatedWishlist = wishlist.filter((item) => item?.id !== id);
-    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
-    setwishlist(updatedWishlist);
+    if (typeof window !== "undefined") {
+      const updatedWishlist = wishlist.filter((item) => item?.id !== id);
+      localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+      setwishlist(updatedWishlist);
+    }
   };
 
   useEffect(() => {
@@ -40,22 +47,48 @@ const Wishlist = () => {
     }, 2000);
   }, []);
 
-  window.dispatchEvent(new Event("wishlist-updated"));
+  // window.dispatchEvent(new Event("wishlist-updated"));
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("wishlist-updated"));
+    }
+  }, []);
+
+  // const handlepopup = (product) => {
+  //   setloading(true);
+  //   setshowpopup(true);
+  //   setselectedproduct(product);
+  //   document.body.style.overflow = "hidden";
+
+  //   setTimeout(() => {
+  //     setloading(false);
+  //   }, 1500);
+  // };
 
   const handlepopup = (product) => {
     setloading(true);
     setshowpopup(true);
     setselectedproduct(product);
-    document.body.style.overflow = "hidden";
+
+    if (typeof document !== "undefined") {
+      document.body.style.overflow = "hidden";
+    }
 
     setTimeout(() => {
       setloading(false);
     }, 1500);
   };
 
+  // const closepopup = () => {
+  //   setshowpopup(false);
+  //   document.body.style.overflow = "auto";
+  // };
+
   const closepopup = () => {
     setshowpopup(false);
-    document.body.style.overflow = "auto";
+    if (typeof document !== "undefined") {
+      document.body.style.overflow = "auto";
+    }
   };
 
   const decrease = () => {
