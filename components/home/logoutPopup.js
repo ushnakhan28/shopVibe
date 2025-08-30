@@ -37,15 +37,6 @@ const LogoutPopup = ({ setactiveTab }) => {
     }
   }, []);
 
-  // const handlebtn = () => {
-  //   setlogoutLoading(true);
-  //   setTimeout(() => {
-  //     localStorage.setItem("isLoggedIn", "false");
-  //     localStorage.setItem("isLoggedOut", "true");
-  //     router.push("/");
-  //     setlogoutLoading(false);
-  //   }, 3000);
-  // };
   const handlebtn = () => {
     setlogoutLoading(true);
     setTimeout(() => {
@@ -70,7 +61,7 @@ const LogoutPopup = ({ setactiveTab }) => {
     }, 3000);
   };
   return (
-    <div className="min-h-[75vh] mt-6 sm:mt-10 flex items-center justify-center px-2 sm:px-4">
+    <div className="mb-5 min-h-[75vh] mt-6 sm:mt-10 flex items-center justify-center px-2 sm:px-4">
       <div className="bg-white border-[#eeeeee] shadow-lg rounded-xl flex flex-col justify-center py-4 sm:py-6 px-4 sm:px-8 gap-y-3 sm:gap-y-4 w-full max-w-md">
         <div className="flex justify-center">
           <div className="bg-red-50 text-[#ff3939] w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex items-center justify-center rounded-full">

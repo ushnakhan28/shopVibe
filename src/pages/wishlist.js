@@ -109,15 +109,9 @@ const Wishlist = () => {
       {/* <Header /> */}
 
       <section className="mt-40 lg:mt-30 lg:mx-9 md:mx-4 sm:mx-5 mx-4">
-        <div className="flex flex-col gap-y-6">
-          <BackBtn />
-          <h1 className="flex gap-x-3 text-2xl font-bold items-center">
-            <IconHeart color="red" /> My Favourites
-          </h1>
-        </div>
         <div>
           {wishlist.length === 0 ? (
-            <div className="-mt-72 xl:-mt-30">
+            <div className="-mt-30">
               <WithOutLogin
                 icon={<IconHeart size={60} color="#9333EA" />}
                 type="Your Wishlist is Empty"
@@ -129,103 +123,114 @@ const Wishlist = () => {
               />
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-5 mt-5 gap-x-5">
-              {wishlist?.map((card, index) => (
-                <div key={card?.id || index} className="h-[380px]">
-                  <div className="h-full flex flex-col justify-between border border-[#d3d3d3] p-3 rounded-xl group hover:shadow-xl duration-300">
-                    <div className="relative overflow-hidden rounded-xl">
-                      <img
-                        src={card?.img}
-                        className="w-full h-[200px] object-cover rounded-xl group-hover:scale-105 duration-300"
-                        alt={card?.title}
-                      />
-                      {card.discount !== 0 && (
-                        <div className="absolute top-2 left-2 z-10">
-                          <Badge
-                            color="red"
-                            variant="filled"
-                            radius="xl"
-                            size="lg"
-                            className="bg-red-600 text-white">
-                            {card.discount}%
-                          </Badge>
-                        </div>
-                      )}
-
-                      <div className="absolute top-2 right-2 flex flex-col gap-y-2 items-end opacity-100 md:opacity-0 group-hover:md:opacity-100 duration-300 z-10">
-                        <div className="bg-white p-1 rounded-full cursor-pointer shadow-xl relative">
-                          {removingId === card.id ? (
-                            <div className="flex text-[#9333EA]">
-                              <IconLoader2 size={18} className="animate-spin" />
-                            </div>
-                          ) : (
-                            <div
-                              onClick={() => {
-                                setRemovingId(card.id);
-                                setTimeout(() => {
-                                  handlebtn(card?.id);
-                                  setRemovingId(null);
-                                }, 2000);
-                              }}>
-                              <IconHeartFilled color="red" size={18} />
-                            </div>
-                          )}
-                        </div>
-                        <div className="bg-white p-3 rounded-full cursor-pointer shadow-xl relative">
-                          <IconEye
-                            onClick={() => handlepopup(card)}
-                            color="gray"
-                            size={18}
-                            className="absolute top-[3px] right-[3px]"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="md:mt-5 flex flex-col gap-y-2">
-                      <Badge
-                        color="#7C3AED"
-                        variant="light"
-                        radius="xl"
-                        size="md">
-                        {card?.category}
-                      </Badge>{" "}
-                      <p className="text-lg font-bold">{card?.title}</p>
-                      <p className="flex gap-x-1 items-center">
-                        <IconStarFilled color="orange" />
-                        {card?.rating}
-                      </p>
-                      <div className="flex justify-between items-center">
-                        {card.discount > 0 ? (
-                          <div className="flex items-center gap-x-3">
-                            <p className="text-xl font-semibold">
-                              <span>$</span>
-                              {card.discountedPrice}
-                            </p>
-                            <p className="font-lg line-through font-thin text-[#8f8f8f]">
-                              <span>$</span>
-                              {card.price}
-                            </p>
-                          </div>
-                        ) : (
-                          <div>
-                            <p className="text-xl flex items-center font-semibold">
-                              <span>$</span>
-                              {card.price}
-                            </p>
+            <div>
+              <div className="flex flex-col gap-y-6">
+                <BackBtn />
+                <h1 className="flex gap-x-3 text-2xl font-bold items-center">
+                  <IconHeart color="red" /> My Favourites
+                </h1>
+              </div>
+              <div className="mb-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-5 mt-5 gap-x-5">
+                {wishlist?.map((card, index) => (
+                  <div key={card?.id || index} className="h-[380px]">
+                    <div className="h-full flex flex-col justify-between border border-[#d3d3d3] p-3 rounded-xl group hover:shadow-xl duration-300">
+                      <div className="relative overflow-hidden rounded-xl">
+                        <img
+                          src={card?.img}
+                          className="w-full h-[200px] object-cover rounded-xl group-hover:scale-105 duration-300"
+                          alt={card?.title}
+                        />
+                        {card.discount !== 0 && (
+                          <div className="absolute top-2 left-2 z-10">
+                            <Badge
+                              color="red"
+                              variant="filled"
+                              radius="xl"
+                              size="lg"
+                              className="bg-red-600 text-white">
+                              {card.discount}%
+                            </Badge>
                           </div>
                         )}
-                        <Link href={"/addToCart"}>
-                          <button className="items-center cursor-pointer text-white px-3 py-2 hover:bg-[#8b32ff] duration-300 flex gap-x-2 rounded-xl bg-[#7D2AE8] hover:scale-105">
-                            <IconShoppingCart size={19} className="w-5 h-5" />{" "}
-                            Add
-                          </button>
-                        </Link>
+
+                        <div className="absolute top-2 right-2 flex flex-col gap-y-2 items-end opacity-100 md:opacity-0 group-hover:md:opacity-100 duration-300 z-10">
+                          <div className="bg-white p-1 rounded-full cursor-pointer shadow-xl relative">
+                            {removingId === card.id ? (
+                              <div className="flex text-[#9333EA]">
+                                <IconLoader2
+                                  size={18}
+                                  className="animate-spin"
+                                />
+                              </div>
+                            ) : (
+                              <div
+                                onClick={() => {
+                                  setRemovingId(card.id);
+                                  setTimeout(() => {
+                                    handlebtn(card?.id);
+                                    setRemovingId(null);
+                                  }, 2000);
+                                }}>
+                                <IconHeartFilled color="red" size={18} />
+                              </div>
+                            )}
+                          </div>
+                          <div className="bg-white p-3 rounded-full cursor-pointer shadow-xl relative">
+                            <IconEye
+                              onClick={() => handlepopup(card)}
+                              color="gray"
+                              size={18}
+                              className="absolute top-[3px] right-[3px]"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="md:mt-5 flex flex-col gap-y-2">
+                        <Badge
+                          color="#7C3AED"
+                          variant="light"
+                          radius="xl"
+                          size="md">
+                          {card?.category}
+                        </Badge>{" "}
+                        <p className="text-lg font-bold">{card?.title}</p>
+                        <p className="flex gap-x-1 items-center">
+                          <IconStarFilled color="orange" />
+                          {card?.rating}
+                        </p>
+                        <div className="flex justify-between items-center">
+                          {card.discount > 0 ? (
+                            <div className="flex items-center gap-x-3">
+                              <p className="text-xl font-semibold">
+                                <span>$</span>
+                                {card.discountedPrice}
+                              </p>
+                              <p className="font-lg line-through font-thin text-[#8f8f8f]">
+                                <span>$</span>
+                                {card.price}
+                              </p>
+                            </div>
+                          ) : (
+                            <div>
+                              <p className="text-xl flex items-center font-semibold">
+                                <span>$</span>
+                                {card.price}
+                              </p>
+                            </div>
+                          )}
+                          <Link href={"/addToCart"}>
+                            <button className="items-center cursor-pointer text-white px-3 py-2 hover:bg-[#8b32ff] duration-300 flex gap-x-2 rounded-xl bg-[#7D2AE8] hover:scale-105">
+                              <IconShoppingCart size={19} className="w-5 h-5" />{" "}
+                              Add
+                            </button>
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           )}
         </div>

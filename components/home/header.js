@@ -351,7 +351,7 @@ const Header = () => {
                   </div>
                 ) : (
                   <div>
-                    {wishlistCount > 0 ? (
+                    {wishlistCount > 0 && isLoggedIn ? (
                       <div className="relative">
                         <IconHeart size={20} />
                         <div className="rounded-xl absolute bottom-[18px] left-[18px] bg-red-500 w-5 h-5 flex justify-center items-center text-white text-[10px]">
@@ -379,7 +379,7 @@ const Header = () => {
                   </div>
                 ) : (
                   <div>
-                    {cartCount > 0 ? (
+                    {cartCount > 0 && isLoggedIn ? (
                       <div className="relative">
                         <IconShoppingCart size={20} />
                         <div className="rounded-xl absolute bottom-[18px] left-[18px] bg-red-500 w-5 h-5 flex justify-center items-center text-white text-[10px]">

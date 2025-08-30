@@ -1626,7 +1626,7 @@ const Profile = () => {
 
         <div>
           {activeTab === "Settings" && (
-            <div>
+            <div className="mb-5">
               <div className="bg-[#fcfcfc] m-4 sm:m-10 px-4 sm:px-8 py-6 sm:py-8 rounded-xl border border-[#e0e0e0] shadow-sm">
                 <h1 className="font-bold text-2xl sm:text-3xl">
                   Account Settings
@@ -1728,7 +1728,7 @@ const Profile = () => {
           )}
         </div>
 
-        {/* ----------Settings---------- */}
+        {/* ----------Signout---------- */}
 
         <div>
           {activeTab === "Signout" && (
