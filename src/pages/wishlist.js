@@ -10,11 +10,11 @@ import {
   IconTruck,
   IconX,
 } from "@tabler/icons-react";
-import Header from "../../components/home/header";
 import { useEffect, useState } from "react";
 import { Badge } from "@mantine/core";
 import BackBtn from "../../components/home/backBtn";
 import Link from "next/link";
+import WithOutLogin from "../../components/home/withoutLogin";
 
 const Wishlist = () => {
   const [showpopup, setshowpopup] = useState(false);
@@ -39,6 +39,8 @@ const Wishlist = () => {
       setloading(false);
     }, 2000);
   }, []);
+
+  window.dispatchEvent(new Event("wishlist-updated"));
 
   const handlepopup = (product) => {
     setloading(true);
@@ -81,7 +83,17 @@ const Wishlist = () => {
         </div>
         <div>
           {wishlist.length === 0 ? (
-            <p className="mt-3 text-[#adadad]">No items in Favourites.</p>
+            <div className="-mt-72 xl:-mt-30">
+              <WithOutLogin
+                icon={<IconHeart size={60} color="#9333EA" />}
+                type="Your Wishlist is Empty"
+                para="Start browsing and save items you love by clicking the heart icon on any product."
+                btn1="Start Shopping"
+                btn2="Browse Categories"
+                btn1path="/"
+                btn2path="/"
+              />
+            </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-5 mt-5 gap-x-5">
               {wishlist?.map((card, index) => (

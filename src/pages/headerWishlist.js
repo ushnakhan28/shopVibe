@@ -25,7 +25,13 @@ const HeaderWishlist = () => {
         <div>
           <WithOutLogin
             icon={<IconHeart size={60} color="#9333EA" />}
-            type="WishList"
+            type="Sign In to View Your Wishlist"
+            para="Create an account or sign in to save your favorite items and access
+            them from any device."
+            btn1="Sign In"
+            btn2="Create Account"
+            btn1path="/loginForm"
+            btn2path="/accountForm"
           />
         </div>
       )}

@@ -28,6 +28,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { ActionIcon, Badge, Select } from "@mantine/core";
 import Btn from "./btn";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const NextArrow = (props) => {
   const { onClick } = props;
@@ -52,6 +53,8 @@ const PrevArrow = (props) => {
 };
 
 const Product = () => {
+  const router = useRouter();
+
   const [products, setproducts] = useState([]);
   const [showbg, setshowbg] = useState(null);
   const [showpopup, setshowpopup] = useState(false);
@@ -64,6 +67,28 @@ const Product = () => {
   const [columns4, setcolumns4] = useState(false);
   const [showall, setshowall] = useState(false);
   const [loading, setloading] = useState(false);
+  const [popupAdded, setPopupAdded] = useState(false);
+
+  const addToCart = (product) => {
+    if (typeof window !== "undefined") {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const existingItemIndex = cart.findIndex(
+        (item) => item.id === product.id
+      );
+
+      if (existingItemIndex !== -1) {
+        cart[existingItemIndex].quantity += 1;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      window.dispatchEvent(new Event("cartUpdated"));
+    }
+
+    // ✅ Button ko "Added" aur disable kar do
+  };
 
   const decrease = () => {
     if (quantity > 1) {
@@ -93,11 +118,13 @@ const Product = () => {
     setshowbg(updated);
     let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
     const alreadyExists = wishlist.some((item) => item?.id === product.id);
-    if (alreadyExists) {
-      return;
+    if (!alreadyExists) {
+      wishlist.push(product);
+      localStorage.setItem("wishlist", JSON.stringify(wishlist));
     }
-    wishlist.push(product);
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("wishlist-updated"));
+    }
   }
 
   function bgstroke(id) {
@@ -107,6 +134,10 @@ const Product = () => {
     let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
     wishlist = wishlist.filter((item) => item?.id !== id);
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("wishlist-updated"));
+    }
   }
 
   useEffect(() => {
@@ -350,6 +381,7 @@ const Product = () => {
                   bgfilled={bgfilled}
                   bgstroke={bgstroke}
                   handlepopup={handlepopup}
+                  addToCart={addToCart}
                 />
               ))}
             </Slider>
@@ -366,6 +398,7 @@ const Product = () => {
                   bgfilled={bgfilled}
                   bgstroke={bgstroke}
                   handlepopup={handlepopup}
+                  addToCart={addToCart}
                 />
               ))}
 
@@ -491,8 +524,23 @@ const Product = () => {
               </div>
               <div className="flex justify-between mt-5">
                 <div>
-                  <button className="cursor-pointer flex items-center gap-x-2 px-8 rounded-xl py-2 hover:bg-[#8b32ff] duration-300 text-white bg-[#7D2AE8]">
+                  {/* <button className="cursor-pointer flex items-center gap-x-2 px-8 rounded-xl py-2 hover:bg-[#8b32ff] duration-300 text-white bg-[#7D2AE8]">
                     <IconShoppingCart size={19} /> Add to Cart
+                  </button> */}
+                  <button
+                    onClick={() => {
+                      addToCart(selectedproduct);
+                      setPopupAdded(true);
+                    }}
+                    disabled={popupAdded}
+                    className={`flex items-center gap-x-2 px-8 rounded-xl py-2 text-white 
+          ${
+            popupAdded
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-[#7D2AE8] hover:bg-[#8b32ff] duration-300"
+          }`}>
+                    <IconShoppingCart size={19} />
+                    {popupAdded ? "Added" : "Add to Cart"}
                   </button>
                 </div>
                 <div className="font-semibold">
@@ -545,7 +593,20 @@ const Product = () => {
   );
 };
 
-const ProductCard = ({ card, showbg, bgfilled, bgstroke, handlepopup }) => {
+const ProductCard = ({
+  card,
+  showbg,
+  bgfilled,
+  bgstroke,
+  handlepopup,
+  addToCart,
+}) => {
+  const [added, setAdded] = useState(false);
+  const handleAdd = () => {
+    addToCart(card); // product ko cart me daalna
+    setAdded(true); // button disable aur "Added" text
+  };
+
   return (
     <div className="p-2 h-[380px]">
       <div className="h-full flex flex-col justify-between border border-[#d3d3d3] p-3 rounded-xl group hover:shadow-xl duration-300">
@@ -574,14 +635,14 @@ const ProductCard = ({ card, showbg, bgfilled, bgstroke, handlepopup }) => {
                   onClick={() => bgstroke(card.id)}
                   color="red"
                   size={16}
-                  className="absolute top-[3px] right-[3px]"
+                  className="absolute top-[4px] right-[4px]"
                 />
               ) : (
                 <IconHeart
                   onClick={() => bgfilled(card.id, card)}
                   color="gray"
                   size={16}
-                  className="absolute top-[3px] right-[3px]"
+                  className="absolute top-[4px] right-[4px]"
                 />
               )}
             </div>
@@ -629,8 +690,22 @@ const ProductCard = ({ card, showbg, bgfilled, bgstroke, handlepopup }) => {
                 </p>
               </div>
             )}
-            <button className="items-center cursor-pointer text-white px-3 hover:bg-[#8b32ff] duration-200 py-2 flex gap-x-2 rounded-xl bg-[#7D2AE8] hover:scale-105">
+            {/* <button
+              onClick={() => addToCart(card)}
+              className="items-center cursor-pointer text-white px-3 hover:bg-[#8b32ff] duration-200 py-2 flex gap-x-2 rounded-xl bg-[#7D2AE8] hover:scale-105">
               <IconShoppingCart size={19} className="w-5 h-5" /> Add
+            </button> */}
+            <button
+              onClick={handleAdd}
+              disabled={added} // disable when already added
+              className={`items-center text-white px-3 py-2 flex gap-x-2 rounded-xl 
+          ${
+            added
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-[#7D2AE8] hover:bg-[#8b32ff] hover:scale-105 duration-200"
+          }`}>
+              <IconShoppingCart size={19} className="w-5 h-5" />{" "}
+              {added ? "Added" : "Add"}
             </button>
           </div>
         </div>

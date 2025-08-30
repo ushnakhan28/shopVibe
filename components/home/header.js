@@ -32,6 +32,46 @@ const Header = () => {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [signinloader, setsigninloader] = useState(false);
   const [createloader, setcreateloader] = useState(false);
+  const [wishlistCount, setWishlistCount] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    // function jo count update karega
+    const updateWishlistCount = () => {
+      const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+      setWishlistCount(storedWishlist.length);
+    };
+
+    updateWishlistCount(); // initial run
+
+    // jab bhi product ya wishlist se "wishlist-updated" event fire ho
+    window.addEventListener("wishlist-updated", updateWishlistCount);
+
+    // cleanup
+    return () => {
+      window.removeEventListener("wishlist-updated", updateWishlistCount);
+    };
+  }, []);
+
+  useEffect(() => {
+    const updateCartCount = () => {
+      const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+      // har item ki quantity bhi add karni hai
+      const totalItems = storedCart.reduce(
+        (sum, item) => sum + item.quantity,
+        0
+      );
+      setCartCount(totalItems);
+    };
+
+    updateCartCount(); // initial run
+    window.addEventListener("cartUpdated", updateCartCount);
+
+    return () => {
+      window.removeEventListener("cartUpdated", updateCartCount);
+    };
+  }, []);
+
   const handleClick = (path) => {
     setsigninloader(true); // Loader on
     setTimeout(() => {
@@ -49,15 +89,15 @@ const Header = () => {
 
   useEffect(() => {
     const loggedIn = localStorage.getItem("isLoggedIn");
+    const created = localStorage.getItem("isCreated");
 
-    if (loggedIn === "true") {
+    if (loggedIn === "true" || created === "true") {
       setisLoggedIn(true);
 
       const storedName = localStorage.getItem("userName");
-
       if (storedName) {
-        setUsername(storedName); // full name
-        setInitials(getInitials(storedName)); // initials desktop ke liye
+        setUsername(storedName);
+        setInitials(getInitials(storedName));
       }
     } else {
       setisLoggedIn(false);
@@ -152,8 +192,19 @@ const Header = () => {
                   <IconLoader2 className="animate-spin" size={20} />
                 </div>
               ) : (
-                <IconHeart size={20} />
-              )}{" "}
+                <div>
+                  {wishlistCount > 0 && isLoggedIn ? (
+                    <div className="relative">
+                      <IconHeart size={20} />
+                      <div className="rounded-xl absolute bottom-3 left-[13px] bg-red-500 w-5 h-5 flex justify-center items-center text-white text-[10px]">
+                        {wishlistCount}
+                      </div>
+                    </div>
+                  ) : (
+                    <IconHeart size={20} />
+                  )}
+                </div>
+              )}
             </div>
 
             <div
@@ -174,7 +225,18 @@ const Header = () => {
                   <IconLoader2 className="animate-spin" size={20} />
                 </div>
               ) : (
-                <IconShoppingCart size={20} />
+                <div>
+                  {cartCount > 0 && isLoggedIn ? (
+                    <div className="relative">
+                      <IconShoppingCart size={20} />
+                      <div className="rounded-xl absolute bottom-3 left-[13px] bg-red-500 w-5 h-5 flex justify-center items-center text-white text-[10px]">
+                        {cartCount}
+                      </div>
+                    </div>
+                  ) : (
+                    <IconShoppingCart size={20} />
+                  )}
+                </div>
               )}
             </div>
 
@@ -203,7 +265,7 @@ const Header = () => {
                 {openDropdown && (
                   <div className="absolute right-0 mt-3 w-[170px] bg-[#ffffff] border rounded-lg shadow-lg overflow-hidden z-50">
                     <button
-                      onClick={() => handleClick("/form")}
+                      onClick={() => handleClick("/loginForm")}
                       className="flex px-3 items-center gap-x-2 hover:bg-[#f9f2ff] w-full cursor-pointer py-[8px] text-sm rounded-lg duration-200">
                       {signinloader && (
                         <IconLoader2 className="animate-spin" size={18} />
@@ -211,7 +273,7 @@ const Header = () => {
                       Sign In
                     </button>
                     <button
-                      onClick={() => handlecreate("/form")}
+                      onClick={() => handlecreate("/accountForm")}
                       className="flex px-3 items-center gap-x-2 hover:bg-[#f9f2ff] w-full cursor-pointer py-[8px] text-sm rounded-lg duration-200">
                       {createloader && (
                         <IconLoader2 className="animate-spin" size={18} />
@@ -288,7 +350,18 @@ const Header = () => {
                     <IconLoader2 className="animate-spin" size={20} />
                   </div>
                 ) : (
-                  <IconHeart size={20} />
+                  <div>
+                    {wishlistCount > 0 ? (
+                      <div className="relative">
+                        <IconHeart size={20} />
+                        <div className="rounded-xl absolute bottom-[18px] left-[18px] bg-red-500 w-5 h-5 flex justify-center items-center text-white text-[10px]">
+                          {wishlistCount}
+                        </div>
+                      </div>
+                    ) : (
+                      <IconHeart size={20} />
+                    )}
+                  </div>
                 )}{" "}
               </div>
               <div
@@ -323,7 +396,7 @@ const Header = () => {
           {!isLoggedIn && (
             <div className="mt-3 flex flex-col gap-y-3 w-full max-w-xs mx-auto">
               <button
-                onClick={() => handleClick("/form")}
+                onClick={() => handleClick("/loginForm")}
                 className="flex justify-center items-center gap-x-3 w-full cursor-pointer text-white px-8 py-[8px] text-sm rounded-lg bg-[#7D2AE8] hover:bg-[#8b32ff] duration-200">
                 {signinloader && (
                   <IconLoader2 className="animate-spin" size={20} />
@@ -331,7 +404,7 @@ const Header = () => {
                 Sign In
               </button>
               <button
-                onClick={() => handlecreate("/form")}
+                onClick={() => handlecreate("/accountForm")}
                 className="flex justify-center items-center gap-x-3 w-full cursor-pointer text-white px-8 py-[8px] text-sm rounded-lg bg-[#7D2AE8] hover:bg-[#8b32ff] duration-200">
                 {createloader && (
                   <IconLoader2 className="animate-spin" size={20} />

@@ -13,7 +13,7 @@ import * as Yup from "yup";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-const Form = () => {
+const LoginForm = () => {
   const [showEyeIcon, setshowEyeIcon] = useState(false);
   const [loading, setloading] = useState(false);
 
@@ -21,18 +21,14 @@ const Form = () => {
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
+      username: "",
       email: "",
       password: "",
     },
     validationSchema: Yup.object({
-      firstName: Yup.string()
-        .min(2, "First name must be at least 2 characters")
-        .required("First name is required"),
-      lastName: Yup.string()
-        .min(2, "Last name must be at least 2 characters")
-        .required("Last name is required"),
+      username: Yup.string()
+        .min(8, "Enter Valid Username")
+        .required("Username is required"),
       email: Yup.string()
         .email("Enter valid email")
         .required("Email is required"),
@@ -43,11 +39,9 @@ const Form = () => {
     onSubmit: (values) => {
       setloading(true);
       setTimeout(() => {
+        localStorage.setItem("authType", "login");
         localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("firstName", values.firstName);
-        localStorage.setItem("lastName", values.lastName);
-        const fullName = `${values.firstName} ${values.lastName}`;
-        localStorage.setItem("userName", fullName);
+        localStorage.setItem("userName", values.username);
         localStorage.setItem("email", values.email);
         router.push("/profile");
         setloading(false);
@@ -73,58 +67,29 @@ const Form = () => {
         </p>
         <form onSubmit={formik.handleSubmit}>
           <div>
-            {/* First & Last Name side by side */}
-            <div className="grid grid-cols-1 md:grid-cols-2 mt-3 gap-x-3">
-              <div className="flex flex-col gap-y-2 mt-2 flex-1">
-                <label className="font-semibold">First Name:</label>
-                <div className="flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[10px] rounded-xl">
-                  <IconUser
-                    className="sm:block hidden"
-                    size={20}
-                    color="#b9b9b9"
-                  />
-                  <input
-                    onBlur={formik.handleBlur}
-                    name="firstName"
-                    placeholder="Enter your first name"
-                    className="flex-1 outline-none focus:ring-0"
-                    onChange={formik.handleChange}
-                    autoComplete="off"
-                    value={formik.values.firstName}
-                  />
-                </div>
-                {formik.touched.firstName && formik.errors.firstName && (
-                  <p className="text-red-500 text-sm">
-                    {formik.errors.firstName}
-                  </p>
-                )}
+            {/* Username */}
+            <div className="flex flex-col gap-y-2 mt-2">
+              <label className="font-semibold">Username:</label>
+              <div className="flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[10px] rounded-xl">
+                <IconUser
+                  className="sm:block hidden"
+                  size={20}
+                  color="#b9b9b9"
+                />
+                <input
+                  onBlur={formik.handleBlur}
+                  name="username"
+                  placeholder="Enter your Username"
+                  className="flex-1 outline-none focus:ring-0"
+                  onChange={formik.handleChange}
+                  autoComplete="off"
+                  value={formik.values.username}
+                />
               </div>
-              <div className="flex flex-col gap-y-2 mt-2 flex-1">
-                <label className="font-semibold">Last Name:</label>
-                <div className="flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[10px] rounded-xl">
-                  <IconUser
-                    className="sm:block hidden"
-                    size={20}
-                    color="#b9b9b9"
-                  />
-                  <input
-                    onBlur={formik.handleBlur}
-                    name="lastName"
-                    placeholder="Enter your last name"
-                    className="flex-1 outline-none focus:ring-0"
-                    onChange={formik.handleChange}
-                    autoComplete="off"
-                    value={formik.values.lastName}
-                  />
-                </div>
-                {formik.touched.lastName && formik.errors.lastName && (
-                  <p className="text-red-500 text-sm">
-                    {formik.errors.lastName}
-                  </p>
-                )}
-              </div>
+              {formik.touched.username && formik.errors.username && (
+                <p className="text-red-500 text-sm">{formik.errors.username}</p>
+              )}
             </div>
-
             {/* Email */}
             <div className="flex flex-col gap-y-2 mt-2">
               <label className="font-semibold">Email:</label>
@@ -197,4 +162,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default LoginForm;

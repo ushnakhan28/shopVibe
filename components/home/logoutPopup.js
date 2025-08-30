@@ -37,11 +37,26 @@ const LogoutPopup = ({ setactiveTab }) => {
     }
   }, []);
 
+  // const handlebtn = () => {
+  //   setlogoutLoading(true);
+  //   setTimeout(() => {
+  //     localStorage.setItem("isLoggedIn", "false");
+  //     localStorage.setItem("isLoggedOut", "true");
+  //     router.push("/");
+  //     setlogoutLoading(false);
+  //   }, 3000);
+  // };
   const handlebtn = () => {
     setlogoutLoading(true);
     setTimeout(() => {
-      localStorage.setItem("isLoggedIn", "false");
+      // localStorage cleanup
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("isCreated");
+      localStorage.removeItem("userName");
+      localStorage.removeItem("email");
       localStorage.setItem("isLoggedOut", "true");
+
+      // redirect
       router.push("/");
       setlogoutLoading(false);
     }, 3000);
@@ -64,10 +79,10 @@ const LogoutPopup = ({ setactiveTab }) => {
         </div>
 
         <h1 className="text-lg sm:text-2xl font-semibold text-center">
-          Confirm Logout
+          Confirm Signout
         </h1>
         <p className="text-[#adadad] text-center text-xs sm:text-base">
-          Are you sure you want to log out of your account?
+          Are you sure you want to sign out of your account?
         </p>
 
         {/* Info Cards */}
@@ -115,7 +130,7 @@ const LogoutPopup = ({ setactiveTab }) => {
             ) : (
               <IconLogout size={18} className="sm:size-[20px]" />
             )}
-            Logout
+            Signout
           </button>
         </div>
 
