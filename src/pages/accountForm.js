@@ -48,6 +48,7 @@ const AccountForm = () => {
         const fullName = `${values.firstName} ${values.lastName}`;
         localStorage.setItem("userName", fullName);
         localStorage.setItem("email", values.email);
+        localStorage.setItem("password", values.password);
         router.push("/profile");
         setloading(false);
       }, 3000);

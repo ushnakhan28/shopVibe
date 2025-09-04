@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { IconLoader2, IconShoppingCart, IconTrash } from "@tabler/icons-react";
-import Header from "../../components/home/header";
 import WithOutLogin from "../../components/home/withoutLogin";
 import BackBtn from "../../components/home/backBtn";
 
 const AddToCart = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cart, setCart] = useState([]);
-  const [quantity, setquantity] = useState(1);
   const [loading, setloading] = useState(null);
+  const [allLoader, setallLoader] = useState(false);
   // 🔹 Check login status
   useEffect(() => {
     const loggedIn = localStorage.getItem("isLoggedIn");
@@ -24,25 +23,42 @@ const AddToCart = () => {
 
     // jab page load ho
     updateCart();
-
-    // jab product add ho
     window.addEventListener("cartUpdated", updateCart);
-
     return () => {
       window.removeEventListener("cartUpdated", updateCart);
     };
   }, []);
+
   const handleRemoveFromCart = (id) => {
-    const updatedCart = cart.filter((item) => item.id !== id);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    const idStr = String(id);
+    const updatedCart = cart.filter((item) => String(item.id) !== idStr);
     setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    window.dispatchEvent(
+      new CustomEvent("cartItemRemoved", { detail: { id: idStr } })
+    );
     window.dispatchEvent(new Event("cartUpdated"));
   };
+
   const handleClearCart = () => {
-    localStorage.removeItem("cart"); // cart ko localStorage se remove kar diya
-    setCart([]); // state ko empty kar diya
-    window.dispatchEvent(new Event("cartUpdated")); // event trigger
+    setallLoader(true);
+    setTimeout(() => {
+      const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      storedCart.forEach((item) => {
+        window.dispatchEvent(
+          new CustomEvent("cartItemRemoved", { detail: { id: item.id } })
+        );
+      });
+      localStorage.removeItem("cart");
+      setCart([]);
+      window.dispatchEvent(new Event("cartUpdated"));
+      localStorage.removeItem("addedItems");
+      window.dispatchEvent(new Event("cartCleared"));
+      setallLoader(false);
+    }, 2000);
   };
+
   const handleDecrease = (id) => {
     const updatedCart = cart.map((item) => {
       if (item.id === id && item.quantity > 1) {
@@ -101,7 +117,12 @@ const AddToCart = () => {
                     <button
                       onClick={handleClearCart}
                       className="cursor-pointer flex gap-x-2 items-center rounded-xl px-4 py-2 bg-[#9333EA] text-white w-full md:w-auto justify-center">
-                      <IconTrash size={20} /> Clear Cart
+                      {allLoader ? (
+                        <IconLoader2 size={20} className="animate-spin" />
+                      ) : (
+                        <IconTrash size={20} />
+                      )}
+                      Clear Cart
                     </button>
                   </div>
 

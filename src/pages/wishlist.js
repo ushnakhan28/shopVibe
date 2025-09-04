@@ -23,13 +23,93 @@ const Wishlist = () => {
   const [loading, setloading] = useState(false);
   const [removingId, setRemovingId] = useState(null);
   const [quantity, setquantity] = useState(1);
+  const [added, setAdded] = useState({});
+
+  useEffect(() => {
+    const handleCartRemove = (e) => {
+      const removedId = String(e.detail.id);
+
+      // localStorage se update karo
+      let addedItems = JSON.parse(localStorage.getItem("addedItems")) || [];
+      addedItems = addedItems.filter((itemId) => String(itemId) !== removedId);
+      localStorage.setItem("addedItems", JSON.stringify(addedItems));
+
+      // ✅ key hatao instead of setting false
+      setAdded((prev) => {
+        const updated = { ...prev };
+        delete updated[removedId];
+        return updated;
+      });
+    };
+
+    window.addEventListener("cartItemRemoved", handleCartRemove);
+    return () => {
+      window.removeEventListener("cartItemRemoved", handleCartRemove);
+    };
+  }, []);
+
+  // 🔹 cartCleared listener
+  useEffect(() => {
+    const handleCartClear = () => {
+      localStorage.removeItem("addedItems");
+      setAdded({});
+    };
+
+    window.addEventListener("cartCleared", handleCartClear);
+    return () => window.removeEventListener("cartCleared", handleCartClear);
+  }, []);
+
+  const addToCart = (product) => {
+    if (typeof window !== "undefined") {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const existingItemIndex = cart.findIndex(
+        (item) => item.id === product.id
+      );
+
+      if (existingItemIndex !== -1) {
+        cart[existingItemIndex].quantity += 1;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      window.dispatchEvent(new Event("cartUpdated"));
+    }
+  };
+  const handleAdd = (product) => {
+    const idStr = String(product.id);
+    addToCart(product);
+    setAdded((prev) => ({ ...prev, [idStr]: true }));
+    markAsAdded(idStr);
+  };
+
+  const markAsAdded = (id) => {
+    const idStr = String(id);
+    let addedItems = JSON.parse(localStorage.getItem("addedItems")) || [];
+    if (!addedItems.includes(idStr)) {
+      addedItems.push(idStr);
+      localStorage.setItem("addedItems", JSON.stringify(addedItems));
+    }
+  };
 
   const handlebtn = (id) => {
     if (typeof window !== "undefined") {
       const updatedWishlist = wishlist.filter((item) => item?.id !== id);
       localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
       setwishlist(updatedWishlist);
-      window.dispatchEvent(new Event("wishlist-updated"));
+
+      let addedItems = JSON.parse(localStorage.getItem("addedItems")) || [];
+      addedItems = addedItems.filter((itemId) => String(itemId) !== String(id));
+      localStorage.setItem("addedItems", JSON.stringify(addedItems));
+
+      setAdded((prev) => {
+        const updated = { ...prev };
+        delete updated[String(id)]; // ✅ force string
+        return updated;
+      });
+
+      window.dispatchEvent(new Event("wishlistUpdated"));
     }
   };
 
@@ -39,6 +119,15 @@ const Wishlist = () => {
       const data = JSON.parse(localStorage.getItem("wishlist")) || [];
       const filteredData = data.filter((item) => item && item.id);
       setwishlist(filteredData);
+
+      // 👇 added state restore karo
+      const addedItems = JSON.parse(localStorage.getItem("addedItems")) || [];
+      const addedState = {};
+      addedItems.forEach((id) => {
+        addedState[id] = true;
+      });
+      setAdded(addedState);
+
       setloading(false);
     }, 2000);
   }, []);
@@ -47,6 +136,20 @@ const Wishlist = () => {
     if (typeof window !== "undefined") {
       window.dispatchEvent(new Event("wishlist-updated"));
     }
+  }, []);
+  // ✅ cartUpdated listener bhi add karo
+  useEffect(() => {
+    const syncAdded = () => {
+      const addedItems = JSON.parse(localStorage.getItem("addedItems")) || [];
+      const updatedState = {};
+      addedItems.forEach((id) => {
+        updatedState[id] = true;
+      });
+      setAdded(updatedState);
+    };
+
+    window.addEventListener("cartUpdated", syncAdded);
+    return () => window.removeEventListener("cartUpdated", syncAdded);
   }, []);
 
   const handlepopup = (product) => {
@@ -87,7 +190,7 @@ const Wishlist = () => {
       <section className="mt-40 lg:mt-30 lg:mx-9 md:mx-4 sm:mx-5 mx-4">
         <div>
           {wishlist.length === 0 ? (
-              <div className="lg:-mt-30 -mt-40">
+            <div className="lg:-mt-30 -mt-40">
               <WithOutLogin
                 icon={<IconHeart size={60} color="#9333EA" />}
                 type="Your Wishlist is Empty"
@@ -195,12 +298,18 @@ const Wishlist = () => {
                               </p>
                             </div>
                           )}
-                          <Link href={"/addToCart"}>
-                            <button className="items-center cursor-pointer text-white px-3 py-2 hover:bg-[#8b32ff] duration-300 flex gap-x-2 rounded-xl bg-[#7D2AE8] hover:scale-105">
-                              <IconShoppingCart size={19} className="w-5 h-5" />{" "}
-                              Add
-                            </button>
-                          </Link>
+                          <button
+                            onClick={() => handleAdd(card)}
+                            disabled={!!added[String(card.id)]}
+                            className={`items-center cursor-pointer text-white px-3 py-2 flex gap-x-2 rounded-xl 
+    ${
+      added[String(card.id)]
+        ? "bg-gray-400 cursor-not-allowed"
+        : "bg-[#7D2AE8] hover:bg-[#8b32ff] hover:scale-105 duration-200"
+    }`}>
+                            <IconShoppingCart size={19} className="w-5 h-5" />
+                            {added[String(card.id)] ? "Added" : "Add"}
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -298,12 +407,22 @@ const Wishlist = () => {
                   </div>
                 </div>
                 <div className="flex flex-wrap md:flex-nowrap justify-between gap-3 mt-5">
-                  <Link href={"/addToCart"}>
-                    <button className="items-center cursor-pointer text-white px-3 py-2 flex gap-x-2 rounded-xl bg-[#7D2AE8] hover:bg-[#8b32ff] duration-300">
-                      <IconShoppingCart size={19} className="w-5 h-5" /> Add To
-                      Cart
-                    </button>
-                  </Link>
+                  <button
+                    onClick={() => {
+                      handleAdd(selectedproduct);
+                    }}
+                    disabled={!!added[String(selectedproduct.id)]}
+                    className={`flex cursor-pointer items-center gap-x-2 px-8 rounded-xl py-2 text-white 
+    ${
+      added[String(selectedproduct.id)]
+        ? "bg-gray-400 cursor-not-allowed"
+        : "bg-[#7D2AE8] hover:bg-[#8b32ff] duration-300"
+    }`}>
+                    <IconShoppingCart size={19} />
+                    {added[String(selectedproduct.id)]
+                      ? "Added"
+                      : "Add to Cart"}
+                  </button>
 
                   <button className="flex-1 px-4 py-2 rounded-xl border border-[#adadad] font-semibold hover:bg-[#f5f5f5] transition">
                     Buy Now

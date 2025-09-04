@@ -43,6 +43,7 @@ const LoginForm = () => {
         localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem("userName", values.username);
         localStorage.setItem("email", values.email);
+        localStorage.setItem("password", values.password);
         router.push("/profile");
         setloading(false);
       }, 3000);

@@ -6,6 +6,9 @@ import { useState } from "react";
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 
+// 🔥 Toast import
+import { Toaster } from "react-hot-toast";
+
 export default function App({ Component, pageProps }) {
   const [queryClient] = useState(() => new QueryClient());
 
@@ -14,9 +17,25 @@ export default function App({ Component, pageProps }) {
       <MantineProvider
         withGlobalStyles
         withNormalizeCSS
-        theme={{ colorScheme: "light" }} // you can change to 'dark' if needed
-      >
+        theme={{ colorScheme: "light" }}>
         <Component {...pageProps} />
+        {/* 🔥 Yahan add karo */}
+        <Toaster
+          position="bottom-right"
+          reverseOrder={false}
+          toastOptions={{
+            style: {
+              backgroundColor: "#9333ea",
+              padding: "8px 10px",
+              color: "white",
+              width: "500px",
+              height: "100px",
+              fontSize: "20px",
+              marginRight: "20px",
+              marginBottom: "10px",
+            },
+          }}
+        />
       </MantineProvider>
     </QueryClientProvider>
   );

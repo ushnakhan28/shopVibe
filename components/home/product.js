@@ -121,7 +121,7 @@ const Product = () => {
       localStorage.setItem("wishlist", JSON.stringify(wishlist));
     }
     if (typeof window !== "undefined") {
-      window.dispatchEvent(new Event("wishlist-updated"));
+      window.dispatchEvent(new Event("wishlistUpdated"));
     }
   }
 
@@ -134,7 +134,7 @@ const Product = () => {
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
 
     if (typeof window !== "undefined") {
-      window.dispatchEvent(new Event("wishlist-updated"));
+      window.dispatchEvent(new Event("wishlistUpdated"));
     }
   }
 
