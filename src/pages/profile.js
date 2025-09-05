@@ -42,6 +42,7 @@ import Wishlist from "./wishlist";
 import LogoutPopup from "../../components/home/logoutPopup";
 import SixDigit from "../../components/home/digit";
 import AddToCart from "./addToCart";
+import AddressPopup from "../../components/home/addAddress";
 
 const Profile = () => {
   const router = useRouter();
@@ -65,6 +66,7 @@ const Profile = () => {
   const [isMethodAdded, setIsMethodAdded] = useState(false); // button ke liye
   const [timer, setTimer] = useState(0);
   const [codeSent, setCodeSent] = useState(false);
+  const [addresspopup, setaddresspopup] = useState(false);
 
   // popup open hone par localStorage check
   useEffect(() => {
@@ -336,11 +338,6 @@ const Profile = () => {
       address: "123 Main St, City, State 12345",
       number: "+1 (555) 123-4567",
       badge: "Default",
-    },
-    {
-      place: "OFFICE",
-      address: "456 Business Ave, Downtown, State 67890",
-      number: "+1 (555) 987-6543",
     },
   ];
 
@@ -790,7 +787,9 @@ const Profile = () => {
                     Manage your shipping addresses
                   </p>
                 </div>
-                <button className="mt-4 sm:mt-0 flex items-center gap-x-2 bg-purple-600 hover:bg-purple-700 text-white font-medium px-4 py-2 rounded-lg shadow">
+                <button
+                  onClick={() => setaddresspopup(true)}
+                  className="mt-4 sm:mt-0 flex items-center gap-x-2 bg-purple-600 hover:bg-purple-700 text-white font-medium cursor-pointer px-4 py-2 rounded-lg shadow">
                   <span className="text-lg">+</span> Add Address
                 </button>
               </div>
@@ -813,10 +812,10 @@ const Profile = () => {
                       </div>
 
                       <div className="flex gap-x-2">
-                        <button className="p-2 border border-gray-300 rounded-lg hover:bg-gray-100">
+                        <button className="p-2 cursor-pointer border border-gray-300 rounded-lg hover:bg-gray-100">
                           <IconEdit size={18} />
                         </button>
-                        <button className="p-2 border border-gray-300 rounded-lg hover:bg-gray-100">
+                        <button className="p-2 cursor-pointer border border-gray-300 rounded-lg hover:bg-gray-100">
                           <IconTrash size={18} />
                         </button>
                       </div>
@@ -1122,7 +1121,7 @@ const Profile = () => {
                     </p>
                   )}
                 </div>
-                <div className="w-full flex mt-4 gap-x-3">
+                <div className="w-full sm:flex flex flex-col gap-y-2 mt-4 gap-x-3">
                   <button
                     onClick={handleupdate}
                     type="button"
@@ -1238,7 +1237,7 @@ const Profile = () => {
                     )}
                 </div>
               </div>
-              <div className="w-full flex mt-4 gap-x-3">
+              <div className="w-full sm:flex flex-col flex gap-y-2 mt-4 gap-x-3">
                 <button
                   type="submit"
                   className="flex justify-center gap-x-2 items-center rounded-xl px-4 py-2 bg-[#9333EA] text-white w-full cursor-pointer hover:bg-[#a03bff]">
@@ -1283,30 +1282,34 @@ const Profile = () => {
                   <p className="font-semibold mt-4">Choose a method:</p>
                   <div className="mt-3 flex flex-col gap-y-2 w-full">
                     {["Authentication App", "SMS"].map((option, index) => {
-                      const isDisabled = isMethodAdded && selected !== option; // disable dusra option
+                      const isDisabled = isMethodAdded && selected !== option;
                       return (
                         <label
                           key={index}
                           onClick={() => {
-                            if (isDisabled) return; // agar disabled hai to click ignore
+                            if (isDisabled) return;
                             setSelected(option);
                             seterror(false);
                           }}
                           className={`px-3 py-2 rounded-xl flex items-center gap-x-2 border transition
-        ${
-          selected === option
-            ? "bg-purple-50 border-purple-500"
-            : "bg-white text-black border-gray-300 hover:border-purple-400"
-        }
-        ${isDisabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
-      `}>
+                    ${
+                      selected === option
+                        ? "bg-purple-50 border-purple-500"
+                        : "bg-white text-black border-gray-300 hover:border-purple-400"
+                    }
+                    ${
+                      isDisabled
+                        ? "opacity-50 cursor-not-allowed"
+                        : "cursor-pointer"
+                    }
+                  `}>
                           <span
                             className={`w-4 h-4 rounded-full border flex items-center justify-center
-          ${
-            selected === option
-              ? "bg-white border-purple-500 border-2"
-              : "border-gray-400"
-          }`}>
+                      ${
+                        selected === option
+                          ? "bg-white border-purple-500 border-2"
+                          : "border-gray-400"
+                      }`}>
                             {selected === option && (
                               <span className="w-2 h-2 rounded-full bg-purple-500"></span>
                             )}
@@ -1322,15 +1325,15 @@ const Profile = () => {
                       </p>
                     )}
                   </div>
-                  <div className="flex gap-x-3 w-full mt-5">
+                  <div className="sm:flex flex flex-col gap-y-2 gap-x-3 w-full mt-5">
                     <button
                       disabled={isMethodAdded}
                       className={`flex items-center justify-center gap-x-2 w-full rounded-xl px-4 py-2 
-    ${
-      isMethodAdded
-        ? "bg-[#9333EA] cursor-default"
-        : "bg-[#9333EA] hover:bg-[#a03bff]"
-    } text-white`}
+                ${
+                  isMethodAdded
+                    ? "bg-[#9333EA] cursor-default"
+                    : "bg-[#9333EA] hover:bg-[#a03bff]"
+                } text-white`}
                       onClick={() => {
                         if (!selected) {
                           seterror(true);
@@ -1339,7 +1342,7 @@ const Profile = () => {
                         setloading(true);
                         setTimeout(() => {
                           setIsMethodAdded(true);
-                          setverify(true); // yahan QR ya SMS screen pe jao
+                          setverify(true);
                           setloading(false);
                         }, 2000);
                       }}>
@@ -1361,7 +1364,7 @@ const Profile = () => {
                   </div>
                 </>
               ) : (
-                <div>
+                <div className="w-full">
                   <div
                     className="flex justify-between"
                     onClick={() => setauthpopup(false)}>
@@ -1377,17 +1380,19 @@ const Profile = () => {
                   <p className="text-sm text-[#616161] mt-2">
                     Protect your account with an extra step at sign-in.
                   </p>
+
                   {selected === "Authentication App" ? (
                     <div>
                       <p className="mt-3 text-[#000] text-sm">
                         Scan this QR code with your authenticator app and enter
-                        the 6‑digit code.
+                        the 6-digit code.
                       </p>
-                      <QRCodeCanvas
-                        className="mx-40 mt-5"
-                        value="otpauth://totp/UshnaApp?secret=JBSWY3DPEHPK3PXP&issuer=MyEcommerce"
-                        size={120}
-                      />
+                      <div className="flex justify-center mt-5">
+                        <QRCodeCanvas
+                          value="otpauth://totp/UshnaApp?secret=JBSWY3DPEHPK3PXP&issuer=MyEcommerce"
+                          size={120}
+                        />
+                      </div>
                       <p className="text-xs text-gray-500 mt-3 text-center">
                         Can’t scan? Enter this code manually:{" "}
                         <b className="text-[#505050]">JBSWY3DPEHPK3PXP</b>
@@ -1398,7 +1403,7 @@ const Profile = () => {
                       />
                     </div>
                   ) : (
-                    <div className="w-[455px]">
+                    <div className="w-full sm:w-[455px]">
                       <form className="flex flex-col">
                         <label className="font-semibold text-[#adadad] mt-2">
                           Phone Number
@@ -1410,7 +1415,7 @@ const Profile = () => {
                           value={phoneFormik.values.phone}
                           onChange={phoneFormik.handleChange}
                           onBlur={phoneFormik.handleBlur}
-                        />{" "}
+                        />
                         {phoneFormik.touched.phone &&
                           phoneFormik.errors.phone && (
                             <p className="text-red-500 text-sm mt-1">
@@ -1455,6 +1460,15 @@ const Profile = () => {
                 </div>
               )}
             </div>
+          </div>
+        )}
+
+        {addresspopup && (
+          <div>
+            <AddressPopup
+              addresspopup={addresspopup}
+              setaddresspopup={setaddresspopup}
+            />
           </div>
         )}
       </div>
