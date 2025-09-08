@@ -20,10 +20,14 @@ const SixDigit = ({ setauthpopup, selected, isCodeSent, phoneNumber }) => {
   };
 
   const handleVerify = () => {
-    if (!isCodeSent || !phoneNumber) {
-      setError("Please send code to your phone first");
-      return;
+    // Only check phone/codeSent if method is SMS
+    if (selected === "SMS") {
+      if (!isCodeSent || !phoneNumber) {
+        setError("Please send code to your phone first");
+        return;
+      }
     }
+
     if (code.some((digit) => digit === "")) {
       setError("Please enter all 6 digits");
       return;
@@ -34,14 +38,12 @@ const SixDigit = ({ setauthpopup, selected, isCodeSent, phoneNumber }) => {
       setError("");
       setloading(false);
       setauthpopup(false);
+
       toast.success("Two-Factor Authentication Verified 🎉", {
         icon: <IconCheck size={40} color="white" />,
       });
-      if (selected === "SMS") {
-        localStorage.setItem("selectedMethod", "SMS");
-      } else {
-        localStorage.setItem("selectedMethod", "Authentication App");
-      }
+
+      localStorage.setItem("selectedMethod", selected);
     }, 1500);
   };
 
