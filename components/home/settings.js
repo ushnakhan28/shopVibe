@@ -11,10 +11,11 @@ const Settings = () => {
   const [authpopup, setauthpopup] = useState(false);
   const [passPopup, setpassPopup] = useState(false);
   // Settings state (email, sms, marketing)
-  const [settings, setSettings] = useState({
-    email: false,
-    sms: false,
-    marketing: false,
+  const [settings, setSettings] = useState(() => {
+    const saved = localStorage.getItem("settings");
+    return saved
+      ? JSON.parse(saved)
+      : { email: false, sms: false, marketing: false };
   });
 
   // localStorage se saved settings load karna

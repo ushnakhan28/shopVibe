@@ -1,22 +1,26 @@
-import { useState } from "react";
-import { IconEdit, IconTrash } from "@tabler/icons-react";
+import { useEffect, useState } from "react";
+import {
+  IconEdit,
+  IconLoader2,
+  IconMapPin,
+  IconPlus,
+  IconTrash,
+} from "@tabler/icons-react";
 import AddressPopup from "./addAddress";
 
 const AddressSection = () => {
   const [addresspopup, setaddresspopup] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
+  const [editLoaderIndex, setEditLoaderIndex] = useState(null);
+  const [deleteLoaderIndex, setDeleteLoaderIndex] = useState(null);
+  const [addresses, setAddresses] = useState(() => {
+    const saved = localStorage.getItem("deliveryAddresses");
+    return saved ? JSON.parse(saved) : [];
+  });
 
-  const [addresses, setAddresses] = useState([
-    {
-      type: "HOME",
-      label: "Default",
-      address: "123 Main St, City, State 12345",
-      phone: "+1 (555) 123-4567",
-      badge: "Default",
-    },
-  ]);
-
-  // Save new or edited address
+  useEffect(() => {
+    localStorage.setItem("deliveryAddresses", JSON.stringify(addresses));
+  }, [addresses]);
   const handleSave = (newAddress) => {
     if (editIndex !== null) {
       const updated = [...addresses];
@@ -29,7 +33,6 @@ const AddressSection = () => {
     setaddresspopup(false);
   };
 
-  // Delete address
   const handleDelete = (index) => {
     setAddresses(addresses.filter((_, i) => i !== index));
   };
@@ -61,50 +64,91 @@ const AddressSection = () => {
               setaddresspopup(true);
             }}
             className="mt-4 sm:mt-0 flex items-center gap-x-2 bg-purple-600 hover:bg-purple-700 text-white font-medium cursor-pointer px-4 py-2 rounded-lg shadow">
-            <span className="text-lg">+</span> Add Address
+            <IconPlus size={20} /> Add Address
           </button>
         </div>
 
         <div className="flex flex-col gap-y-5 mt-6">
-          {addresses.map((item, index) => (
-            <div
-              key={index}
-              className="border border-gray-200 rounded-xl px-5 py-4 bg-white hover:shadow-md transition">
-              <div className="flex flex-col sm:flex-row justify-between gap-y-3 sm:gap-y-0">
-                <div className="flex items-center gap-x-3">
-                  <span className="font-medium text-base sm:text-lg">
-                    {item.type}
-                  </span>
-                  {item.label && (
-                    <span className="text-xs bg-gray-100 text-gray-600 border border-gray-300 px-2 py-0.5 rounded-full">
-                      {item.label}
-                    </span>
-                  )}
-                </div>
-
-                <div className="flex gap-x-2">
-                  <button
-                    onClick={() => {
-                      setEditIndex(index);
-                      setaddresspopup(true);
-                    }}
-                    className="p-2 cursor-pointer border border-gray-300 rounded-lg hover:bg-gray-100">
-                    <IconEdit size={18} />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(index)}
-                    className="p-2 cursor-pointer border border-gray-300 rounded-lg hover:bg-gray-100">
-                    <IconTrash size={18} />
-                  </button>
-                </div>
+          {addresses.length === 0 ? (
+            <div className="flex flex-col mt-5 gap-y-2 items-center">
+              <div className="w-14 h-14 flex items-center justify-center rounded-full bg-purple-200">
+                <IconMapPin size={30} color="#9333ea" />
               </div>
 
-              <div className="mt-3 text-gray-700">
-                <p className="text-sm sm:text-base">{item.address}</p>
-                <p className="text-sm sm:text-base">{item.phone}</p>
-              </div>
+              <h1 className="font-semibold text-xl text-center">
+                No Address Saved
+              </h1>
+              <p className="text-[#616161]">
+                Add a delivery address to proceed with your order.
+              </p>
+              <button
+                onClick={() => {
+                  setEditIndex(null);
+                  setaddresspopup(true);
+                }}
+                className="mt-4 sm:mt-2 flex items-center gap-x-2 bg-purple-600 hover:bg-purple-700 text-white font-medium cursor-pointer px-8 py-2 rounded-lg shadow">
+                <IconPlus size={20} /> Add Address
+              </button>
             </div>
-          ))}
+          ) : (
+            addresses.map((item, index) => (
+              <div
+                key={index}
+                className="border border-gray-200 rounded-xl px-5 py-4 bg-white hover:shadow-md transition">
+                <div className="flex flex-col sm:flex-row justify-between gap-y-3 sm:gap-y-0">
+                  <div className="flex items-center gap-x-3">
+                    <span className="font-medium text-base sm:text-lg">
+                      {item.type}
+                    </span>
+                    {item.label && (
+                      <span className="text-xs bg-gray-100 text-gray-600 border border-gray-300 px-2 py-0.5 rounded-full">
+                        {item.label}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="flex gap-x-2">
+                    <button
+                      onClick={() => {
+                        setEditLoaderIndex(index);
+                        setTimeout(() => {
+                          setEditIndex(index);
+                          setaddresspopup(true);
+                          setEditLoaderIndex(null);
+                        }, 2000);
+                      }}
+                      className="p-2 cursor-pointer border border-gray-300 rounded-lg hover:bg-gray-100">
+                      {editLoaderIndex === index ? (
+                        <IconLoader2 size={18} className="animate-spin" />
+                      ) : (
+                        <IconEdit size={18} />
+                      )}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setDeleteLoaderIndex(index);
+                        setTimeout(() => {
+                          handleDelete(index);
+                          setDeleteLoaderIndex(null);
+                        }, 2000);
+                      }}
+                      className="p-2 cursor-pointer border border-gray-300 rounded-lg hover:bg-gray-100">
+                      {deleteLoaderIndex === index ? (
+                        <IconLoader2 size={18} className="animate-spin" />
+                      ) : (
+                        <IconTrash size={18} />
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="mt-3 text-gray-700">
+                  <p className="text-sm sm:text-base">{item.address}</p>
+                  <p className="text-sm sm:text-base">{item.phone}</p>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>

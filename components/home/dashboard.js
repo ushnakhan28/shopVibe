@@ -32,7 +32,7 @@ const Dashboard = () => {
   const data = [
     {
       title: "Total Spent",
-      quantity: "$999.9",
+      quantity: "$797",
       icon: <IconCreditCard size={30} />,
       para: "+12% from last month",
       bg: "bg-green-50",
@@ -41,7 +41,7 @@ const Dashboard = () => {
     },
     {
       title: "Loyalty Points",
-      quantity: "1250",
+      quantity: "996",
       icon: <IconGift size={30} />,
       para: "750 to next tier",
       bg: "bg-blue-50",
@@ -50,7 +50,7 @@ const Dashboard = () => {
     },
     {
       title: "Total Orders",
-      quantity: "24",
+      quantity: "3",
       icon: <IconPackage size={30} />,
       para: "15 reviewed",
       bg: "bg-purple-50",

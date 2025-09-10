@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
-import { IconX } from "@tabler/icons-react";
+import { useEffect, useState } from "react";
+import { IconLoader2, IconX } from "@tabler/icons-react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 export default function AddressPopup({
   addresspopup,
@@ -7,35 +9,43 @@ export default function AddressPopup({
   onSave,
   existingData,
 }) {
-  const [type, setType] = useState("HOME");
-  const [label, setLabel] = useState("");
-  const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("");
+  const [loading, setloading] = useState(false);
+  const formik = useFormik({
+    initialValues: {
+      type: "HOME",
+      label: "",
+      address: "",
+      phone: "",
+    },
+    validationSchema: Yup.object({
+      type: Yup.string().required("Type is required"),
+      label: Yup.string().required("Label is required"),
+      address: Yup.string().required("Address is required"),
+      phone: Yup.string()
+        .matches(/^[0-9]+$/, "Phone must contain only digits")
+        .min(10, "Phone must be at least 10 digits")
+        .required("Phone is required"),
+    }),
+    onSubmit: (values) => {
+      setloading(true);
+      setTimeout(() => {
+        const newAddress = { ...values, badge: values.label };
+        onSave(newAddress);
+        setloading(false);
+      }, 2000);
+    },
+  });
 
   useEffect(() => {
     if (existingData) {
-      setType(existingData.type);
-      setLabel(existingData.label);
-      setAddress(existingData.address);
-      setPhone(existingData.phone);
-    } else {
-      setType("HOME");
-      setLabel("");
-      setAddress("");
-      setPhone("");
+      formik.setValues({
+        type: existingData.type || "HOME",
+        label: existingData.label || "",
+        address: existingData.address || "",
+        phone: existingData.phone || "",
+      });
     }
   }, [existingData]);
-
-  const handleSave = () => {
-    const newAddress = {
-      type,
-      label,
-      address,
-      phone,
-      badge: label, // optional
-    };
-    onSave(newAddress);
-  };
 
   if (!addresspopup) return null;
 
@@ -43,8 +53,8 @@ export default function AddressPopup({
     <div className="fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center bg-black/60 backdrop-blur-[1px]">
       <div className="flex flex-col border bg-white border-[#eeeeee] shadow-xl w-[300px] sm:w-[500px] px-5 py-6 rounded-xl relative">
         {/* Header */}
-        <div className="flex justify-between items-center mb-2">
-          <h1 className="font-semibold text-xl">
+        <div className="flex justify-between items-center">
+          <h1 className="font-semibold text-2xl">
             {existingData ? "Edit Address" : "Add Address"}
           </h1>
           <IconX
@@ -58,58 +68,83 @@ export default function AddressPopup({
           Manage your shipping address.
         </p>
 
-        {/* Type Selection */}
-        <div className="flex gap-3 mb-4">
-          {["HOME", "OFFICE", "OTHER"].map((option) => (
-            <button
-              key={option}
-              className={`px-4 py-2 rounded-lg border ${
-                type === option
-                  ? "border-purple-500 bg-purple-50 text-purple-600"
-                  : "border-gray-300 text-gray-600"
-              }`}
-              onClick={() => setType(option)}>
-              {option}
-            </button>
-          ))}
-        </div>
+        {/* Form */}
+        <form onSubmit={formik.handleSubmit}>
+          {/* Type Selection */}
+          <div className="flex gap-3 mb-4">
+            {["HOME", "OFFICE", "OTHER"].map((option) => (
+              <button
+                type="button"
+                key={option}
+                className={`px-4 py-2 rounded-lg border ${
+                  formik.values.type === option
+                    ? "border-purple-500 bg-purple-50 text-purple-600"
+                    : "border-gray-300 text-gray-600"
+                }`}
+                onClick={() => formik.setFieldValue("type", option)}>
+                {option}
+              </button>
+            ))}
+          </div>
+          {formik.touched.type && formik.errors.type && (
+            <p className="text-red-500 text-xs mb-2">{formik.errors.type}</p>
+          )}
 
-        {/* Label */}
-        <label className="text-sm font-medium mb-1">Label</label>
-        <input
-          type="text"
-          placeholder="Default, Billing, etc."
-          value={label}
-          onChange={(e) => setLabel(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-3 focus:outline-purple-500"
-        />
+          {/* Label */}
+          <label className="text-sm font-medium mb-1">Label</label>
+          <input
+            type="text"
+            name="label"
+            placeholder="Default, Billing, etc."
+            value={formik.values.label}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-1 focus:outline-purple-500"
+          />
+          {formik.touched.label && formik.errors.label && (
+            <p className="text-red-500 text-xs mb-2">{formik.errors.label}</p>
+          )}
 
-        {/* Full Address */}
-        <label className="text-sm font-medium mb-1">Full Address</label>
-        <input
-          type="text"
-          placeholder="Street, City, State, ZIP"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-3 focus:outline-purple-500"
-        />
+          {/* Full Address */}
+          <label className="text-sm font-medium mb-1">Full Address</label>
+          <input
+            type="text"
+            name="address"
+            placeholder="Street, City, State, ZIP"
+            value={formik.values.address}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-1 focus:outline-purple-500"
+          />
+          {formik.touched.address && formik.errors.address && (
+            <p className="text-red-500 text-xs mb-2">{formik.errors.address}</p>
+          )}
 
-        {/* Phone */}
-        <label className="text-sm font-medium mb-1">Phone</label>
-        <input
-          type="text"
-          placeholder="+1 555 000 0000"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-4 focus:outline-purple-500"
-        />
+          {/* Phone */}
+          <label className="text-sm font-medium mb-1">Phone</label>
+          <input
+            type="tel"
+            name="phone"
+            placeholder="+1 555 000 0000"
+            value={formik.values.phone}
+            onChange={(e) => {
+              const onlyNums = e.target.value.replace(/[^0-9]/g, "");
+              formik.setFieldValue("phone", onlyNums);
+            }}
+            onBlur={formik.handleBlur}
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-1 focus:outline-purple-500"
+          />
+          {formik.touched.phone && formik.errors.phone && (
+            <p className="text-red-500 text-xs mb-2">{formik.errors.phone}</p>
+          )}
 
-        {/* Save Button */}
-        <button
-          onClick={handleSave}
-          className="bg-purple-600 text-white px-5 py-2 rounded-lg self-end hover:bg-purple-700 transition">
-          Save
-        </button>
+          {/* Save Button */}
+          <button
+            type="submit"
+            className="flex justify-center items-center gap-x-2 bg-purple-600 text-white w-full px-5 py-2 rounded-lg self-end hover:bg-purple-700 transition mt-3">
+            {loading && <IconLoader2 size={20} className="animate-spin" />} Save
+          </button>
+        </form>
       </div>
     </div>
   );
