@@ -23,7 +23,7 @@ const Newsletter = () => {
     },
   ];
   return (
-    <div className="bg-[#9333EA] mt-20 py-15 px-5 md:px-0" id="newsletter">
+    <div className="bg-purple-700 mt-20 py-15 px-5 md:px-0" id="newsletter">
       <center>
         <IconMail color="white" size={55} />
       </center>

@@ -101,8 +101,8 @@ const AuthPopup = ({ authpopup, setauthpopup }) => {
                 className={`flex items-center justify-center gap-x-2 w-full rounded-xl px-4 py-2 
                   ${
                     isMethodAdded
-                      ? "bg-[#9333EA] cursor-default"
-                      : "bg-[#9333EA] hover:bg-[#a03bff]"
+                      ? "bg-purple-700 cursor-default"
+                      : "bg-purple-700 hover:bg-[#a03bff]"
                   } text-white`}
                 onClick={() => {
                   if (!selected) {
@@ -137,7 +137,7 @@ const AuthPopup = ({ authpopup, setauthpopup }) => {
               <h1 className="font-bold text-2xl">Two-Factor Authentication</h1>
               <IconX
                 size={25}
-                color="#9333ea"
+                color="#7e22ce"
                 className="cursor-pointer -mt-4 -mr-3"
                 onClick={() => setauthpopup(false)}
               />
@@ -173,7 +173,7 @@ const AuthPopup = ({ authpopup, setauthpopup }) => {
                   <input
                     name="phone"
                     placeholder="Enter your number"
-                    className="border border-[#adadad] px-4 py-2 rounded-xl w-full mt-2 outline-[#9333ea]"
+                    className="border border-[#adadad] px-4 py-2 rounded-xl w-full mt-2 outline-purple-700"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                   />
@@ -182,7 +182,7 @@ const AuthPopup = ({ authpopup, setauthpopup }) => {
                       <button
                         type="button"
                         onClick={handleSendCode}
-                        className="w-[120px] hover:bg-[#a23fff] mt-2 py-2 rounded-xl bg-[#9333ea] text-white cursor-pointer">
+                        className="w-[120px] hover:bg-[#a23fff] mt-2 py-2 rounded-xl bg-purple-700 text-white cursor-pointer">
                         Send Code
                       </button>
                     ) : timer > 0 ? (
@@ -196,7 +196,7 @@ const AuthPopup = ({ authpopup, setauthpopup }) => {
                       <button
                         type="button"
                         onClick={handleSendCode}
-                        className="w-[120px] hover:bg-[#a23fff] mt-2 py-2 rounded-xl bg-[#9333ea] text-white cursor-pointer">
+                        className="w-[120px] hover:bg-[#a23fff] mt-2 py-2 rounded-xl bg-purple-700 text-white cursor-pointer">
                         Resend Code
                       </button>
                     )}

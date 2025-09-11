@@ -7,7 +7,6 @@ import {
   IconUser,
   IconX,
 } from "@tabler/icons-react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -35,14 +34,13 @@ const Header = () => {
   const [wishlistCount, setWishlistCount] = useState(0);
   const [cartCount, setCartCount] = useState(0);
 
-  // 🔹 Wishlist count listener
   useEffect(() => {
     const updateWishlistCount = () => {
       const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
       setWishlistCount(storedWishlist.length);
     };
 
-    updateWishlistCount(); // initial run
+    updateWishlistCount();
 
     window.addEventListener("wishlistUpdated", updateWishlistCount);
 
@@ -70,17 +68,17 @@ const Header = () => {
     };
   }, []);
   const handleClick = (path) => {
-    setsigninloader(true); // Loader on
+    setsigninloader(true);
     setTimeout(() => {
-      router.push(path); // 2 sec baad page change
-      setsigninloader(false); // Loader off
+      router.push(path);
+      setsigninloader(false);
     }, 2000);
   };
   const handlecreate = (path) => {
-    setcreateloader(true); // Loader on
+    setcreateloader(true);
     setTimeout(() => {
-      router.push(path); // 2 sec baad page change
-      setcreateloader(false); // Loader off
+      router.push(path);
+      setcreateloader(false);
     }, 2000);
   };
 
@@ -121,25 +119,22 @@ const Header = () => {
   };
   return (
     <div className="fixed bg-white border-b border-[#d8d8d8] w-full top-0 z-50">
-      {/* Top Navbar */}
       <div className="flex justify-between items-center px-4 md:px-10 py-3 gap-4 flex-wrap md:flex-nowrap">
-        {/* Logo */}
         <div className="lg:hidden fixed text-sm top-[8px] left-4 z-50 bg-purple-600 text-white p-2 rounded-lg shadow">
           SV
         </div>
-        <h1 className="text-xl md:text-2xl md:ml-6 lg:ml-0 ml-12 font-bold text-[#7C3AED] whitespace-nowrap">
+        <h1 className="text-xl md:text-2xl md:ml-6 lg:ml-0 ml-12 font-bold text-purple-700 whitespace-nowrap">
           ShopVibe
         </h1>
 
-        {/* NavLinks */}
         <div className="hidden lg:ml-5 mt-1 lg:flex lg:gap-x-8 text-gray-600 text-sm lg:text-base flex-shrink-0 whitespace-nowrap">
           {data.map((item, index) => (
             <a
               key={index}
               href={item.links}
               onClick={() => handlelinks(item.links)}
-              className={`hover:text-[#8B5CF6] font-semibold duration-100 ${
-                active === item.links ? "text-[#8B5CF6]" : ""
+              className={`hover:text-purple-700 font-semibold duration-100 ${
+                active === item.links ? "text-purple-700" : ""
               }`}>
               {item.content}
             </a>
@@ -151,20 +146,20 @@ const Header = () => {
           <IconSearch
             className="absolute left-3 top-2"
             size={18}
-            color="#7C3AED"
+            color="#7e22ce"
           />
           <input
             value={search}
             onChange={(e) => setsearch(e.target.value)}
             placeholder="Search..."
-            className="w-full pl-10 pr-8 py-1.5 rounded-xl bg-[#eeeeee] outline-[#7C3AED] text-sm"
+            className="w-full pl-10 pr-8 py-1.5 rounded-xl bg-[#eeeeee] outline-purple-700 text-sm"
           />
           {search.length > 0 && (
             <IconX
               onClick={handlebtn}
               className="absolute right-2 top-2 cursor-pointer"
               size={16}
-              color="#7C3AED"
+              color="#7e22ce"
             />
           )}
         </div>
@@ -181,11 +176,11 @@ const Header = () => {
               }}
               className={`cursor-pointer p-1.5 rounded-xl ${
                 router.pathname === "/headerWishlist"
-                  ? "bg-[#ded4ff] text-[#7C3AED]"
+                  ? "bg-[#ded4ff] text-purple-700"
                   : "hover:bg-[#e9e9e9]"
               }`}>
               {favLoader && router.pathname !== "/headerWishlist" ? (
-                <div className="text-[#9333EA]">
+                <div className="text-purple-700">
                   <IconLoader2 className="animate-spin" size={20} />
                 </div>
               ) : (
@@ -214,11 +209,11 @@ const Header = () => {
               }}
               className={`cursor-pointer p-1.5 rounded-xl ${
                 router.pathname === "/headerCart"
-                  ? "bg-[#ded4ff] text-[#7C3AED]"
+                  ? "bg-[#ded4ff] text-purple-700"
                   : "hover:bg-[#e9e9e9]"
               }`}>
               {cartLoader && router.pathname !== "/headerCart" ? (
-                <div className="text-[#9333EA]">
+                <div className="text-purple-700">
                   <IconLoader2 className="animate-spin" size={20} />
                 </div>
               ) : (
@@ -241,7 +236,7 @@ const Header = () => {
               <div
                 onClick={() => router.push("/profile")}
                 className="cursor-pointer rounded-xl">
-                <div className="sm:w-9 sm:h-9 bg-[#9333EA] flex items-center justify-center text-white font-semibold rounded-full">
+                <div className="sm:w-9 sm:h-9 bg-purple-700 flex items-center justify-center text-white font-semibold rounded-full">
                   {initials}
                 </div>
               </div>
@@ -251,7 +246,7 @@ const Header = () => {
                   onClick={() => setOpenDropdown(!openDropdown)}
                   className={`cursor-pointer p-1.5 rounded-xl ${
                     openDropdown
-                      ? "bg-[#ded4ff] text-[#7C3AED]"
+                      ? "bg-[#ded4ff] text-purple-700"
                       : "hover:bg-[#e9e9e9]"
                   }`}>
                   {" "}
@@ -297,20 +292,20 @@ const Header = () => {
           <IconSearch
             className="absolute left-3 top-2.5"
             size={18}
-            color="#7C3AED"
+            color="#7e22ce"
           />
           <input
             value={search}
             onChange={(e) => setsearch(e.target.value)}
             placeholder="Search..."
-            className="w-full pl-10 pr-8 py-2 rounded-xl bg-[#eeeeee] outline-[#7C3AED] text-sm"
+            className="w-full pl-10 pr-8 py-2 rounded-xl bg-[#eeeeee] outline-purple-700 text-sm"
           />
           {search.length > 0 && (
             <IconX
               onClick={handlebtn}
               className="absolute right-2 top-2.5 cursor-pointer"
               size={16}
-              color="#7C3AED"
+              color="#7e22ce"
             />
           )}
         </div>
@@ -343,7 +338,7 @@ const Header = () => {
                 }}
                 className="cursor-pointer p-2 rounded-xl bg-white text-[#bb73ff]">
                 {favLoader && router.pathname !== "/headerWishlist" ? (
-                  <div className="text-[#9333EA]">
+                  <div className="text-purple-700">
                     <IconLoader2 className="animate-spin" size={20} />
                   </div>
                 ) : (
@@ -371,7 +366,7 @@ const Header = () => {
                 }}
                 className="cursor-pointer p-2 rounded-xl bg-white text-[#bb73ff]">
                 {cartLoader && router.pathname !== "/headerCart" ? (
-                  <div className="text-[#9333EA]">
+                  <div className="text-purple-700">
                     <IconLoader2 className="animate-spin" size={20} />
                   </div>
                 ) : (
@@ -394,7 +389,7 @@ const Header = () => {
               <div
                 onClick={() => router.push("/profile")}
                 className="cursor-pointer mt-3 rounded-xl text-[#bb73ff]">
-                <div className="inline-block bg-[#9333EA] text-white font-semibold rounded-xl">
+                <div className="inline-block bg-purple-700 text-white font-semibold rounded-xl">
                   <p className="px-4 py-2 ">{username}</p>
                 </div>
               </div>

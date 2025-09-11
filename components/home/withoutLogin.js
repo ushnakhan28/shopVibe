@@ -32,7 +32,7 @@ const WithOutLogin = (signin) => {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 font-semibold w-full sm:w-auto">
             <button
               onClick={() => handlesignin(signin.btn1path)}
-              className="cursor-pointer flex gap-x-2 justify-center items-center bg-[#9333EA] text-white rounded-xl px-4 py-2 w-full sm:w-[200px] hover:opacity-90 transition">
+              className="cursor-pointer flex gap-x-2 justify-center items-center bg-purple-700 text-white rounded-xl px-4 py-2 w-full sm:w-[200px] hover:opacity-90 transition">
               {loader1 && <IconLoader2 className="animate-spin" size={20} />}
               {signin.btn1}
             </button>

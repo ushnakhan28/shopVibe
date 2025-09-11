@@ -58,21 +58,23 @@ const AddressSection = () => {
               Manage your shipping addresses
             </p>
           </div>
-          <button
-            onClick={() => {
-              setEditIndex(null);
-              setaddresspopup(true);
-            }}
-            className="mt-4 sm:mt-0 flex items-center gap-x-2 bg-purple-600 hover:bg-purple-700 text-white font-medium cursor-pointer px-4 py-2 rounded-lg shadow">
-            <IconPlus size={20} /> Add Address
-          </button>
+          <div className="tracking-[1px] text-lg">
+            <button
+              onClick={() => {
+                setEditIndex(null);
+                setaddresspopup(true);
+              }}
+              className="mt-4 sm:mt-0 flex items-center gap-x-2 bg-purple-700 text-white cursor-pointer px-4 py-2 rounded-lg shadow">
+              <IconPlus size={20} /> Add Address
+            </button>
+          </div>
         </div>
 
         <div className="flex flex-col gap-y-5 mt-6">
           {addresses.length === 0 ? (
             <div className="flex flex-col mt-5 gap-y-2 items-center">
               <div className="w-14 h-14 flex items-center justify-center rounded-full bg-purple-200">
-                <IconMapPin size={30} color="#9333ea" />
+                <IconMapPin size={30} color="#7e22ce" />
               </div>
 
               <h1 className="font-semibold text-xl text-center">
@@ -81,14 +83,16 @@ const AddressSection = () => {
               <p className="text-[#616161]">
                 Add a delivery address to proceed with your order.
               </p>
-              <button
-                onClick={() => {
-                  setEditIndex(null);
-                  setaddresspopup(true);
-                }}
-                className="mt-4 sm:mt-2 flex items-center gap-x-2 bg-purple-600 hover:bg-purple-700 text-white font-medium cursor-pointer px-8 py-2 rounded-lg shadow">
-                <IconPlus size={20} /> Add Address
-              </button>
+              <div className="tracking-[1px] text-lg">
+                <button
+                  onClick={() => {
+                    setEditIndex(null);
+                    setaddresspopup(true);
+                  }}
+                  className="mt-4 sm:mt-2 flex items-center gap-x-2 bg-purple-700 hover:bg-purple-700 text-white cursor-pointer px-8 py-2 rounded-lg shadow">
+                  <IconPlus size={20} /> Add Address
+                </button>
+              </div>
             </div>
           ) : (
             addresses.map((item, index) => (

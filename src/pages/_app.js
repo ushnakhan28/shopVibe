@@ -25,7 +25,7 @@ export default function App({ Component, pageProps }) {
           reverseOrder={false}
           toastOptions={{
             style: {
-              backgroundColor: "#9333ea",
+              backgroundColor: "#7e22ce",
               padding: "8px 10px",
               color: "white",
               width: "500px",

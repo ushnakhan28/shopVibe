@@ -103,7 +103,7 @@ const DeletePopup = ({ deletepopup, setdeletepopup }) => {
               value={deleteFormik.values.confirmText}
               onChange={deleteFormik.handleChange}
               onBlur={deleteFormik.handleBlur}
-              className="px-4 py-2 mt-1 outline-[#9333EA] w-full rounded-xl border-[#adadad] border"
+              className="px-4 py-2 mt-1 outline-purple-700 w-full rounded-xl border-[#adadad] border"
             />
             {deleteFormik.errors.confirmText &&
               deleteFormik.touched.confirmText && (
@@ -121,7 +121,7 @@ const DeletePopup = ({ deletepopup, setdeletepopup }) => {
               value={deleteFormik.values.dltpassword}
               onChange={deleteFormik.handleChange}
               onBlur={deleteFormik.handleBlur}
-              className="px-4 py-2 mt-1 outline-[#9333EA] w-full rounded-xl border-[#adadad] border"
+              className="px-4 py-2 mt-1 outline-purple-700 w-full rounded-xl border-[#adadad] border"
             />
             {deleteFormik.touched.dltpassword &&
               deleteFormik.errors.dltpassword && (
@@ -136,7 +136,7 @@ const DeletePopup = ({ deletepopup, setdeletepopup }) => {
         <div className="w-full sm:flex flex-col flex gap-y-2 mt-4 gap-x-3">
           <button
             type="submit"
-            className="flex justify-center gap-x-2 items-center rounded-xl px-4 py-2 bg-[#9333EA] text-white w-full cursor-pointer hover:bg-[#a03bff]">
+            className="flex justify-center gap-x-2 items-center rounded-xl px-4 py-2 bg-purple-700 text-white w-full cursor-pointer hover:bg-[#a03bff]">
             {loading ? (
               <IconLoader2 className="animate-spin" size={20} />
             ) : (

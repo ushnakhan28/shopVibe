@@ -1,10 +1,5 @@
-import {
-  IconArrowRight,
-  IconShoppingBag,
-  IconTarget,
-} from "@tabler/icons-react";
+import { IconArrowRight, IconShoppingBag } from "@tabler/icons-react";
 import Btn from "./btn";
-import { Badge } from "@mantine/core";
 import Link from "next/link";
 import BnrBadge from "./bnrBadge";
 
@@ -25,7 +20,7 @@ const Banner = () => {
   ];
   return (
     <div
-      className="bg-[#9333EA] py-16 lg:mt-14 mt-25 px-4 md:px-10"
+      className="bg-purple-700 py-16 lg:mt-14 mt-25 px-4 md:px-10"
       id="banner">
       <center>
         <BnrBadge

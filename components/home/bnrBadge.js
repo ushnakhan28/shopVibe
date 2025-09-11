@@ -37,17 +37,17 @@ const BnrBadge = (item) => {
   return (
     <div>
       <Badge
-        leftSection={<IconComponent size={20} color="white" />}
+        leftSection={<IconComponent size={20} color="#7e22ce" />}
         color="grape"
         variant="light"
         radius="xl"
         size="lg"
         style={{
-          backgroundColor: "#C084FC",
-          color: "white",
+          backgroundColor: "#eeeeee",
+          color: "#7e22ce",
           fontWeight: "bold",
           boxShadow: "0 4px 10px rgba(0, 0, 0, 0.15)",
-          border: "1px solid rgba(255, 255, 255, 0.2)",
+          border: "1px solid #7e22ce",
         }}>
         {item.text}
       </Badge>

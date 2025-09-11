@@ -164,7 +164,7 @@ const PasswordPopup = ({ passPopup, setpassPopup }) => {
           <div className="w-full flex flex-col gap-y-2 mt-4">
             <button
               type="submit"
-              className="flex justify-center gap-x-2 items-center rounded-xl px-4 py-2 bg-[#9333EA] text-white w-full cursor-pointer hover:bg-[#a03bff]">
+              className="flex justify-center gap-x-2 items-center rounded-xl px-4 py-2 bg-purple-700 text-white w-full cursor-pointer hover:bg-[#a03bff]">
               {loading ? (
                 <IconLoader2 className="animate-spin" size={20} />
               ) : (

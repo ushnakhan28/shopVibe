@@ -35,7 +35,7 @@ const NextArrow = (props) => {
   return (
     <div
       onClick={onClick}
-      className="absolute right-[-25px] top-[40%] z-10 cursor-pointer bg-[#7D2AE8] hover:bg-[#8b32ff] text-white p-2 rounded-full hover:scale-105 duration-300">
+      className="absolute right-[-25px] top-[40%] z-10 cursor-pointer bg-purple-700 text-white p-2 rounded-full hover:scale-105 duration-300">
       <IconChevronRight />
     </div>
   );
@@ -46,7 +46,7 @@ const PrevArrow = (props) => {
   return (
     <div
       onClick={onClick}
-      className="absolute left-[-25px] top-[40%] z-10 cursor-pointer bg-[#7D2AE8] hover:bg-[#8b32ff] text-white p-2 rounded-full hover:scale-105 duration-300">
+      className="absolute left-[-25px] top-[40%] z-10 cursor-pointer bg-purple-700 text-white p-2 rounded-full hover:scale-105 duration-300">
       <IconChevronLeft />
     </div>
   );
@@ -290,13 +290,13 @@ const Product = () => {
                 key={index}
                 onClick={() => setfilter(item)}
                 className={`px-2 md:px-3 py-[1px] rounded-xl cursor-pointer ${
-                  filter === item ? "bg-[#7D2AE8] text-white" : "bg-[#f0f0f0]"
+                  filter === item ? "bg-purple-700 text-white" : "bg-[#f0f0f0]"
                 }`}>
                 <span className="text-xs md:text-sm">{item}</span>
               </div>
             ))}
             <Badge
-              color="#7C3AED"
+              color="#7e22ce"
               variant="light"
               radius="xl"
               size="md"
@@ -310,7 +310,7 @@ const Product = () => {
         <div className="w-full md:w-auto">
           <Select
             onChange={(value) => setdropdown(value)}
-            className="w-full md:w-auto outline-1 outline-[#8b5cf6] rounded-sm"
+            className="w-full md:w-auto outline-1 outline-purple-700 rounded-sm"
             placeholder="All Categories"
             data={[
               "All Categories",
@@ -327,7 +327,7 @@ const Product = () => {
               "Photography",
               "Kitchen",
             ]}
-            rightSection={<IconChevronDown size={16} color="#8b5cf6" />}
+            rightSection={<IconChevronDown size={16} color="#7e22ce" />}
             rightSectionWidth={50}
             maxDropdownHeight={440}
             styles={{
@@ -346,8 +346,8 @@ const Product = () => {
             }}
             className={`p-[7px] transition-all duration-300  ${
               columns4
-                ? "bg-[#7D2AE8] text-white scale-105"
-                : "bg-[#f3f3f3] text-[#7D2AE8] hover:bg-[#e5d6fb]"
+                ? "bg-purple-700 text-white scale-105"
+                : "bg-[#f3f3f3] text-purple-700 hover:bg-[#e5d6fb]"
             }`}>
             <IconColumns3 size={18} />
           </button>
@@ -359,8 +359,8 @@ const Product = () => {
             }}
             className={`p-[7px] transition-all duration-300 ${
               columns3
-                ? "bg-[#7D2AE8] text-white scale-105"
-                : "bg-[#f3f3f3] text-[#7D2AE8] hover:bg-[#e5d6fb]"
+                ? "bg-purple-700 text-white scale-105"
+                : "bg-[#f3f3f3] text-purple-700 hover:bg-[#e5d6fb]"
             }`}>
             <IconLayoutColumns size={18} />
           </button>
@@ -402,7 +402,7 @@ const Product = () => {
 
               <div className="flex justify-center mt-10 md:20 col-span-full">
                 {loading ? (
-                  <div className="flex gap-x-3 bg-white rounded-xl text-[#9333EA] border-2 border-[#9333EA] shadow-sm cursor-not-allowed px-3 py-2">
+                  <div className="flex gap-x-3 bg-white rounded-xl text-purple-700 border-2 border-purple-700 shadow-sm cursor-not-allowed px-3 py-2">
                     <IconLoader2 className="animate-spin" />
                     <span>Loading Categories...</span>
                   </div>
@@ -410,7 +410,7 @@ const Product = () => {
                   <button
                     onClick={show}
                     type="submit"
-                    className="bg-[#9333EA] px-6 py-3 flex gap-x-2 rounded-xl text-white cursor-pointer hover:bg-[#a647ff]">
+                    className="bg-purple-700 px-6 py-3 flex gap-x-2 rounded-xl text-white cursor-pointer ">
                     View All Categories
                     <i>
                       <IconArrowRight />
@@ -420,7 +420,7 @@ const Product = () => {
                   <button
                     onClick={less}
                     type="submit"
-                    className="bg-[#9333EA] px-6 py-3 flex gap-x-2 rounded-xl text-white cursor-pointer hover:bg-[#a647ff]">
+                    className="bg-purple-700 px-6 py-3 flex gap-x-2 rounded-xl text-white cursor-pointer ">
                     View Less Categories
                     <i>
                       <IconArrowLeft />
@@ -443,7 +443,7 @@ const Product = () => {
           <div className="mx-3 relative z-10 bg-white rounded-xl shadow-lg p-8 max-w-4xl max-h-[83vh] overflow-y-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8">
             <button
               onClick={closepopup}
-              className="cursor-pointer absolute top-3 right-3 bg-[#7D2AE8] text-white p-2 rounded-full shadow-md hover:scale-105 transition z-20">
+              className="cursor-pointer absolute top-3 right-3 bg-purple-700 text-white p-2 rounded-full shadow-md hover:scale-105 transition z-20">
               <IconX size={18} />
             </button>
 
@@ -455,7 +455,7 @@ const Product = () => {
               />
             </div>
             <div className="flex flex-col gap-y-[6px]">
-              <Badge variant="light" color="#8b5cf6" radius="xl" size="md">
+              <Badge variant="light" color="#7e22ce" radius="xl" size="md">
                 {selectedproduct.category}
               </Badge>
               <h1 className="text-xl font-bold tracking-wider">
@@ -522,9 +522,6 @@ const Product = () => {
               </div>
               <div className="flex justify-between mt-5">
                 <div>
-                  {/* <button className="cursor-pointer flex items-center gap-x-2 px-8 rounded-xl py-2 hover:bg-[#8b32ff] duration-300 text-white bg-[#7D2AE8]">
-                    <IconShoppingCart size={19} /> Add to Cart
-                  </button> */}
                   <button
                     onClick={() => {
                       addToCart(selectedproduct);
@@ -535,7 +532,7 @@ const Product = () => {
           ${
             popupAdded
               ? "bg-gray-400 cursor-not-allowed"
-              : "bg-[#7D2AE8] hover:bg-[#8b32ff] duration-300"
+              : "bg-purple-700 duration-300"
           }`}>
                     <IconShoppingCart size={19} />
                     {popupAdded ? "Added" : "Add to Cart"}
@@ -573,7 +570,7 @@ const Product = () => {
                   </p>
                 </div>
                 <div className="flex gap-x-2">
-                  <IconReload className="text-[#8B5CF6]" size={20} />
+                  <IconReload className="text-purple-700" size={20} />
                   <p className="text-[#4d4d4d] text-sm">30-day return policy</p>
                 </div>
                 <div className="flex gap-x-2">
@@ -657,7 +654,7 @@ const ProductCard = ({
         <div className="md:mt-5 flex flex-col gap-y-2">
           <Badge
             className="mt-3 md:mt-0"
-            color="#7C3AED"
+            color="#7e22ce"
             variant="light"
             radius="xl"
             size="md">
@@ -688,19 +685,15 @@ const ProductCard = ({
                 </p>
               </div>
             )}
-            {/* <button
-              onClick={() => addToCart(card)}
-              className="items-center cursor-pointer text-white px-3 hover:bg-[#8b32ff] duration-200 py-2 flex gap-x-2 rounded-xl bg-[#7D2AE8] hover:scale-105">
-              <IconShoppingCart size={19} className="w-5 h-5" /> Add
-            </button> */}
+
             <button
               onClick={handleAdd}
-              disabled={added} // disable when already added
+              disabled={added}
               className={`items-center text-white px-3 py-2 flex gap-x-2 rounded-xl 
           ${
             added
               ? "bg-gray-400 cursor-not-allowed"
-              : "bg-[#7D2AE8] hover:bg-[#8b32ff] hover:scale-105 duration-200"
+              : "bg-purple-700 hover:scale-105 duration-200"
           }`}>
               <IconShoppingCart size={19} className="w-5 h-5" />{" "}
               {added ? "Added" : "Add"}

@@ -49,7 +49,6 @@ export default function CategoryPage() {
     localStorage.setItem("wishlist", JSON.stringify(stored));
     setFavorites(stored.map((p) => p.id));
 
-    // 🔔 Header wishlist count update
     window.dispatchEvent(new Event("wishlistUpdated"));
   };
 
@@ -74,7 +73,7 @@ export default function CategoryPage() {
   if (!categoryData)
     return (
       <div className="p-5 flex items-center h-[100vh] justify-center">
-        <IconLoader2 size={50} className="animate-spin text-[#9333EA]" />
+        <IconLoader2 size={50} className="animate-spin text-purple-700" />
       </div>
     );
   const handleAdd = (product, quantity = 1) => {
@@ -212,13 +211,15 @@ export default function CategoryPage() {
                   key={index}
                   onClick={() => setfilter(item)}
                   className={`px-2 md:px-3 py-[1px] rounded-xl cursor-pointer ${
-                    filter === item ? "bg-[#7D2AE8] text-white" : "bg-[#f0f0f0]"
+                    filter === item
+                      ? "bg-purple-700 text-white"
+                      : "bg-[#f0f0f0]"
                   }`}>
                   <span className="text-xs md:text-sm">{item}</span>
                 </div>
               ))}
               <Badge
-                color="#7C3AED"
+                color="#7e22ce"
                 variant="light"
                 radius="xl"
                 size="md"
@@ -282,7 +283,7 @@ export default function CategoryPage() {
 
                     <div className="md:mt-5 flex flex-col gap-y-2">
                       <Badge
-                        color="#7C3AED"
+                        color="#7e22ce"
                         variant="light"
                         radius="xl"
                         size="md">
@@ -320,7 +321,7 @@ export default function CategoryPage() {
     ${
       addedItems[product.id]
         ? "bg-gray-400 cursor-not-allowed"
-        : "bg-[#7D2AE8] hover:bg-[#6c21d4] transition"
+        : "bg-purple-700"
     }`}>
                           <IconShoppingCart size={19} />
                           {addedItems[product.id] ? "Added" : "Add"}
@@ -345,7 +346,7 @@ export default function CategoryPage() {
             <div className="mx-3 relative z-10 bg-white rounded-xl shadow-lg p-8 max-w-4xl h-[83vh] md:max-h-[90vh] overflow-y-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8">
               <button
                 onClick={closepopup}
-                className="cursor-pointer absolute top-3 right-3 bg-[#7D2AE8] text-white p-2 rounded-full shadow-md hover:scale-105 transition z-20">
+                className="cursor-pointer absolute top-3 right-3 bg-purple-700 text-white p-2 rounded-full shadow-md hover:scale-105 transition z-20">
                 <IconX size={18} />
               </button>
 
@@ -358,7 +359,7 @@ export default function CategoryPage() {
               </div>
 
               <div className="flex flex-col gap-y-[6px]">
-                <Badge variant="light" color="#8b5cf6" radius="xl" size="md">
+                <Badge variant="light" color="#7e22ce" radius="xl" size="md">
                   {selectedProduct.category}
                 </Badge>
                 <h1 className="text-xl font-bold tracking-wider">
@@ -432,7 +433,7 @@ export default function CategoryPage() {
     ${
       addedItems[selectedProduct.id]
         ? "bg-gray-400 cursor-not-allowed"
-        : "bg-[#7D2AE8] hover:bg-[#6c21d4] transition"
+        : "bg-purple-700"
     }`}>
                     <IconShoppingCart size={19} />
                     {addedItems[selectedProduct.id] ? "Added" : "Add to Cart"}
@@ -461,7 +462,7 @@ export default function CategoryPage() {
                     </p>
                   </div>
                   <div className="flex gap-x-2">
-                    <IconReload className="text-[#8B5CF6]" size={20} />
+                    <IconReload className="text-purple-700" size={20} />
                     <p className="text-[#4d4d4d] text-sm">
                       30-day return policy
                     </p>

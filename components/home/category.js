@@ -61,9 +61,9 @@ const Category = () => {
             <div className="flex flex-col gap-y-2 px-5 py-8">
               <p className="font-bold text-xl">{item.name}</p>
               <p className="text-sm text-[#adadad]">{item.desc}</p>
-              <p className="text">{item.totalProducts} Products</p>
+              <p className="text-purple-700">{item.totalProducts} Products</p>
               <Link href={`/categories/${encodeURIComponent(item.name)}`}>
-                <button className="group-hover:bg-[#9333EA] duration-[0.3s] group-hover:text-white w-full flex mt-2 gap-x-2 justify-center cursor-pointer border-1 border-[#cacaca] rounded-xl px-5 py-3">
+                <button className="group-hover:bg-purple-700 duration-[0.3s] group-hover:text-white w-full flex mt-2 gap-x-2 justify-center cursor-pointer border-1 border-[#cacaca] rounded-xl px-5 py-3">
                   {item.buttonText}
                   <IconArrowRight className="group-hover:translate-x-2 duration-[0.3s]" />
                 </button>
@@ -74,7 +74,7 @@ const Category = () => {
       </div>
       <div className="flex justify-center mt-20">
         {loading ? (
-          <div className="flex gap-x-3 bg-white rounded-xl text-[#9333EA] border-2 border-[#9333EA] shadow-sm cursor-not-allowed px-3 py-2">
+          <div className="flex gap-x-3 bg-white rounded-xl text-purple-700 border-2 border-purple-700 shadow-sm cursor-not-allowed px-3 py-2">
             <IconLoader2 className="animate-spin" />
             <span>Loading Catagories...</span>
           </div>

@@ -65,7 +65,7 @@ const SixDigit = ({ setauthpopup, selected, isCodeSent, phoneNumber }) => {
             className={`w-12 h-12 sm:w-14 sm:h-14 text-center font-semibold text-lg outline-none border 
               ${index === 0 ? "rounded-tl-xl rounded-bl-xl" : ""} 
               ${index === 5 ? "rounded-tr-xl rounded-br-xl" : ""} 
-              border-gray-300 focus:border-[#9333ea] focus:text-[#9333ea]`}
+              border-gray-300 focus:border-purple-700 focus:text-purple-700`}
           />
         ))}
       </div>
@@ -78,7 +78,7 @@ const SixDigit = ({ setauthpopup, selected, isCodeSent, phoneNumber }) => {
 
       <div className="text-lg">
         <button
-          className="flex items-center justify-center gap-x-3 py-2 rounded-xl bg-[#9333ea] text-white w-full mt-4 cursor-pointer hover:bg-[#a23fff] transition-colors"
+          className="flex items-center justify-center gap-x-3 py-2 rounded-xl bg-purple-700 text-white w-full mt-4 cursor-pointer hover:bg-[#a23fff] transition-colors"
           onClick={handleVerify}>
           {loading && <IconLoader2 className="animate-spin" size={20} />} Verify
         </button>

@@ -8,20 +8,17 @@ const AddToCart = () => {
   const [cart, setCart] = useState([]);
   const [loading, setloading] = useState(null);
   const [allLoader, setallLoader] = useState(false);
-  // 🔹 Check login status
   useEffect(() => {
     const loggedIn = localStorage.getItem("isLoggedIn");
     setIsLoggedIn(loggedIn === "true");
   }, []);
 
-  // 🔹 Load cart + update on event
   useEffect(() => {
     const updateCart = () => {
       const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
       setCart(storedCart);
     };
 
-    // jab page load ho
     updateCart();
     window.addEventListener("cartUpdated", updateCart);
     return () => {
@@ -92,7 +89,7 @@ const AddToCart = () => {
             {cart.length === 0 ? (
               <div className="lg:-mt-30 -mt-40">
                 <WithOutLogin
-                  icon={<IconShoppingCart size={60} color="#9333EA" />}
+                  icon={<IconShoppingCart size={60} color="#7e22ce" />}
                   type="Your Cart is Empty"
                   para="Looks like you haven't added anything to your cart yet. Start shopping to fill it up!"
                   btn1="Start Shopping"
@@ -106,7 +103,7 @@ const AddToCart = () => {
                 <div className="flex flex-col gap-y-6">
                   <BackBtn />
                   <h1 className="flex items-center gap-x-3 font-bold text-2xl">
-                    <IconShoppingCart color="#9333EA" /> Shopping Cart
+                    <IconShoppingCart color="#7e22ce" /> Shopping Cart
                   </h1>
                 </div>
                 <div className="mb-5 border border-[#adadad] rounded-xl px-4 sm:px-6 md:px-10 py-6 md:py-8 mt-10">
@@ -116,7 +113,7 @@ const AddToCart = () => {
                     </h1>
                     <button
                       onClick={handleClearCart}
-                      className="cursor-pointer flex gap-x-2 items-center rounded-xl px-4 py-2 bg-[#9333EA] text-white w-full md:w-auto justify-center">
+                      className="cursor-pointer flex gap-x-2 items-center rounded-xl px-4 py-2 bg-purple-700 text-white w-full md:w-auto justify-center">
                       {allLoader ? (
                         <IconLoader2 size={20} className="animate-spin" />
                       ) : (
@@ -146,7 +143,7 @@ const AddToCart = () => {
                                 {item.category}
                               </p>
                               <p className="font-bold mt-1">${item.price}</p>
-                              <p className="text-sm text-[#9333EA]">
+                              <p className="text-sm text-purple-700">
                                 {item.stock} items is in stock
                               </p>
                             </div>
@@ -178,7 +175,7 @@ const AddToCart = () => {
                                     setloading(null);
                                   }, 2000);
                                 }}
-                                className="cursor-pointer flex gap-x-2 items-center rounded-xl px-4 py-2 bg-[#9333EA] text-white w-full sm:w-auto justify-center">
+                                className="cursor-pointer flex gap-x-2 items-center rounded-xl px-4 py-2 bg-purple-700 text-white w-full sm:w-auto justify-center">
                                 {loading === item.id ? (
                                   <IconLoader2
                                     size={16}
@@ -202,7 +199,7 @@ const AddToCart = () => {
         ) : (
           <div className="lg:-mt-30 -mt-40">
             <WithOutLogin
-              icon={<IconShoppingCart size={60} color="#9333EA" />}
+              icon={<IconShoppingCart size={60} color="#7e22ce" />}
               type="Sign In to View Your Cart"
               para="Create an account or sign in to save your favorite items and access them from any device."
               btn1="Sign In"

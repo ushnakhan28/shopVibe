@@ -13,7 +13,6 @@ import {
 import { useEffect, useState } from "react";
 import { Badge } from "@mantine/core";
 import BackBtn from "../../components/home/backBtn";
-import Link from "next/link";
 import WithOutLogin from "../../components/home/withoutLogin";
 
 const Wishlist = () => {
@@ -29,12 +28,10 @@ const Wishlist = () => {
     const handleCartRemove = (e) => {
       const removedId = String(e.detail.id);
 
-      // localStorage se update karo
       let addedItems = JSON.parse(localStorage.getItem("addedItems")) || [];
       addedItems = addedItems.filter((itemId) => String(itemId) !== removedId);
       localStorage.setItem("addedItems", JSON.stringify(addedItems));
 
-      // ✅ key hatao instead of setting false
       setAdded((prev) => {
         const updated = { ...prev };
         delete updated[removedId];
@@ -48,7 +45,6 @@ const Wishlist = () => {
     };
   }, []);
 
-  // 🔹 cartCleared listener
   useEffect(() => {
     const handleCartClear = () => {
       localStorage.removeItem("addedItems");
@@ -105,7 +101,7 @@ const Wishlist = () => {
 
       setAdded((prev) => {
         const updated = { ...prev };
-        delete updated[String(id)]; // ✅ force string
+        delete updated[String(id)];
         return updated;
       });
 
@@ -120,7 +116,6 @@ const Wishlist = () => {
       const filteredData = data.filter((item) => item && item.id);
       setwishlist(filteredData);
 
-      // 👇 added state restore karo
       const addedItems = JSON.parse(localStorage.getItem("addedItems")) || [];
       const addedState = {};
       addedItems.forEach((id) => {
@@ -137,7 +132,7 @@ const Wishlist = () => {
       window.dispatchEvent(new Event("wishlist-updated"));
     }
   }, []);
-  // ✅ cartUpdated listener bhi add karo
+
   useEffect(() => {
     const syncAdded = () => {
       const addedItems = JSON.parse(localStorage.getItem("addedItems")) || [];
@@ -192,7 +187,7 @@ const Wishlist = () => {
           {wishlist.length === 0 ? (
             <div className="lg:-mt-30 -mt-40">
               <WithOutLogin
-                icon={<IconHeart size={60} color="#9333EA" />}
+                icon={<IconHeart size={60} color="#7e22ce" />}
                 type="Your Wishlist is Empty"
                 para="Start browsing and save items you love by clicking the heart icon on any product."
                 btn1="Start Shopping"
@@ -235,7 +230,7 @@ const Wishlist = () => {
                         <div className="absolute top-2 right-2 flex flex-col gap-y-2 items-end opacity-100 md:opacity-0 group-hover:md:opacity-100 duration-300 z-10">
                           <div className="bg-white p-1 rounded-full cursor-pointer shadow-xl relative">
                             {removingId === card.id ? (
-                              <div className="flex text-[#9333EA]">
+                              <div className="flex text-purple-700">
                                 <IconLoader2
                                   size={18}
                                   className="animate-spin"
@@ -267,7 +262,7 @@ const Wishlist = () => {
 
                       <div className="md:mt-5 flex flex-col gap-y-2">
                         <Badge
-                          color="#7C3AED"
+                          color="#7e22ce"
                           variant="light"
                           radius="xl"
                           size="md">
@@ -305,7 +300,7 @@ const Wishlist = () => {
     ${
       added[String(card.id)]
         ? "bg-gray-400 cursor-not-allowed"
-        : "bg-[#7D2AE8] hover:bg-[#8b32ff] hover:scale-105 duration-200"
+        : "bg-purple-700 hover:scale-105 duration-200"
     }`}>
                             <IconShoppingCart size={19} className="w-5 h-5" />
                             {added[String(card.id)] ? "Added" : "Add"}
@@ -327,7 +322,7 @@ const Wishlist = () => {
             <div className="mx-3 relative z-10 bg-white rounded-xl shadow-lg p-8 max-w-4xl h-[83vh] md:max-h-[90vh] overflow-y-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8">
               <button
                 onClick={closepopup}
-                className="cursor-pointer absolute top-3 right-3 bg-[#7D2AE8] text-white p-2 rounded-full shadow-md hover:scale-105 transition z-20">
+                className="cursor-pointer absolute top-3 right-3 bg-purple-700 text-white p-2 rounded-full shadow-md hover:scale-105 transition z-20">
                 <IconX size={18} />
               </button>
 
@@ -340,7 +335,7 @@ const Wishlist = () => {
               </div>
 
               <div className="flex flex-col gap-y-[6px]">
-                <Badge variant="light" color="#8b5cf6" radius="xl" size="md">
+                <Badge variant="light" color="#7e22ce" radius="xl" size="md">
                   {selectedproduct.category}
                 </Badge>
                 <h1 className="text-xl font-bold tracking-wider">
@@ -416,7 +411,7 @@ const Wishlist = () => {
     ${
       added[String(selectedproduct.id)]
         ? "bg-gray-400 cursor-not-allowed"
-        : "bg-[#7D2AE8] hover:bg-[#8b32ff] duration-300"
+        : "bg-purple-700 duration-300"
     }`}>
                     <IconShoppingCart size={19} />
                     {added[String(selectedproduct.id)]
@@ -430,7 +425,7 @@ const Wishlist = () => {
 
                   <div className="flex items-center justify-center px-3 py-2 flex-shrink cursor-pointer rounded-xl border border-[#adadad]">
                     {removingId === selectedproduct?.id ? (
-                      <div className="flex text-[#9333EA]">
+                      <div className="flex text-purple-700">
                         <IconLoader2 size={20} className="animate-spin" />
                       </div>
                     ) : (
@@ -457,7 +452,7 @@ const Wishlist = () => {
                     </p>
                   </div>
                   <div className="flex gap-x-2">
-                    <IconReload className="text-[#8B5CF6]" size={20} />
+                    <IconReload className="text-purple-700" size={20} />
                     <p className="text-[#4d4d4d] text-sm">
                       30-day return policy
                     </p>

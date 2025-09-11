@@ -73,7 +73,7 @@ export default function PaymentPopup({
           </h1>
           <IconX
             size={25}
-            color="#9333ea"
+            color="#7e22ce"
             className="cursor-pointer"
             onClick={() => setPaymentPopup(false)}
           />

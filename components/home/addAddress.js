@@ -59,7 +59,7 @@ export default function AddressPopup({
           </h1>
           <IconX
             size={25}
-            color="#9333ea"
+            color="#7e22ce"
             className="cursor-pointer"
             onClick={() => setaddresspopup(false)}
           />
@@ -78,7 +78,7 @@ export default function AddressPopup({
                 key={option}
                 className={`px-4 py-2 rounded-lg border ${
                   formik.values.type === option
-                    ? "border-purple-500 bg-purple-50 text-purple-600"
+                    ? "border-purple-700 bg-purple-50 text-purple-700"
                     : "border-gray-300 text-gray-600"
                 }`}
                 onClick={() => formik.setFieldValue("type", option)}>
@@ -99,7 +99,7 @@ export default function AddressPopup({
             value={formik.values.label}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-1 focus:outline-purple-500"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-1 focus:outline-purple-700"
           />
           {formik.touched.label && formik.errors.label && (
             <p className="text-red-500 text-xs mb-2">{formik.errors.label}</p>
@@ -114,7 +114,7 @@ export default function AddressPopup({
             value={formik.values.address}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-1 focus:outline-purple-500"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-1 focus:outline-purple-700"
           />
           {formik.touched.address && formik.errors.address && (
             <p className="text-red-500 text-xs mb-2">{formik.errors.address}</p>
@@ -132,18 +132,19 @@ export default function AddressPopup({
               formik.setFieldValue("phone", onlyNums);
             }}
             onBlur={formik.handleBlur}
-            className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-1 focus:outline-purple-500"
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 mb-1 focus:outline-purple-700"
           />
           {formik.touched.phone && formik.errors.phone && (
             <p className="text-red-500 text-xs mb-2">{formik.errors.phone}</p>
           )}
-
-          {/* Save Button */}
-          <button
-            type="submit"
-            className="flex justify-center items-center gap-x-2 bg-purple-600 text-white w-full px-5 py-2 rounded-lg self-end hover:bg-purple-700 transition mt-3">
-            {loading && <IconLoader2 size={20} className="animate-spin" />} Save
-          </button>
+          <div className="tracking-[1px] text-lg">
+            <button
+              type="submit"
+              className="flex justify-center items-center gap-x-2 bg-purple-700 cursor-pointer text-white w-full px-5 py-2 rounded-lg self-end transition mt-3">
+              {loading && <IconLoader2 size={20} className="animate-spin" />}{" "}
+              Save
+            </button>
+          </div>
         </form>
       </div>
     </div>

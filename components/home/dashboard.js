@@ -70,7 +70,7 @@ const Dashboard = () => {
   return (
     <div className="lg:mt-15 mt-30">
       {/* Welcome Section */}
-      <div className="bg-[#9333EA] sm:px-10 px-5 sm:py-8 py-5 sm:mx-10 mx-5 my-10 rounded-xl mt-20">
+      <div className="bg-purple-700 sm:px-10 px-5 sm:py-8 py-5 sm:mx-10 mx-5 my-10 rounded-xl mt-20">
         <h1 className="font-bold text-white text-3xl">
           Welcome back, {username}!
         </h1>

@@ -120,13 +120,13 @@ const Settings = () => {
           <div
             onClick={() => setpassPopup(true)}
             className="flex gap-x-3 items-center border border-[#adadad] hover:bg-gray-100 cursor-pointer rounded-xl px-3 py-2">
-            <IconSettings size={20} color="#9333EA" />
+            <IconSettings size={20} color="#7e22ce" />
             <span>Change Password</span>
           </div>
           <div
             onClick={() => setauthpopup(true)}
             className="flex gap-x-3 items-center border border-[#adadad] hover:bg-gray-100 cursor-pointer rounded-xl px-3 py-2">
-            <IconSettings size={20} color="#9333EA" />
+            <IconSettings size={20} color="#7e22ce" />
             <span>Two-Factor Authentication</span>
           </div>
           <div

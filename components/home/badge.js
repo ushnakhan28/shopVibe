@@ -7,7 +7,7 @@ const AppBadge = (item) => {
       <center>
         <Badge
           leftSection={item.icon}
-          color="#7C3AED"
+          color="#7e22ce"
           variant="light"
           radius="xl"
           size="lg">

@@ -103,7 +103,7 @@ const PersonalInfo = () => {
 
   return (
     <div>
-      <div className="bg-[#9333EA] lg:mt-15 mt-25 px-6 sm:px-10 py-8">
+      <div className="bg-purple-700 lg:mt-15 mt-25 px-6 sm:px-10 py-8">
         <Link
           href="/"
           className="w-[160px] items-center flex gap-x-2 text-[#e2e2e2] text-sm sm:text-base">

@@ -60,7 +60,7 @@ const PaymentMethods = () => {
             setEditIndex(null);
             setPaymentPopup(true);
           }}
-          className="flex justify-center items-center gap-x-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-medium">
+          className="flex justify-center items-center gap-x-2 cursor-pointer bg-purple-700 text-white px-4 py-2 rounded-lg font-medium">
           <IconPlus size={20} /> Add Card
         </button>
       </div>
@@ -70,7 +70,7 @@ const PaymentMethods = () => {
         {cards.length === 0 ? (
           <div className="flex flex-col mt-10 gap-y-2 items-center">
             <div className="w-14 h-14 flex items-center justify-center rounded-full bg-purple-200">
-              <IconCreditCard size={30} color="#9333ea" />
+              <IconCreditCard size={30} color="#7e22ce" />
             </div>
 
             <h1 className="font-semibold text-xl text-center">
@@ -84,7 +84,7 @@ const PaymentMethods = () => {
                 setEditIndex(null);
                 setPaymentPopup(true);
               }}
-              className="mt-4 sm:mt-2 flex items-center gap-x-2 bg-purple-600 hover:bg-purple-700 text-white font-medium cursor-pointer px-8 py-2 rounded-lg shadow">
+              className="mt-4 sm:mt-2 flex items-center gap-x-2 bg-purple-700 text-white font-medium cursor-pointer px-8 py-2 rounded-lg shadow">
               <IconPlus size={20} /> Add Card
             </button>
           </div>
