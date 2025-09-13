@@ -24,7 +24,7 @@ const WithOutLogin = (signin) => {
 
   return (
     <div className="flex justify-center items-center min-h-[90vh] px-4">
-      <div className="lg:mt-25 mt-35 mb-3 flex flex-col justify-center items-center border border-[#adadad] rounded-xl shadow-lg w-full max-w-[600px] px-3 sm:px-10 py-10">
+      <div className="lg:mt-25 mt-35 mb-3 flex flex-col justify-center items-center border border-[#adadad] rounded-lg shadow-lg w-full max-w-[600px] px-3 sm:px-10 py-10">
         <div className="flex flex-col justify-center items-center gap-y-5 text-center">
           <i className="text-4xl sm:text-5xl">{signin.icon}</i>
           <h1 className="font-bold text-xl sm:text-2xl">{signin.type}</h1>
@@ -32,13 +32,13 @@ const WithOutLogin = (signin) => {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 font-semibold w-full sm:w-auto">
             <button
               onClick={() => handlesignin(signin.btn1path)}
-              className="cursor-pointer flex gap-x-2 justify-center items-center bg-purple-700 text-white rounded-xl px-4 py-2 w-full sm:w-[200px] hover:opacity-90 transition">
+              className="cursor-pointer flex gap-x-2 justify-center items-center bg-purple-700 text-white rounded-lg px-4 py-2 w-full sm:w-[200px] hover:opacity-90 transition">
               {loader1 && <IconLoader2 className="animate-spin" size={20} />}
               {signin.btn1}
             </button>
             <button
               onClick={() => handlelogout(signin.btn2path)}
-              className="cursor-pointer flex gap-x-2 justify-center items-center border border-[#adadad] rounded-xl px-4 py-2 w-full sm:w-[200px] hover:bg-gray-200 duration-200">
+              className="cursor-pointer flex gap-x-2 justify-center items-center border border-[#adadad] rounded-lg px-4 py-2 w-full sm:w-[200px] hover:bg-gray-200 duration-200">
               {loader2 && <IconLoader2 className="animate-spin" size={20} />}
               {signin.btn2}
             </button>

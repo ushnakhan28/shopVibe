@@ -289,7 +289,7 @@ const Product = () => {
               <div
                 key={index}
                 onClick={() => setfilter(item)}
-                className={`px-2 md:px-3 py-[1px] rounded-xl cursor-pointer ${
+                className={`px-2 md:px-3 py-[1px] rounded-lg cursor-pointer ${
                   filter === item ? "bg-purple-700 text-white" : "bg-[#f0f0f0]"
                 }`}>
                 <span className="text-xs md:text-sm">{item}</span>
@@ -338,7 +338,7 @@ const Product = () => {
             }}
           />
         </div>
-        <div className="w-17 lg:block items-center overflow-hidden hidden border-2 border-[#e5d6fb] rounded-xl bg-white">
+        <div className="w-17 lg:block items-center overflow-hidden hidden border-2 border-[#e5d6fb] rounded-lg bg-white">
           <button
             onClick={() => {
               setcolumns3(false);
@@ -402,7 +402,7 @@ const Product = () => {
 
               <div className="flex justify-center mt-10 md:20 col-span-full">
                 {loading ? (
-                  <div className="flex gap-x-3 bg-white rounded-xl text-purple-700 border-2 border-purple-700 shadow-sm cursor-not-allowed px-3 py-2">
+                  <div className="flex gap-x-3 bg-white rounded-lg text-purple-700 border-2 border-purple-700 shadow-sm cursor-not-allowed px-3 py-2">
                     <IconLoader2 className="animate-spin" />
                     <span>Loading Categories...</span>
                   </div>
@@ -410,7 +410,7 @@ const Product = () => {
                   <button
                     onClick={show}
                     type="submit"
-                    className="bg-purple-700 px-6 py-3 flex gap-x-2 rounded-xl text-white cursor-pointer ">
+                    className="bg-purple-700 px-6 py-3 flex gap-x-2 rounded-lg text-white cursor-pointer ">
                     View All Categories
                     <i>
                       <IconArrowRight />
@@ -420,7 +420,7 @@ const Product = () => {
                   <button
                     onClick={less}
                     type="submit"
-                    className="bg-purple-700 px-6 py-3 flex gap-x-2 rounded-xl text-white cursor-pointer ">
+                    className="bg-purple-700 px-6 py-3 flex gap-x-2 rounded-lg text-white cursor-pointer ">
                     View Less Categories
                     <i>
                       <IconArrowLeft />
@@ -440,7 +440,7 @@ const Product = () => {
       {showpopup && selectedproduct && (
         <div className="fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center">
           <div className="absolute w-full h-full bg-black/80 backdrop-blur-[1px] pointer-events-none"></div>
-          <div className="mx-3 relative z-10 bg-white rounded-xl shadow-lg p-8 max-w-4xl max-h-[83vh] overflow-y-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="mx-3 relative z-10 bg-white rounded-lg shadow-lg p-8 max-w-4xl max-h-[83vh] overflow-y-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8">
             <button
               onClick={closepopup}
               className="cursor-pointer absolute top-3 right-3 bg-purple-700 text-white p-2 rounded-full shadow-md hover:scale-105 transition z-20">
@@ -450,7 +450,7 @@ const Product = () => {
             <div>
               <img
                 src={selectedproduct.img}
-                className="w-[550px] h-[445px] object-cover rounded-xl"
+                className="w-[550px] h-[445px] object-cover rounded-lg"
                 alt={selectedproduct.title}
               />
             </div>
@@ -528,7 +528,7 @@ const Product = () => {
                       setPopupAdded(true);
                     }}
                     disabled={popupAdded}
-                    className={`flex items-center gap-x-2 px-8 rounded-xl py-2 text-white 
+                    className={`flex items-center gap-x-2 px-8 rounded-lg py-2 text-white 
           ${
             popupAdded
               ? "bg-gray-400 cursor-not-allowed"
@@ -539,11 +539,11 @@ const Product = () => {
                   </button>
                 </div>
                 <div className="font-semibold">
-                  <button className="cursor-pointer px-8 rounded-xl py-2 border border-[#adadad]">
+                  <button className="cursor-pointer px-8 rounded-lg py-2 border border-[#adadad]">
                     Buy Now
                   </button>
                 </div>
-                <div className="flex items-center justify-center px-3 cursor-pointer rounded-xl border border-[#adadad]">
+                <div className="flex items-center justify-center px-3 cursor-pointer rounded-lg border border-[#adadad]">
                   {showbg && showbg[selectedproduct.id] ? (
                     <IconHeartFilled
                       onClick={() => bgstroke(selectedproduct.id)}
@@ -598,17 +598,17 @@ const ProductCard = ({
 }) => {
   const [added, setAdded] = useState(false);
   const handleAdd = () => {
-    addToCart(card); // product ko cart me daalna
-    setAdded(true); // button disable aur "Added" text
+    addToCart(card);
+    setAdded(true);
   };
 
   return (
     <div className="p-2 h-[380px]">
-      <div className="h-full flex flex-col justify-between border border-[#d3d3d3] p-3 rounded-xl group hover:shadow-xl duration-300">
-        <div className="relative overflow-hidden rounded-xl">
+      <div className="h-full flex flex-col justify-between border hover:scale-105 border-[#d3d3d3] p-3 rounded-lg group hover:shadow-xl duration-300">
+        <div className="relative overflow-hidden rounded-lg">
           <img
             src={card.img}
-            className="w-full h-[200px] object-cover rounded-xl group-hover:scale-105 duration-300"
+            className="w-full h-[200px] object-cover rounded-lg group-hover:scale-105 duration-300"
             alt={card.title}
           />
           {card.discount !== 0 && (
@@ -689,7 +689,7 @@ const ProductCard = ({
             <button
               onClick={handleAdd}
               disabled={added}
-              className={`items-center text-white px-3 py-2 flex gap-x-2 rounded-xl 
+              className={`items-center text-white px-3 py-2 flex gap-x-2 rounded-lg 
           ${
             added
               ? "bg-gray-400 cursor-not-allowed"

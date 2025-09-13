@@ -210,7 +210,7 @@ export default function CategoryPage() {
                 <div
                   key={index}
                   onClick={() => setfilter(item)}
-                  className={`px-2 md:px-3 py-[1px] rounded-xl cursor-pointer ${
+                  className={`px-2 md:px-3 py-[1px] rounded-lg cursor-pointer ${
                     filter === item
                       ? "bg-purple-700 text-white"
                       : "bg-[#f0f0f0]"
@@ -241,11 +241,11 @@ export default function CategoryPage() {
             {finalFilteredProducts?.length > 0 ? (
               finalFilteredProducts?.map((product) => (
                 <div key={product?.id} className="h-[380px]">
-                  <div className="h-full flex flex-col justify-between border border-[#d3d3d3] p-3 rounded-xl group hover:shadow-xl duration-300">
-                    <div className="relative overflow-hidden rounded-xl">
+                  <div className="h-full flex flex-col justify-between border border-[#d3d3d3] p-3 rounded-lg group hover:shadow-xl duration-300">
+                    <div className="relative overflow-hidden rounded-lg">
                       <img
                         src={product.img}
-                        className="w-full h-[200px] object-cover rounded-xl group-hover:scale-105 duration-300"
+                        className="w-full h-[200px] object-cover rounded-lg group-hover:scale-105 duration-300"
                         alt={product.title}
                       />
                       {product.discount !== 0 && (
@@ -317,7 +317,7 @@ export default function CategoryPage() {
                         <button
                           onClick={() => handleAdd(product, 1)}
                           disabled={addedItems[product.id]} // sirf current product disable
-                          className={`flex items-center justify-center gap-x-2 px-3 py-2 rounded-xl text-white 
+                          className={`flex items-center justify-center gap-x-2 px-3 py-2 rounded-lg text-white 
     ${
       addedItems[product.id]
         ? "bg-gray-400 cursor-not-allowed"
@@ -343,7 +343,7 @@ export default function CategoryPage() {
         {showpopup && selectedProduct && (
           <div className="fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center">
             <div className="absolute w-full h-full bg-black/80 backdrop-blur-[1px] pointer-events-none"></div>
-            <div className="mx-3 relative z-10 bg-white rounded-xl shadow-lg p-8 max-w-4xl h-[83vh] md:max-h-[90vh] overflow-y-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="mx-3 relative z-10 bg-white rounded-lg shadow-lg p-8 max-w-4xl h-[83vh] md:max-h-[90vh] overflow-y-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8">
               <button
                 onClick={closepopup}
                 className="cursor-pointer absolute top-3 right-3 bg-purple-700 text-white p-2 rounded-full shadow-md hover:scale-105 transition z-20">
@@ -353,7 +353,7 @@ export default function CategoryPage() {
               <div>
                 <img
                   src={selectedProduct.img}
-                  className="w-[550px] h-[445px] object-cover rounded-xl"
+                  className="w-[550px] h-[445px] object-cover rounded-lg"
                   alt={selectedProduct.title}
                 />
               </div>
@@ -429,7 +429,7 @@ export default function CategoryPage() {
                   <button
                     onClick={() => handleAdd(selectedProduct, quantity)}
                     disabled={addedItems[selectedProduct.id]} // same status use karo
-                    className={`flex-1 flex items-center justify-center gap-x-2 px-4 py-2 rounded-xl text-white 
+                    className={`flex-1 flex items-center justify-center gap-x-2 px-4 py-2 rounded-lg text-white 
     ${
       addedItems[selectedProduct.id]
         ? "bg-gray-400 cursor-not-allowed"
@@ -439,11 +439,11 @@ export default function CategoryPage() {
                     {addedItems[selectedProduct.id] ? "Added" : "Add to Cart"}
                   </button>
 
-                  <button className="flex-1 px-4 py-2 rounded-xl border border-[#adadad] font-semibold hover:bg-[#f5f5f5] transition">
+                  <button className="flex-1 px-4 py-2 rounded-lg border border-[#adadad] font-semibold hover:bg-[#f5f5f5] transition">
                     Buy Now
                   </button>
 
-                  <div className="flex items-center justify-center px-3 py-2 flex-shrink cursor-pointer rounded-xl border border-[#adadad]">
+                  <div className="flex items-center justify-center px-3 py-2 flex-shrink cursor-pointer rounded-lg border border-[#adadad]">
                     <div onClick={() => toggleFavorite(selectedProduct.id)}>
                       {favorites.includes(selectedProduct.id) ? (
                         <IconHeartFilled color="red" size={18} />

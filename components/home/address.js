@@ -48,7 +48,7 @@ const AddressSection = () => {
         />
       )}
 
-      <div className="bg-[#fcfcfc] m-4 sm:m-10 px-4 sm:px-8 py-6 sm:py-8 rounded-xl border border-[#e0e0e0] shadow-sm">
+      <div className="bg-[#fcfcfc] m-4 sm:m-10 px-4 sm:px-8 py-6 sm:py-8 rounded-lg border border-[#e0e0e0] shadow-sm">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
           <div>
             <h1 className="font-bold text-2xl sm:text-3xl">
@@ -98,7 +98,7 @@ const AddressSection = () => {
             addresses.map((item, index) => (
               <div
                 key={index}
-                className="border border-gray-200 rounded-xl px-5 py-4 bg-white hover:shadow-md transition">
+                className="border border-gray-200 rounded-lg px-5 py-4 bg-white hover:shadow-md transition">
                 <div className="flex flex-col sm:flex-row justify-between gap-y-3 sm:gap-y-0">
                   <div className="flex items-center gap-x-3">
                     <span className="font-medium text-base sm:text-lg">

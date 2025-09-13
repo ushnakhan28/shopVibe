@@ -66,7 +66,7 @@ export default function PaymentPopup({
 
   return (
     <div className="fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center bg-black/60 backdrop-blur-[1px]">
-      <div className="flex flex-col border bg-white border-[#eeeeee] shadow-xl w-[300px] sm:w-[500px] px-5 py-6 rounded-xl relative">
+      <div className="flex flex-col border bg-white border-[#eeeeee] shadow-xl w-[300px] sm:w-[500px] px-5 py-6 rounded-lg relative">
         <div className="flex justify-between items-center">
           <h1 className="font-semibold text-2xl">
             {existingData ? "Edit Card" : "Add Card"}

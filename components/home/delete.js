@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import * as Yup from "yup";
+import FullWidthBtn from "./fullWidthBtn";
 
 const DeletePopup = ({ deletepopup, setdeletepopup }) => {
   const router = useRouter();
@@ -49,7 +50,7 @@ const DeletePopup = ({ deletepopup, setdeletepopup }) => {
       <div className="absolute w-full h-full pointer-events-none"></div>
       <form
         onSubmit={deleteFormik.handleSubmit}
-        className="flex flex-col items-start border bg-white border-[#eeeeee] shadow-xl w-[300px] sm:w-[500px] px-4 py-6 rounded-xl">
+        className="flex flex-col items-start border bg-white border-[#eeeeee] shadow-xl w-[300px] sm:w-[500px] px-4 py-6 rounded-lg">
         <h1 className="font-bold text-2xl">Delete Account</h1>
         <p className="text-sm text-[#616161] mt-2">
           This action cannot be undone. This will permanently delete your
@@ -66,7 +67,7 @@ const DeletePopup = ({ deletepopup, setdeletepopup }) => {
                 setSelected(option);
                 deleteFormik.setFieldValue("reason", option);
               }}
-              className={`px-3 py-2 rounded-xl flex items-center gap-x-2 cursor-pointer border transition 
+              className={`px-3 py-2 rounded-lg flex items-center gap-x-2 cursor-pointer border transition 
             ${
               selected === option
                 ? "bg-red-50 border-red-500"
@@ -103,7 +104,7 @@ const DeletePopup = ({ deletepopup, setdeletepopup }) => {
               value={deleteFormik.values.confirmText}
               onChange={deleteFormik.handleChange}
               onBlur={deleteFormik.handleBlur}
-              className="px-4 py-2 mt-1 outline-purple-700 w-full rounded-xl border-[#adadad] border"
+              className="px-4 py-2 mt-1 outline-purple-700 w-full rounded-lg border-[#adadad] border"
             />
             {deleteFormik.errors.confirmText &&
               deleteFormik.touched.confirmText && (
@@ -121,7 +122,7 @@ const DeletePopup = ({ deletepopup, setdeletepopup }) => {
               value={deleteFormik.values.dltpassword}
               onChange={deleteFormik.handleChange}
               onBlur={deleteFormik.handleBlur}
-              className="px-4 py-2 mt-1 outline-purple-700 w-full rounded-xl border-[#adadad] border"
+              className="px-4 py-2 mt-1 outline-purple-700 w-full rounded-lg border-[#adadad] border"
             />
             {deleteFormik.touched.dltpassword &&
               deleteFormik.errors.dltpassword && (
@@ -134,16 +135,12 @@ const DeletePopup = ({ deletepopup, setdeletepopup }) => {
 
         {/* Buttons */}
         <div className="w-full sm:flex flex-col flex gap-y-2 mt-4 gap-x-3">
-          <button
+          <FullWidthBtn
+            text="Delete Account"
+            loading={loading}
+            icon={<IconTrash size={22} />}
             type="submit"
-            className="flex justify-center gap-x-2 items-center rounded-xl px-4 py-2 bg-purple-700 text-white w-full cursor-pointer hover:bg-[#a03bff]">
-            {loading ? (
-              <IconLoader2 className="animate-spin" size={20} />
-            ) : (
-              <IconTrash size={20} />
-            )}
-            Delete Account
-          </button>
+          />
           <button
             onClick={() => {
               setdeletepopup(false);
@@ -152,7 +149,7 @@ const DeletePopup = ({ deletepopup, setdeletepopup }) => {
                 values: { confirmText: "", dltpassword: "" },
               });
             }}
-            className="rounded-xl px-4 py-2 border border-gray-300 w-full cursor-pointer hover:bg-gray-100">
+            className="rounded-lg px-4 py-2 border border-gray-300 w-full cursor-pointer hover:bg-gray-100">
             Cancel
           </button>
         </div>

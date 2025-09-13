@@ -9,7 +9,7 @@ const CategoryBnr = ({ icon, text, head, para, stats }) => {
     <div className="relative bg-purple-700 py-16 px-4 md:px-10 -mt-5">
       <Link
         href="/"
-        className="inline-flex items-center gap-x-2 text-white bg-purple-600 text-md px-3 py-1 rounded-xl shadow-lg hover:scale-105 transition transform absolute lg:top-6 top-18 left-8">
+        className="inline-flex items-center gap-x-2 text-white bg-purple-600 text-md px-3 py-1 rounded-lg shadow-lg hover:scale-105 transition transform absolute lg:top-6 top-18 left-8">
         <IconArrowLeft size={20} />
         <span className="hidden sm:block">Back to Home</span>
       </Link>

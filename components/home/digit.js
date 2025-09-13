@@ -1,6 +1,7 @@
 import { IconCheck, IconLoader2 } from "@tabler/icons-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import FullWidthBtn from "./fullWidthBtn";
 
 const SixDigit = ({ setauthpopup, selected, isCodeSent, phoneNumber }) => {
   const [code, setCode] = useState(["", "", "", "", "", ""]);
@@ -20,7 +21,6 @@ const SixDigit = ({ setauthpopup, selected, isCodeSent, phoneNumber }) => {
   };
 
   const handleVerify = () => {
-    // Only check phone/codeSent if method is SMS
     if (selected === "SMS") {
       if (!isCodeSent || !phoneNumber) {
         setError("Please send code to your phone first");
@@ -48,7 +48,7 @@ const SixDigit = ({ setauthpopup, selected, isCodeSent, phoneNumber }) => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto px-4">
+    <div className="w-full max-w-md mx-auto">
       <h1 className="font-semibold mt-4 text-[#adadad] text-center sm:text-left">
         Enter 6-digit code
       </h1>
@@ -76,13 +76,14 @@ const SixDigit = ({ setauthpopup, selected, isCodeSent, phoneNumber }) => {
         </p>
       )}
 
-      <div className="text-lg">
-        <button
-          className="flex items-center justify-center gap-x-3 py-2 rounded-xl bg-purple-700 text-white w-full mt-4 cursor-pointer hover:bg-[#a23fff] transition-colors"
-          onClick={handleVerify}>
-          {loading && <IconLoader2 className="animate-spin" size={20} />} Verify
-        </button>
-      </div>
+      <FullWidthBtn
+        text="Verify"
+        loading={loading}
+        type="submit"
+        onClick={() => {
+          handleVerify();
+        }}
+      />
     </div>
   );
 };

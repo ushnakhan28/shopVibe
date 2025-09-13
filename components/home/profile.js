@@ -14,10 +14,12 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import FullWidthBtn from "./fullWidthBtn";
 
 const PersonalInfo = () => {
   const [edit, setedit] = useState(false);
-
+  const [editloading, seteditloading] = useState(false);
+  const [saveloading, setsaveloading] = useState(false);
   const [username, setusername] = useState("");
   const [email, setemail] = useState("");
 
@@ -37,14 +39,17 @@ const PersonalInfo = () => {
       address: Yup.string().required("Address is required"),
     }),
     onSubmit: (values) => {
-      localStorage.setItem("userName", values.username);
-      localStorage.setItem("email", values.email);
-      localStorage.setItem("phone", values.phone);
-      localStorage.setItem("address", values.address);
-
-      setusername(values.username);
-      setemail(values.email);
-      setedit(false);
+      setsaveloading(true);
+      setTimeout(() => {
+        localStorage.setItem("userName", values.username);
+        localStorage.setItem("email", values.email);
+        localStorage.setItem("phone", values.phone);
+        localStorage.setItem("address", values.address);
+        setusername(values.username);
+        setemail(values.email);
+        setedit(false);
+        setsaveloading(false);
+      }, 2000);
     },
     enableReinitialize: true,
   });
@@ -135,12 +140,12 @@ const PersonalInfo = () => {
         </div>
       </div>
 
-      <div className="sm:mx-10 my-10 mx-5 bg-[#fcfcfc] sm:p-10 p-5 rounded-xl">
+      <div className="sm:mx-10 my-10 mx-5 bg-[#fcfcfc] sm:p-10 p-5 rounded-lg">
         <div className="flex justify-between items-center">
           <h1 className="sm:font-bold font-semibold text-3xl">
             Personal Information
           </h1>
-          <div className="bg-gradient-to-r from-pink-500 to-purple-500 p-2 rounded-xl cursor-pointer hover:scale-105 duration-[0.5s]">
+          <div className="bg-gradient-to-r from-pink-500 to-purple-500 p-2 rounded-lg cursor-pointer hover:scale-105 duration-[0.5s]">
             <IconEdit onClick={() => setedit(true)} size={22} color="white" />
           </div>
         </div>
@@ -157,22 +162,23 @@ const PersonalInfo = () => {
             </div>
           ))}
         </div>
-        <button
+        <FullWidthBtn
+          text="Edit Information"
+          loading={editloading}
+          icon={<IconEdit size={22} />}
           onClick={() => setedit(true)}
-          className="mt-8 w-full flex gap-x-2 justify-center items-center cursor-pointer text-white py-2 sm:text-base rounded-lg bg-[#7D2AE8] hover:bg-[#8b32ff] duration-200">
-          <IconEdit size={20} /> Edit Information
-        </button>
+        />
       </div>
 
       {edit && (
         <div className="fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center bg-black/60 backdrop-blur-[1px]">
-          <div className="bg-[#fff] sm:p-10 p-5 rounded-xl w-[90%] sm:w-[70%] md:w-[50%] shadow-lg relative">
+          <div className="bg-[#fff] sm:p-10 p-5 rounded-lg w-[90%] sm:w-[70%] md:w-[50%] shadow-lg relative">
             <div className="flex justify-between items-center">
               <h1 className="sm:font-bold font-semibold text-3xl">
                 Edit Information
               </h1>
 
-              <div className="bg-gradient-to-r from-pink-500 to-purple-500 p-2 rounded-xl cursor-pointer hover:scale-105 duration-[0.5s]">
+              <div className="bg-gradient-to-r from-pink-500 to-purple-500 p-2 rounded-lg cursor-pointer hover:scale-105 duration-[0.5s]">
                 <IconX
                   onClick={() => {
                     setedit(false);
@@ -189,7 +195,7 @@ const PersonalInfo = () => {
               {information.map((item, index) => (
                 <div key={index} className="flex flex-col gap-y-2 w-full">
                   <label className="font-semibold">{item.infoTitle}:</label>
-                  <div className="flex items-center border border-[#adadad] px-3 py-[10px] rounded-xl w-full">
+                  <div className="flex items-center border border-[#adadad] px-3 py-[10px] rounded-lg w-full">
                     {item.icon}
                     <input
                       type="text"
@@ -208,11 +214,14 @@ const PersonalInfo = () => {
                 </div>
               ))}
 
-              <button
+              <FullWidthBtn
+                text="Save Information"
+                loading={saveloading}
+                icon={<IconDownload size={22} />}
                 type="submit"
-                className="lg:mt-2 mt-1 col-span-2 w-full flex gap-x-2 justify-center items-center cursor-pointer text-white py-2 sm:text-base rounded-lg bg-[#7D2AE8] hover:bg-[#8b32ff] duration-200">
-                <IconDownload size={20} /> Save Information
-              </button>
+                onClick={() => {}}
+                className="col-span-2"
+              />
             </form>
           </div>
         </div>

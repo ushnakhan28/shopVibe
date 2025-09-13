@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { IconLoader2, IconCheck, IconX } from "@tabler/icons-react";
 import { QRCodeCanvas } from "qrcode.react";
 import SixDigit from "./digit";
+import FullWidthBtn from "./fullWidthBtn";
 
 const AuthPopup = ({ authpopup, setauthpopup }) => {
   const [verify, setverify] = useState(false);
@@ -45,7 +46,7 @@ const AuthPopup = ({ authpopup, setauthpopup }) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center bg-black/60 backdrop-blur-[1px]">
       <div className="absolute w-full h-full pointer-events-none"></div>
-      <div className="flex flex-col items-start border bg-white border-[#eeeeee] shadow-xl w-[300px] sm:w-[500px] px-5 py-6 rounded-xl">
+      <div className="flex flex-col items-start border bg-white border-[#eeeeee] shadow-xl w-[300px] sm:w-[500px] px-5 py-6 rounded-lg">
         {!verify ? (
           <>
             <h1 className="font-bold text-2xl">Two-Factor Authentication</h1>
@@ -64,11 +65,11 @@ const AuthPopup = ({ authpopup, setauthpopup }) => {
                       setSelected(option);
                       seterror(false);
                     }}
-                    className={`px-3 py-2 rounded-xl flex items-center gap-x-2 border transition
+                    className={`px-3 py-2 rounded-lg flex items-center gap-x-2 border transition
                       ${
                         selected === option
-                          ? "bg-purple-50 border-purple-500"
-                          : "bg-white text-black border-gray-300 hover:border-purple-400"
+                          ? "bg-purple-50 border-purple-700"
+                          : "bg-white text-black border-gray-300 hover:border-purple-700"
                       }
                       ${
                         isDisabled
@@ -79,11 +80,11 @@ const AuthPopup = ({ authpopup, setauthpopup }) => {
                       className={`w-4 h-4 rounded-full border flex items-center justify-center
                         ${
                           selected === option
-                            ? "bg-white border-purple-500 border-2"
+                            ? "bg-white border-purple-700 border-2"
                             : "border-gray-400"
                         }`}>
                       {selected === option && (
-                        <span className="w-2 h-2 rounded-full bg-purple-500"></span>
+                        <span className="w-2 h-2 rounded-full bg-purple-700"></span>
                       )}
                     </span>
                     {option}
@@ -98,11 +99,11 @@ const AuthPopup = ({ authpopup, setauthpopup }) => {
             <div className="sm:flex flex flex-col gap-y-2 gap-x-3 w-full mt-5">
               <button
                 disabled={isMethodAdded}
-                className={`flex items-center justify-center gap-x-2 w-full rounded-xl px-4 py-2 
+                className={`flex items-center justify-center gap-x-2 cursor-pointer w-full rounded-lg px-4 py-2 
                   ${
                     isMethodAdded
                       ? "bg-purple-700 cursor-default"
-                      : "bg-purple-700 hover:bg-[#a03bff]"
+                      : "bg-purple-700"
                   } text-white`}
                 onClick={() => {
                   if (!selected) {
@@ -122,7 +123,7 @@ const AuthPopup = ({ authpopup, setauthpopup }) => {
               </button>
 
               <button
-                className="w-full rounded-xl px-4 py-2 border border-gray-300 hover:bg-gray-100 cursor-pointer"
+                className="w-full rounded-lg px-4 py-2 border border-gray-300 hover:bg-gray-100 cursor-pointer"
                 onClick={() => {
                   setauthpopup(false);
                   setSelected(null);
@@ -173,7 +174,7 @@ const AuthPopup = ({ authpopup, setauthpopup }) => {
                   <input
                     name="phone"
                     placeholder="Enter your number"
-                    className="border border-[#adadad] px-4 py-2 rounded-xl w-full mt-2 outline-purple-700"
+                    className="border border-[#adadad] px-4 py-2 rounded-lg w-full mt-2 outline-purple-700"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                   />
@@ -182,21 +183,21 @@ const AuthPopup = ({ authpopup, setauthpopup }) => {
                       <button
                         type="button"
                         onClick={handleSendCode}
-                        className="w-[120px] hover:bg-[#a23fff] mt-2 py-2 rounded-xl bg-purple-700 text-white cursor-pointer">
+                        className="w-[120px] hover:bg-[#a23fff] mt-2 py-2 rounded-lg bg-purple-700 text-white cursor-pointer">
                         Send Code
                       </button>
                     ) : timer > 0 ? (
                       <button
                         type="button"
                         disabled
-                        className="w-[140px] mt-2 py-2 rounded-xl bg-gray-400 text-white cursor-not-allowed">
+                        className="w-[140px] mt-2 py-2 rounded-lg bg-gray-400 text-white cursor-not-allowed">
                         Resend in {timer}s
                       </button>
                     ) : (
                       <button
                         type="button"
                         onClick={handleSendCode}
-                        className="w-[120px] hover:bg-[#a23fff] mt-2 py-2 rounded-xl bg-purple-700 text-white cursor-pointer">
+                        className="w-[120px] hover:bg-[#a23fff] mt-2 py-2 rounded-lg bg-purple-700 text-white cursor-pointer">
                         Resend Code
                       </button>
                     )}

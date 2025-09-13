@@ -62,9 +62,9 @@ const LogoutPopup = ({ setactiveTab }) => {
   };
   return (
     <div className="mb-5 min-h-[75vh] mt-6 sm:mt-10 flex items-center justify-center px-2 sm:px-4">
-      <div className="bg-white border-[#eeeeee] shadow-lg rounded-xl flex flex-col justify-center py-4 sm:py-6 px-4 sm:px-8 gap-y-3 sm:gap-y-4 w-full max-w-md">
+      <div className="bg-white border-[#eeeeee] shadow-lg rounded-lg flex flex-col justify-center py-4 sm:py-6 px-4 sm:px-8 gap-y-3 sm:gap-y-4 w-full max-w-md">
         <div className="flex justify-center">
-          <div className="bg-red-50 text-[#ff3939] w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex items-center justify-center rounded-full">
+          <div className="bg-red-50 text-red-500 w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex items-center justify-center rounded-full">
             <IconLogout size={26} className="sm:size-[30px]" />
           </div>
         </div>
@@ -77,7 +77,7 @@ const LogoutPopup = ({ setactiveTab }) => {
         </p>
 
         <div className="flex flex-col gap-y-3 sm:gap-y-4 items-center">
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-x-4 items-center sm:items-center border-[#adadad] rounded-xl w-full px-4 sm:px-5 border py-3 sm:h-20">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-x-4 items-center sm:items-center border-[#adadad] rounded-lg w-full px-4 sm:px-5 border py-3 sm:h-20">
             <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black flex items-center justify-center text-white font-semibold text-lg sm:text-xl rounded-full">
               {initials}
             </div>
@@ -87,7 +87,7 @@ const LogoutPopup = ({ setactiveTab }) => {
             </div>
           </div>
 
-          <div className="flex gap-x-3 sm:gap-x-4 items-center border-[#adadad] rounded-xl w-full px-4 sm:px-5 border py-2 sm:py-3">
+          <div className="flex gap-x-3 sm:gap-x-4 items-center border-[#adadad] rounded-lg w-full px-4 sm:px-5 border py-2 sm:py-3">
             <div className="flex-shrink-0">
               <IconShield size={24} className="sm:size-[28px] text-green-600" />
             </div>
@@ -101,7 +101,7 @@ const LogoutPopup = ({ setactiveTab }) => {
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-2">
           <button
             onClick={handleCancel}
-            className="px-4 sm:px-6 py-2 flex gap-x-2 w-full cursor-pointer justify-center items-center border border-gray-200 rounded-xl hover:bg-gray-100 duration-300 text-sm sm:text-base">
+            className="px-4 sm:px-6 py-2 flex gap-x-2 w-full cursor-pointer justify-center items-center border border-gray-200 rounded-lg hover:bg-gray-100 duration-300 text-sm sm:text-base">
             {cancelLoading ? (
               <IconLoader2 className="animate-spin" size={20} />
             ) : (
@@ -111,7 +111,7 @@ const LogoutPopup = ({ setactiveTab }) => {
           </button>
           <button
             onClick={handlebtn}
-            className="px-4 sm:px-6 py-2 flex gap-x-2 w-full cursor-pointer justify-center items-center bg-red-500 text-white rounded-xl hover:bg-red-600 duration-300 text-sm sm:text-base">
+            className="px-4 sm:px-6 py-2 flex gap-x-2 w-full cursor-pointer justify-center items-center bg-red-600 text-white rounded-lg hover:bg-red-700 duration-300 text-sm sm:text-base">
             {logoutLoading ? (
               <IconLoader2 className="animate-spin" size={20} />
             ) : (

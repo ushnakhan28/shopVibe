@@ -104,7 +104,7 @@ const Profile = () => {
                 setSidebarOpen(false);
               }}>
               <div
-                className={`flex gap-x-4 cursor-pointer items-center px-3 py-3 rounded-xl w-full font-semibold text-md ${
+                className={`flex gap-x-4 cursor-pointer items-center px-3 py-3 rounded-lg w-full font-semibold text-md ${
                   activeTab === item.sidebarContent
                     ? "bg-[#ebd6ff] text-purple-700 border-r-3 border-purple-700"
                     : "hover:bg-[#f0f0f0] text-gray-700"

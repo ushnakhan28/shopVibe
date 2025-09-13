@@ -152,7 +152,7 @@ const Header = () => {
             value={search}
             onChange={(e) => setsearch(e.target.value)}
             placeholder="Search..."
-            className="w-full pl-10 pr-8 py-1.5 rounded-xl bg-[#eeeeee] outline-purple-700 text-sm"
+            className="w-full pl-10 pr-8 py-1.5 rounded-lg bg-[#eeeeee] outline-purple-700 text-sm"
           />
           {search.length > 0 && (
             <IconX
@@ -174,7 +174,7 @@ const Header = () => {
                   setfavLoader(false);
                 }, 2000);
               }}
-              className={`cursor-pointer p-1.5 rounded-xl ${
+              className={`cursor-pointer p-1.5 rounded-lg ${
                 router.pathname === "/headerWishlist"
                   ? "bg-[#ded4ff] text-purple-700"
                   : "hover:bg-[#e9e9e9]"
@@ -188,7 +188,7 @@ const Header = () => {
                   {wishlistCount > 0 && isLoggedIn ? (
                     <div className="relative">
                       <IconHeart size={20} />
-                      <div className="rounded-xl absolute bottom-3 left-[13px] bg-red-500 w-5 h-5 flex justify-center items-center text-white text-[10px]">
+                      <div className="rounded-full absolute bottom-3 left-[13px] bg-red-500 w-5 h-5 flex justify-center items-center text-white text-[10px]">
                         {wishlistCount}
                       </div>
                     </div>
@@ -207,7 +207,7 @@ const Header = () => {
                   setcartLoader(false);
                 }, 2000);
               }}
-              className={`cursor-pointer p-1.5 rounded-xl ${
+              className={`cursor-pointer p-1.5 rounded-lg ${
                 router.pathname === "/headerCart"
                   ? "bg-[#ded4ff] text-purple-700"
                   : "hover:bg-[#e9e9e9]"
@@ -221,7 +221,7 @@ const Header = () => {
                   {cartCount > 0 && isLoggedIn ? (
                     <div className="relative">
                       <IconShoppingCart size={20} />
-                      <div className="rounded-xl absolute bottom-3 left-[13px] bg-red-500 w-5 h-5 flex justify-center items-center text-white text-[10px]">
+                      <div className="rounded-full absolute bottom-3 left-[13px] bg-red-500 w-5 h-5 flex justify-center items-center text-white text-[10px]">
                         {cartCount}
                       </div>
                     </div>
@@ -235,7 +235,7 @@ const Header = () => {
             {isLoggedIn ? (
               <div
                 onClick={() => router.push("/profile")}
-                className="cursor-pointer rounded-xl">
+                className="cursor-pointer rounded-lg">
                 <div className="sm:w-9 sm:h-9 bg-purple-700 flex items-center justify-center text-white font-semibold rounded-full">
                   {initials}
                 </div>
@@ -244,7 +244,7 @@ const Header = () => {
               <div className="relative">
                 <div
                   onClick={() => setOpenDropdown(!openDropdown)}
-                  className={`cursor-pointer p-1.5 rounded-xl ${
+                  className={`cursor-pointer p-1.5 rounded-lg ${
                     openDropdown
                       ? "bg-[#ded4ff] text-purple-700"
                       : "hover:bg-[#e9e9e9]"
@@ -298,7 +298,7 @@ const Header = () => {
             value={search}
             onChange={(e) => setsearch(e.target.value)}
             placeholder="Search..."
-            className="w-full pl-10 pr-8 py-2 rounded-xl bg-[#eeeeee] outline-purple-700 text-sm"
+            className="w-full pl-10 pr-8 py-2 rounded-lg bg-[#eeeeee] outline-purple-700 text-sm"
           />
           {search.length > 0 && (
             <IconX
@@ -336,7 +336,7 @@ const Header = () => {
                     setfavLoader(false);
                   }, 2000);
                 }}
-                className="cursor-pointer p-2 rounded-xl bg-white text-[#bb73ff]">
+                className="cursor-pointer p-2 rounded-lg bg-white text-[#bb73ff]">
                 {favLoader && router.pathname !== "/headerWishlist" ? (
                   <div className="text-purple-700">
                     <IconLoader2 className="animate-spin" size={20} />
@@ -346,7 +346,7 @@ const Header = () => {
                     {wishlistCount > 0 && isLoggedIn ? (
                       <div className="relative">
                         <IconHeart size={20} />
-                        <div className="rounded-xl absolute bottom-[18px] left-[18px] bg-red-500 w-5 h-5 flex justify-center items-center text-white text-[10px]">
+                        <div className="rounded-full absolute bottom-[18px] left-[18px] bg-red-500 w-5 h-5 flex justify-center items-center text-white text-[10px]">
                           {wishlistCount}
                         </div>
                       </div>
@@ -364,7 +364,7 @@ const Header = () => {
                     setcartLoader(false);
                   }, 2000);
                 }}
-                className="cursor-pointer p-2 rounded-xl bg-white text-[#bb73ff]">
+                className="cursor-pointer p-2 rounded-lg bg-white text-[#bb73ff]">
                 {cartLoader && router.pathname !== "/headerCart" ? (
                   <div className="text-purple-700">
                     <IconLoader2 className="animate-spin" size={20} />
@@ -374,7 +374,7 @@ const Header = () => {
                     {cartCount > 0 && isLoggedIn ? (
                       <div className="relative">
                         <IconShoppingCart size={20} />
-                        <div className="rounded-xl absolute bottom-[18px] left-[18px] bg-red-500 w-5 h-5 flex justify-center items-center text-white text-[10px]">
+                        <div className="rounded-full absolute bottom-[18px] left-[18px] bg-red-500 w-5 h-5 flex justify-center items-center text-white text-[10px]">
                           {cartCount}
                         </div>
                       </div>
@@ -388,8 +388,8 @@ const Header = () => {
             {isLoggedIn ? (
               <div
                 onClick={() => router.push("/profile")}
-                className="cursor-pointer mt-3 rounded-xl text-[#bb73ff]">
-                <div className="inline-block bg-purple-700 text-white font-semibold rounded-xl">
+                className="cursor-pointer mt-3 rounded-lg text-[#bb73ff]">
+                <div className="inline-block bg-purple-700 text-white font-semibold rounded-lg">
                   <p className="px-4 py-2 ">{username}</p>
                 </div>
               </div>

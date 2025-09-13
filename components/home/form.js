@@ -28,8 +28,8 @@ const Form = () => {
     <div>
       <center className="mt-8">
         {click ? (
-          <div className="flex flex-col gap-y-2 justify-center items-center w-full md:w-6/12 mx-auto py-8 rounded-xl bg-[#ab5ff3]">
-            <IconConfetti color="white" size={40} />
+          <div className="flex flex-col gap-y-2 justify-center items-center w-full md:w-6/12 mx-auto py-8 rounded-lg bg-[#ab5ff3]">
+            <IconConfetti color="white" size={40} className="animate-bounce" />
             <h1 className="text-white font-bold text-xl">Thank You!</h1>
             <p className="text-[#eeeeee] text-center px-3 md:px-0">
               You&apos;ve successfully subscribed to our newsletter.
@@ -43,7 +43,7 @@ const Form = () => {
               className="flex flex-col md:flex-row justify-center gap-3 md:gap-x-5 px-4 md:px-0">
               <input
                 type="email"
-                className={`border-2 rounded-xl w-full md:w-96 px-3 py-2 outline-0 ${
+                className={`border-2 rounded-lg w-full md:w-96 px-3 py-2 outline-0 ${
                   para ? "border-red-400" : "border-[#bdbdbd]"
                 }`}
                 placeholder="Enter your email address"

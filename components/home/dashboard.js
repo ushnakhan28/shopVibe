@@ -70,7 +70,7 @@ const Dashboard = () => {
   return (
     <div className="lg:mt-15 mt-30">
       {/* Welcome Section */}
-      <div className="bg-purple-700 sm:px-10 px-5 sm:py-8 py-5 sm:mx-10 mx-5 my-10 rounded-xl mt-20">
+      <div className="bg-purple-700 sm:px-10 px-5 sm:py-8 py-5 sm:mx-10 mx-5 my-10 rounded-lg mt-20">
         <h1 className="font-bold text-white text-3xl">
           Welcome back, {username}!
         </h1>
@@ -84,7 +84,7 @@ const Dashboard = () => {
         {data.map((item, index) => (
           <div
             key={index}
-            className={`rounded-xl p-5 shadow-sm ${item.bg} flex flex-col justify-between`}>
+            className={`rounded-lg p-5 shadow-sm ${item.bg} flex flex-col justify-between`}>
             <div className="flex justify-between items-start">
               <div>
                 <p className={`text-sm ${item.text}`}>{item.title}</p>

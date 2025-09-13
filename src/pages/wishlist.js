@@ -207,11 +207,11 @@ const Wishlist = () => {
               <div className="mb-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-5 mt-5 gap-x-5">
                 {wishlist?.map((card, index) => (
                   <div key={card?.id || index} className="h-[380px]">
-                    <div className="h-full flex flex-col justify-between border border-[#d3d3d3] p-3 rounded-xl group hover:shadow-xl duration-300">
-                      <div className="relative overflow-hidden rounded-xl">
+                    <div className="h-full flex flex-col justify-between border border-[#d3d3d3] p-3 rounded-lg group hover:shadow-xl duration-300">
+                      <div className="relative overflow-hidden rounded-lg">
                         <img
                           src={card?.img}
-                          className="w-full h-[200px] object-cover rounded-xl group-hover:scale-105 duration-300"
+                          className="w-full h-[200px] object-cover rounded-lg group-hover:scale-105 duration-300"
                           alt={card?.title}
                         />
                         {card.discount !== 0 && (
@@ -296,7 +296,7 @@ const Wishlist = () => {
                           <button
                             onClick={() => handleAdd(card)}
                             disabled={!!added[String(card.id)]}
-                            className={`items-center cursor-pointer text-white px-3 py-2 flex gap-x-2 rounded-xl 
+                            className={`items-center cursor-pointer text-white px-3 py-2 flex gap-x-2 rounded-lg 
     ${
       added[String(card.id)]
         ? "bg-gray-400 cursor-not-allowed"
@@ -319,7 +319,7 @@ const Wishlist = () => {
         {showpopup && selectedproduct && (
           <div className="fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center">
             <div className="absolute w-full h-full bg-black/80 backdrop-blur-[1px] pointer-events-none"></div>
-            <div className="mx-3 relative z-10 bg-white rounded-xl shadow-lg p-8 max-w-4xl h-[83vh] md:max-h-[90vh] overflow-y-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="mx-3 relative z-10 bg-white rounded-lg shadow-lg p-8 max-w-4xl h-[83vh] md:max-h-[90vh] overflow-y-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8">
               <button
                 onClick={closepopup}
                 className="cursor-pointer absolute top-3 right-3 bg-purple-700 text-white p-2 rounded-full shadow-md hover:scale-105 transition z-20">
@@ -329,7 +329,7 @@ const Wishlist = () => {
               <div>
                 <img
                   src={selectedproduct.img}
-                  className="w-[550px] h-[445px] object-cover rounded-xl"
+                  className="w-[550px] h-[445px] object-cover rounded-lg"
                   alt={selectedproduct.title}
                 />
               </div>
@@ -407,7 +407,7 @@ const Wishlist = () => {
                       handleAdd(selectedproduct);
                     }}
                     disabled={!!added[String(selectedproduct.id)]}
-                    className={`flex cursor-pointer items-center gap-x-2 px-8 rounded-xl py-2 text-white 
+                    className={`flex cursor-pointer items-center gap-x-2 px-8 rounded-lg py-2 text-white 
     ${
       added[String(selectedproduct.id)]
         ? "bg-gray-400 cursor-not-allowed"
@@ -419,11 +419,11 @@ const Wishlist = () => {
                       : "Add to Cart"}
                   </button>
 
-                  <button className="flex-1 px-4 py-2 rounded-xl border border-[#adadad] font-semibold hover:bg-[#f5f5f5] transition">
+                  <button className="flex-1 px-4 py-2 rounded-lg border border-[#adadad] font-semibold hover:bg-[#f5f5f5] transition">
                     Buy Now
                   </button>
 
-                  <div className="flex items-center justify-center px-3 py-2 flex-shrink cursor-pointer rounded-xl border border-[#adadad]">
+                  <div className="flex items-center justify-center px-3 py-2 flex-shrink cursor-pointer rounded-lg border border-[#adadad]">
                     {removingId === selectedproduct?.id ? (
                       <div className="flex text-purple-700">
                         <IconLoader2 size={20} className="animate-spin" />

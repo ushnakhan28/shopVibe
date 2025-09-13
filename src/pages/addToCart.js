@@ -106,14 +106,14 @@ const AddToCart = () => {
                     <IconShoppingCart color="#7e22ce" /> Shopping Cart
                   </h1>
                 </div>
-                <div className="mb-5 border border-[#adadad] rounded-xl px-4 sm:px-6 md:px-10 py-6 md:py-8 mt-10">
+                <div className="mb-5 border border-[#adadad] rounded-lg px-4 sm:px-6 md:px-10 py-6 md:py-8 mt-10">
                   <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
                     <h1 className="font-semibold text-xl md:text-2xl">
                       Cart Items
                     </h1>
                     <button
                       onClick={handleClearCart}
-                      className="cursor-pointer flex gap-x-2 items-center rounded-xl px-4 py-2 bg-purple-700 text-white w-full md:w-auto justify-center">
+                      className="cursor-pointer flex gap-x-2 items-center rounded-lg px-4 py-2 bg-purple-700 text-white w-full md:w-auto justify-center">
                       {allLoader ? (
                         <IconLoader2 size={20} className="animate-spin" />
                       ) : (
@@ -126,13 +126,13 @@ const AddToCart = () => {
                   <ul className="space-y-3 mt-5">
                     {cart.map((item) => (
                       <div key={item.id}>
-                        <li className="border border-[#adadad] p-3 rounded-xl flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+                        <li className="border border-[#adadad] p-3 rounded-lg flex flex-col md:flex-row md:justify-between md:items-center gap-4">
                           <div className="flex flex-col sm:flex-row gap-4">
                             <div className="w-full sm:w-[120px] h-[150px] sm:h-[100px]">
                               <img
                                 src={item.img}
                                 alt={item.title}
-                                className="w-full h-full rounded-xl object-cover"
+                                className="w-full h-full rounded-lg object-cover"
                               />
                             </div>
                             <div>
@@ -175,7 +175,7 @@ const AddToCart = () => {
                                     setloading(null);
                                   }, 2000);
                                 }}
-                                className="cursor-pointer flex gap-x-2 items-center rounded-xl px-4 py-2 bg-purple-700 text-white w-full sm:w-auto justify-center">
+                                className="cursor-pointer flex gap-x-2 items-center rounded-lg px-4 py-2 bg-purple-700 text-white w-full sm:w-auto justify-center">
                                 {loading === item.id ? (
                                   <IconLoader2
                                     size={16}

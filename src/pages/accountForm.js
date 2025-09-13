@@ -3,6 +3,7 @@ import {
   IconEye,
   IconEyeOff,
   IconLoader2,
+  IconLogin,
   IconMail,
   IconPhone,
   IconUser,
@@ -12,6 +13,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import * as Yup from "yup";
+import FullWidthBtn from "../../components/home/fullWidthBtn";
 
 const AccountForm = () => {
   const router = useRouter();
@@ -32,7 +34,9 @@ const AccountForm = () => {
       email: Yup.string()
         .email("Invalid email address")
         .required("Email is required"),
-      password: Yup.string().required("Password is required"),
+      password: Yup.string()
+        .required("Password is required")
+        .min(8, "Password must be at least 8 characters"),
       confirmPassword: Yup.string()
         .oneOf([Yup.ref("password"), null], "Passwords do not match")
         .required("Confirm password is required"),
@@ -57,15 +61,13 @@ const AccountForm = () => {
 
   return (
     <div className="flex gap-y-3 flex-col items-center justify-center h-[100vh]">
-      <Link
-        href="/"
-        className="mt-30 md:mt-1 items-center flex gap-x-2 text-[#999999]">
+      <Link href="/" className="items-center flex gap-x-2 text-[#999999]">
         <IconArrowLeft size={20} />
         <span className="hover:underline">Back to ShopVibe</span>
       </Link>
       <div
-        className="shadow-2xl sm:px-5 px-3 border border-[#dddddd] sm:py-5 py-6 rounded-xl 
-  w-[550px] 
+        className="shadow-2xl sm:px-5 px-3 border border-[#dddddd] sm:py-5 py-5 rounded-lg 
+  w-[480px] 
   max-[480px]:w-[90%]">
         <h1 className="font-bold text-2xl text-center">Create Account</h1>
         <p className="text-md text-center mt-2 text-[#adadad]">
@@ -74,9 +76,9 @@ const AccountForm = () => {
         <form onSubmit={formik.handleSubmit}>
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 mt-3 gap-x-3">
-              <div className="flex flex-col gap-y-2 mt-2 flex-1">
+              <div className="flex flex-col mt-2 flex-1">
                 <label className="font-semibold">First Name:</label>
-                <div className="flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[10px] rounded-xl">
+                <div className="flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[7px] rounded-lg">
                   <IconUser
                     className="sm:block hidden"
                     size={20}
@@ -98,9 +100,9 @@ const AccountForm = () => {
                   </p>
                 )}
               </div>
-              <div className="flex flex-col gap-y-2 mt-2 flex-1">
+              <div className="flex flex-col mt-2 flex-1">
                 <label className="font-semibold">Last Name:</label>
-                <div className="flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[10px] rounded-xl">
+                <div className="flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[7px] rounded-lg">
                   <IconUser
                     className="sm:block hidden"
                     size={20}
@@ -123,9 +125,9 @@ const AccountForm = () => {
                 )}
               </div>
             </div>
-            <div className="flex flex-col gap-y-2 mt-2">
+            <div className="flex flex-col mt-1">
               <label className="font-semibold">Email:</label>
-              <div className="flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[10px] rounded-xl">
+              <div className="flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[7px] rounded-lg">
                 <IconMail
                   className="sm:block hidden"
                   size={20}
@@ -145,9 +147,9 @@ const AccountForm = () => {
                 <p className="text-red-500 text-sm">{formik.errors.email}</p>
               )}
             </div>
-            <div className="flex flex-col gap-y-2 mt-2">
+            <div className="flex flex-col mt-1">
               <label className="font-semibold">Password:</label>
-              <div className="flex gap-x-0 sm:gap-x-3 items-center w-full border border-[#adadad] px-3 py-2 rounded-xl">
+              <div className="flex gap-x-0 sm:gap-x-3 items-center w-full border border-[#adadad] px-3 py-[7px] rounded-lg">
                 <IconPhone
                   className="sm:block hidden"
                   size={20}
@@ -178,9 +180,9 @@ const AccountForm = () => {
                 <p className="text-red-500 text-sm">{formik.errors.password}</p>
               )}
             </div>
-            <div className="flex flex-col gap-y-2 mt-2">
+            <div className="flex flex-col mt-1">
               <label className="font-semibold">Confirm Password:</label>
-              <div className="flex gap-x-0 sm:gap-x-3 items-center w-full border border-[#adadad] px-3 py-2 rounded-xl">
+              <div className="flex gap-x-0 sm:gap-x-3 items-center w-full border border-[#adadad] px-3 py-[7px] rounded-lg">
                 <IconPhone
                   className="sm:block hidden"
                   size={20}
@@ -214,12 +216,11 @@ const AccountForm = () => {
                   </p>
                 )}
             </div>
-            <button
-              type="submit"
-              className="flex gap-x-2 justify-center items-center cursor-pointer text-white w-full mt-7 px-4 py-3 rounded-xl bg-[#7D2AE8] hover:bg-[#8b32ff] duration-200">
-              {loading && <IconLoader2 className="animate-spin" size={20} />}
-              Login
-            </button>
+            <FullWidthBtn
+              text="Create Account"
+              loading={loading}
+              icon={<IconLogin size={20} />}
+            />
           </div>
         </form>
       </div>

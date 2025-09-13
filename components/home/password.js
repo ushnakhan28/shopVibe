@@ -8,6 +8,7 @@ import {
 import { useFormik } from "formik";
 import { useState } from "react";
 import * as Yup from "yup";
+import FullWidthBtn from "./fullWidthBtn";
 
 const PasswordPopup = ({ passPopup, setpassPopup }) => {
   const [showEyeIcon1, setshowEyeIcon1] = useState(false);
@@ -48,10 +49,8 @@ const PasswordPopup = ({ passPopup, setpassPopup }) => {
       setTimeout(() => {
         localStorage.setItem("password", values.newpass);
 
-        // ✅ popup close
         setpassPopup(false);
 
-        // reset form + eye icons
         formik.resetForm();
         setshowEyeIcon1(false);
         setshowEyeIcon2(false);
@@ -66,12 +65,11 @@ const PasswordPopup = ({ passPopup, setpassPopup }) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center bg-black/60 backdrop-blur-[1px]">
       <div className="absolute w-full h-full pointer-events-none"></div>
-      <div className="flex flex-col justify-center items-center border bg-white border-[#eeeeee] shadow-xl w-[300px] sm:w-[500px] px-5 py-6 rounded-xl">
+      <div className="flex flex-col justify-center items-center border bg-white border-[#eeeeee] shadow-xl w-[300px] sm:w-[500px] px-5 py-6 rounded-lg">
         <form onSubmit={formik.handleSubmit} className="w-full">
-          {/* Current Password */}
           <div className="flex flex-col gap-y-2 mt-2">
             <label className="font-semibold">Current Password:</label>
-            <div className="flex items-center border border-[#adadad] px-3 py-2 rounded-xl">
+            <div className="flex items-center border border-[#adadad] gap-x-2 px-3 py-2 rounded-lg">
               <IconLock className="sm:block hidden" size={20} color="#b9b9b9" />
               <input
                 onBlur={formik.handleBlur}
@@ -98,10 +96,9 @@ const PasswordPopup = ({ passPopup, setpassPopup }) => {
             )}
           </div>
 
-          {/* New Password */}
           <div className="flex flex-col gap-y-2 mt-2">
             <label className="font-semibold">New Password:</label>
-            <div className="flex items-center border border-[#adadad] px-3 py-2 rounded-xl">
+            <div className="flex items-center border border-[#adadad] gap-x-2 px-3 py-2 rounded-lg">
               <IconLock className="sm:block hidden" size={20} color="#b9b9b9" />
               <input
                 onBlur={formik.handleBlur}
@@ -128,10 +125,9 @@ const PasswordPopup = ({ passPopup, setpassPopup }) => {
             )}
           </div>
 
-          {/* Confirm Password */}
           <div className="flex flex-col gap-y-2 mt-2">
             <label className="font-semibold">Confirm New Password:</label>
-            <div className="flex items-center border border-[#adadad] px-3 py-2 rounded-xl">
+            <div className="flex items-center border border-[#adadad] gap-x-2 px-3 py-2 rounded-lg">
               <IconLock className="sm:block hidden" size={20} color="#b9b9b9" />
               <input
                 onBlur={formik.handleBlur}
@@ -160,25 +156,21 @@ const PasswordPopup = ({ passPopup, setpassPopup }) => {
             )}
           </div>
 
-          {/* Buttons */}
           <div className="w-full flex flex-col gap-y-2 mt-4">
-            <button
+            <FullWidthBtn
+              text="Update Password"
+              loading={loading}
               type="submit"
-              className="flex justify-center gap-x-2 items-center rounded-xl px-4 py-2 bg-purple-700 text-white w-full cursor-pointer hover:bg-[#a03bff]">
-              {loading ? (
-                <IconLoader2 className="animate-spin" size={20} />
-              ) : (
-                <IconKey size={20} />
-              )}
-              Update Password
-            </button>
+              icon={<IconKey size={22} />}
+              onClick={() => {}}
+            />
             <button
               type="button"
               onClick={() => {
                 setpassPopup(false);
                 formik.resetForm();
               }}
-              className="rounded-xl px-4 py-2 border border-gray-300 w-full cursor-pointer hover:bg-gray-100">
+              className="rounded-lg px-4 py-2 border border-gray-300 w-full cursor-pointer hover:bg-gray-100">
               Cancel
             </button>
           </div>

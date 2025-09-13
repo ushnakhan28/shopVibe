@@ -38,7 +38,7 @@ const PaymentMethods = () => {
   };
 
   return (
-    <div className="bg-[#fcfcfc] m-4 sm:m-10 px-4 sm:px-8 py-6 sm:py-8 rounded-xl border border-[#e0e0e0] shadow-sm">
+    <div className="bg-[#fcfcfc] m-4 sm:m-10 px-4 sm:px-8 py-6 sm:py-8 rounded-lg border border-[#e0e0e0] shadow-sm">
       {paymentPopup && (
         <PaymentPopup
           paymentPopup={paymentPopup}
@@ -92,7 +92,7 @@ const PaymentMethods = () => {
           cards.map((card, index) => (
             <div
               key={index}
-              className="flex flex-col sm:flex-row justify-between items-start sm:items-center border border-gray-200 rounded-xl px-5 py-4 bg-white hover:shadow-md transition">
+              className="flex flex-col sm:flex-row justify-between items-start sm:items-center border border-gray-200 rounded-lg px-5 py-4 bg-white hover:shadow-md transition">
               <div className="flex items-center gap-3">
                 <IconCreditCard className="text-gray-600" />
                 <div>

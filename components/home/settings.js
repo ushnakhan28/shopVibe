@@ -42,7 +42,7 @@ const Settings = () => {
   return (
     <div className="mb-5">
       {/* Account Settings */}
-      <div className="bg-[#fcfcfc] m-4 sm:m-10 px-4 sm:px-8 py-6 sm:py-8 rounded-xl border border-[#e0e0e0] shadow-sm">
+      <div className="bg-[#fcfcfc] m-4 sm:m-10 px-4 sm:px-8 py-6 sm:py-8 rounded-lg border border-[#e0e0e0] shadow-sm">
         <h1 className="font-bold text-2xl sm:text-3xl">Account Settings</h1>
         <p className="text-[#616161] text-sm sm:text-base tracking-[1.2px]">
           Configure your account preferences
@@ -110,7 +110,7 @@ const Settings = () => {
       </div>
 
       {/* Security */}
-      <div className="bg-[#fcfcfc] mt-8 m-4 sm:m-10 px-4 sm:px-8 py-6 sm:py-8 rounded-xl border border-[#e0e0e0] shadow-sm">
+      <div className="bg-[#fcfcfc] mt-8 m-4 sm:m-10 px-4 sm:px-8 py-6 sm:py-8 rounded-lg border border-[#e0e0e0] shadow-sm">
         <h1 className="font-bold text-2xl sm:text-3xl">Security</h1>
         <p className="text-[#616161] text-sm sm:text-base tracking-[1.2px]">
           Manage your account security
@@ -119,19 +119,19 @@ const Settings = () => {
         <div className="mt-5 flex flex-col gap-y-3">
           <div
             onClick={() => setpassPopup(true)}
-            className="flex gap-x-3 items-center border border-[#adadad] hover:bg-gray-100 cursor-pointer rounded-xl px-3 py-2">
+            className="flex gap-x-3 items-center border border-[#adadad] hover:bg-gray-100 cursor-pointer rounded-lg px-3 py-2">
             <IconSettings size={20} color="#7e22ce" />
             <span>Change Password</span>
           </div>
           <div
             onClick={() => setauthpopup(true)}
-            className="flex gap-x-3 items-center border border-[#adadad] hover:bg-gray-100 cursor-pointer rounded-xl px-3 py-2">
+            className="flex gap-x-3 items-center border border-[#adadad] hover:bg-gray-100 cursor-pointer rounded-lg px-3 py-2">
             <IconSettings size={20} color="#7e22ce" />
             <span>Two-Factor Authentication</span>
           </div>
           <div
             onClick={() => setdeletepopup(true)}
-            className="flex gap-x-3 items-center border border-[#adadad] hover:bg-gray-100 cursor-pointer rounded-xl px-3 py-2">
+            className="flex gap-x-3 items-center border border-[#adadad] hover:bg-gray-100 cursor-pointer rounded-lg px-3 py-2">
             <IconTrash size={20} color="#ff3939" />
             <span>Delete Account</span>
           </div>

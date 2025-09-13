@@ -38,32 +38,34 @@ const Category = () => {
   const visibleCategories = showAll ? categories : categories.slice(0, 6);
 
   return (
-    <div id="category" className="bg-[#f1f1f1] pb-20 pt-1">
+    <div id="category" className="bg-[#f0f0f0] pb-20 pt-1">
       <AppBadge text="Product Categories" icon={<IconCategory size={18} />} />
       <Title
         head="Shop by Category"
         para="Discover amazing products across our carefully curated categories"
       />
-      <div className="justify grid md:grid-cols-3 grid-cols-1 gap-10 md:mt-20 mt-10 md:mx-20 mx-10">
+      <div className="justify grid md:grid-cols-3 grid-cols-1 gap-15 md:mt-15 mt-10 md:mx-30 mx-10">
         {visibleCategories?.map((item) => (
           <div
             key={item.id}
-            className="bg-[#f8f8f8] rounded-xl group duration-[0.3s] overflow-hidden hover:shadow-xl">
+            className="bg-[#fcfcfc] rounded-lg group hover:scale-105 duration-[0.3s] overflow-hidden hover:shadow-xl">
             <div className="relative overflow-hidden">
               <img
-                className="group-hover:scale-105 rounded-t-xl duration-[0.3s] w-full h-[150px] md:h-[250px]"
+                className="group-hover:scale-105 rounded-t-xl duration-[0.3s] w-full h-[150px] md:h-[200px]"
                 src={item.img}
                 alt={item.name}
               />
               <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 group-hover:opacity-30 duration-[0.3s]"></div>
               <div></div>
             </div>
-            <div className="flex flex-col gap-y-2 px-5 py-8">
+            <div className="flex flex-col gap-y-1 px-5 py-3">
               <p className="font-bold text-xl">{item.name}</p>
               <p className="text-sm text-[#adadad]">{item.desc}</p>
-              <p className="text-purple-700">{item.totalProducts} Products</p>
+              <p className="text-purple-700 font-semibold">
+                {item.totalProducts} Products
+              </p>
               <Link href={`/categories/${encodeURIComponent(item.name)}`}>
-                <button className="group-hover:bg-purple-700 duration-[0.3s] group-hover:text-white w-full flex mt-2 gap-x-2 justify-center cursor-pointer border-1 border-[#cacaca] rounded-xl px-5 py-3">
+                <button className="mb-3 mt-1 group-hover:bg-purple-700 duration-[0.3s] group-hover:text-white w-full flex gap-x-2 justify-center cursor-pointer border-1 border-[#cacaca] rounded-lg px-5 py-2">
                   {item.buttonText}
                   <IconArrowRight className="group-hover:translate-x-2 duration-[0.3s]" />
                 </button>
@@ -74,7 +76,7 @@ const Category = () => {
       </div>
       <div className="flex justify-center mt-20">
         {loading ? (
-          <div className="flex gap-x-3 bg-white rounded-xl text-purple-700 border-2 border-purple-700 shadow-sm cursor-not-allowed px-3 py-2">
+          <div className="flex gap-x-3 bg-white rounded-lg text-purple-700 border-2 border-purple-700 shadow-sm cursor-not-allowed px-3 py-2">
             <IconLoader2 className="animate-spin" />
             <span>Loading Catagories...</span>
           </div>

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { IconLoader2, IconX } from "@tabler/icons-react";
+import { IconDownload, IconLoader2, IconX } from "@tabler/icons-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import FullWidthBtn from "./fullWidthBtn";
 
 export default function AddressPopup({
   addresspopup,
@@ -51,7 +52,7 @@ export default function AddressPopup({
 
   return (
     <div className="fixed top-0 left-0 w-full h-full z-50 flex justify-center items-center bg-black/60 backdrop-blur-[1px]">
-      <div className="flex flex-col border bg-white border-[#eeeeee] shadow-xl w-[300px] sm:w-[500px] px-5 py-6 rounded-xl relative">
+      <div className="flex flex-col border bg-white border-[#eeeeee] shadow-xl w-[300px] sm:w-[500px] px-5 py-6 rounded-lg relative">
         {/* Header */}
         <div className="flex justify-between items-center">
           <h1 className="font-semibold text-2xl">
@@ -137,14 +138,14 @@ export default function AddressPopup({
           {formik.touched.phone && formik.errors.phone && (
             <p className="text-red-500 text-xs mb-2">{formik.errors.phone}</p>
           )}
-          <div className="tracking-[1px] text-lg">
-            <button
-              type="submit"
-              className="flex justify-center items-center gap-x-2 bg-purple-700 cursor-pointer text-white w-full px-5 py-2 rounded-lg self-end transition mt-3">
-              {loading && <IconLoader2 size={20} className="animate-spin" />}{" "}
-              Save
-            </button>
-          </div>
+          <FullWidthBtn
+            text="Save Information"
+            loading={loading}
+            icon={<IconDownload size={22} />}
+            type="submit"
+            onClick={() => {}}
+            className="col-span-2"
+          />
         </form>
       </div>
     </div>
