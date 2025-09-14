@@ -32,7 +32,7 @@ export default function PaymentPopup({
         .required("CVV is required"),
     }),
     onSubmit: (values, { setSubmitting }) => {
-      setloading(true); // loader start
+      setloading(true);
       setTimeout(() => {
         const newCard = {
           type: values.type,
@@ -44,7 +44,7 @@ export default function PaymentPopup({
         };
         onSave(newCard);
         setPaymentPopup(false);
-        setloading(false); // loader stop
+        setloading(false);
         setSubmitting(false);
       }, 2000);
     },

@@ -40,14 +40,12 @@ const LogoutPopup = ({ setactiveTab }) => {
   const handlebtn = () => {
     setlogoutLoading(true);
     setTimeout(() => {
-      // localStorage cleanup
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("isCreated");
       localStorage.removeItem("userName");
       localStorage.removeItem("email");
       localStorage.setItem("isLoggedOut", "true");
 
-      // redirect
       router.push("/");
       setlogoutLoading(false);
     }, 3000);

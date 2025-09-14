@@ -109,8 +109,8 @@ const Profile = () => {
                     ? "bg-[#ebd6ff] text-purple-700 border-r-3 border-purple-700"
                     : "hover:bg-[#f0f0f0] text-gray-700"
                 }`}>
-                <i className="">{item.icon}</i>
-                <p className="">{item.sidebarContent}</p>
+                <i>{item.icon}</i>
+                <p>{item.sidebarContent}</p>
               </div>
             </div>
           ))}

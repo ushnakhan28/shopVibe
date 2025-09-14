@@ -1,4 +1,3 @@
-// components/AuthPopup.jsx
 import React, { useEffect, useState } from "react";
 import { IconLoader2, IconCheck, IconX } from "@tabler/icons-react";
 import { QRCodeCanvas } from "qrcode.react";

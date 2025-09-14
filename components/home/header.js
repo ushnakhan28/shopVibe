@@ -49,7 +49,6 @@ const Header = () => {
     };
   }, []);
 
-  // 🔹 Cart count listener
   useEffect(() => {
     const updateCartCount = () => {
       const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -60,7 +59,7 @@ const Header = () => {
       setCartCount(totalItems);
     };
 
-    updateCartCount(); // initial run
+    updateCartCount();
     window.addEventListener("cartUpdated", updateCartCount);
 
     return () => {

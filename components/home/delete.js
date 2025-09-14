@@ -26,7 +26,7 @@ const DeletePopup = ({ deletepopup, setdeletepopup }) => {
           const storedPassword = localStorage.getItem("password");
           return value === storedPassword;
         }),
-      reason: Yup.string().required("Please select a reason"), // 👈 ye required kar diya
+      reason: Yup.string().required("Please select a reason"),
     }),
     onSubmit: (values) => {
       setloading(true);

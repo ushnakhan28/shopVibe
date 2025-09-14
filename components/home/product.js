@@ -187,9 +187,7 @@ const Product = () => {
     "Over $200",
   ];
 
-  // Combine filters
   const finalFilteredProducts = products.filter((card) => {
-    // Category filter
     if (
       dropdown &&
       dropdown !== "All Categories" &&
@@ -198,7 +196,6 @@ const Product = () => {
       return false;
     }
 
-    // Price filter
     if (filter) {
       if (filter === "Under $25") {
         return (
@@ -259,7 +256,6 @@ const Product = () => {
     }, 2000);
   };
 
-  // No product condition
   useEffect(() => {
     setnoproduct(finalFilteredProducts.length === 0);
   }, [finalFilteredProducts]);

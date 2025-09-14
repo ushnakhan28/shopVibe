@@ -1,5 +1,3 @@
-// components/Settings.jsx
-
 import { IconSettings, IconTrash } from "@tabler/icons-react";
 import React, { useState, useEffect } from "react";
 import DeletePopup from "./delete";
@@ -10,7 +8,7 @@ const Settings = () => {
   const [deletepopup, setdeletepopup] = useState(false);
   const [authpopup, setauthpopup] = useState(false);
   const [passPopup, setpassPopup] = useState(false);
-  // Settings state (email, sms, marketing)
+
   const [settings, setSettings] = useState(() => {
     const saved = localStorage.getItem("settings");
     return saved
@@ -18,7 +16,6 @@ const Settings = () => {
       : { email: false, sms: false, marketing: false };
   });
 
-  // localStorage se saved settings load karna
   useEffect(() => {
     const savedSettings = localStorage.getItem("settings");
     if (savedSettings) {
@@ -26,12 +23,10 @@ const Settings = () => {
     }
   }, []);
 
-  // jab bhi settings change ho to localStorage update karna
   useEffect(() => {
     localStorage.setItem("settings", JSON.stringify(settings));
   }, [settings]);
 
-  // toggle function
   const handleToggle = (key) => {
     setSettings((prev) => ({
       ...prev,

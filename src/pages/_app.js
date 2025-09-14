@@ -2,11 +2,9 @@ import "@/styles/globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 
-// Mantine imports
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 
-// 🔥 Toast import
 import { Toaster } from "react-hot-toast";
 
 export default function App({ Component, pageProps }) {

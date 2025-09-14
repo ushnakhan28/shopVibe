@@ -121,7 +121,6 @@ export default function CategoryPage() {
 
       localStorage.setItem("cart", JSON.stringify(cart));
 
-      // 🔔 Header ko update karne ke liye event
       window.dispatchEvent(new Event("cartUpdated"));
     }
   };
@@ -134,7 +133,6 @@ export default function CategoryPage() {
     "Over $200",
   ];
   const finalFilteredProducts = products.filter((product) => {
-    // Price filter
     if (filter) {
       if (filter === "Under $25") {
         return (
@@ -316,7 +314,7 @@ export default function CategoryPage() {
                         )}
                         <button
                           onClick={() => handleAdd(product, 1)}
-                          disabled={addedItems[product.id]} // sirf current product disable
+                          disabled={addedItems[product.id]}
                           className={`flex items-center justify-center gap-x-2 px-3 py-2 rounded-lg text-white 
     ${
       addedItems[product.id]
@@ -428,7 +426,7 @@ export default function CategoryPage() {
                 <div className="flex flex-wrap md:flex-nowrap justify-between gap-3 mt-5">
                   <button
                     onClick={() => handleAdd(selectedProduct, quantity)}
-                    disabled={addedItems[selectedProduct.id]} // same status use karo
+                    disabled={addedItems[selectedProduct.id]}
                     className={`flex-1 flex items-center justify-center gap-x-2 px-4 py-2 rounded-lg text-white 
     ${
       addedItems[selectedProduct.id]
