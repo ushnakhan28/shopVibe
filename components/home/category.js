@@ -48,7 +48,7 @@ const Category = () => {
         {visibleCategories?.map((item) => (
           <div
             key={item.id}
-            className="bg-[#fcfcfc] rounded-lg group hover:scale-105 duration-[0.3s] overflow-hidden hover:shadow-xl">
+            className="bg-[#fcfcfc] rounded-lg group hover:scale-110 duration-[0.3s] overflow-hidden hover:shadow-xl">
             <div className="relative overflow-hidden">
               <img
                 className="group-hover:scale-105 rounded-t-xl duration-[0.3s] w-full h-[150px] md:h-[200px]"

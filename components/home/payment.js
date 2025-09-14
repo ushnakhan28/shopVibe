@@ -48,7 +48,7 @@ const PaymentMethods = () => {
         />
       )}
 
-      <div className="flex justify-between items-center mb-5">
+      <div className="flex flex-row justify-between items-start sm:items-center gap-3 mb-5">
         <div>
           <h1 className="font-bold text-2xl sm:text-3xl">Payment Methods</h1>
           <p className="text-[#616161] text-sm sm:text-base tracking-[1.2px]">
@@ -61,22 +61,20 @@ const PaymentMethods = () => {
             setPaymentPopup(true);
           }}
           className="flex justify-center items-center gap-x-2 cursor-pointer bg-purple-700 text-white px-4 py-2 rounded-lg font-medium">
-          <IconPlus size={20} /> Add Card
+          <IconPlus size={20} />
+          <span className="hidden sm:inline">Add Card</span>
         </button>
       </div>
 
-      {/* Content */}
       <div className="space-y-4">
         {cards.length === 0 ? (
-          <div className="flex flex-col mt-10 gap-y-2 items-center">
+          <div className="flex flex-col mt-10 gap-y-3 items-center text-center px-4">
             <div className="w-14 h-14 flex items-center justify-center rounded-full bg-purple-200">
               <IconCreditCard size={30} color="#7e22ce" />
             </div>
 
-            <h1 className="font-semibold text-xl text-center">
-              No Cards Saved
-            </h1>
-            <p className="text-[#616161] text-center">
+            <h1 className="font-semibold text-lg sm:text-xl">No Cards Saved</h1>
+            <p className="text-[#616161] text-sm sm:text-base">
               Add a payment method to proceed with your order.
             </p>
             <button
@@ -84,7 +82,7 @@ const PaymentMethods = () => {
                 setEditIndex(null);
                 setPaymentPopup(true);
               }}
-              className="mt-4 sm:mt-2 flex items-center gap-x-2 bg-purple-700 text-white font-medium cursor-pointer px-8 py-2 rounded-lg shadow">
+              className="mt-4 flex items-center justify-center gap-x-2 bg-purple-700 text-white font-medium cursor-pointer px-6 py-2 rounded-lg shadow">
               <IconPlus size={20} /> Add Card
             </button>
           </div>
@@ -92,11 +90,11 @@ const PaymentMethods = () => {
           cards.map((card, index) => (
             <div
               key={index}
-              className="flex flex-col sm:flex-row justify-between items-start sm:items-center border border-gray-200 rounded-lg px-5 py-4 bg-white hover:shadow-md transition">
+              className="flex flex-col sm:flex-row justify-between items-start sm:items-center border border-gray-200 rounded-lg px-4 sm:px-5 py-4 bg-white hover:shadow-md transition gap-3">
               <div className="flex items-center gap-3">
                 <IconCreditCard className="text-gray-600" />
                 <div>
-                  <h2 className="font-medium">
+                  <h2 className="font-medium text-sm sm:text-base">
                     {card.type} ending in {card.last4}
                     {card.default && (
                       <span className="ml-2 bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded-full">
@@ -104,11 +102,13 @@ const PaymentMethods = () => {
                       </span>
                     )}
                   </h2>
-                  <p className="text-sm text-gray-500">Expires {card.expiry}</p>
+                  <p className="text-xs sm:text-sm text-gray-500">
+                    Expires {card.expiry}
+                  </p>
                 </div>
               </div>
 
-              <div className="flex gap-x-2 mt-3 sm:mt-0">
+              <div className="flex gap-x-2 w-full sm:w-auto justify-end">
                 <button
                   onClick={() => {
                     setEditLoaderIndex(index);
@@ -123,7 +123,7 @@ const PaymentMethods = () => {
                     <IconLoader2 size={18} className="animate-spin" />
                   ) : (
                     <IconEdit size={18} />
-                  )}{" "}
+                  )}
                 </button>
                 <button
                   onClick={() => {
@@ -138,7 +138,7 @@ const PaymentMethods = () => {
                     <IconLoader2 size={18} className="animate-spin" />
                   ) : (
                     <IconTrash size={18} />
-                  )}{" "}
+                  )}
                 </button>
               </div>
             </div>

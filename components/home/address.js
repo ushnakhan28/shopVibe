@@ -49,7 +49,7 @@ const AddressSection = () => {
       )}
 
       <div className="bg-[#fcfcfc] m-4 sm:m-10 px-4 sm:px-8 py-6 sm:py-8 rounded-lg border border-[#e0e0e0] shadow-sm">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+        <div className="flex flex-row justify-between items-start sm:items-center">
           <div>
             <h1 className="font-bold text-2xl sm:text-3xl">
               Delivery Addresses
@@ -64,8 +64,9 @@ const AddressSection = () => {
                 setEditIndex(null);
                 setaddresspopup(true);
               }}
-              className="mt-4 sm:mt-0 flex items-center gap-x-2 bg-purple-700 text-white cursor-pointer px-4 py-2 rounded-lg shadow">
-              <IconPlus size={20} /> Add Address
+              className="mt-4 sm:mt-0 flex items-center justify-center gap-x-2 bg-purple-700 text-white cursor-pointer px-4 py-2 rounded-lg shadow">
+              <IconPlus size={20} />
+              <span className="hidden sm:inline">Add Address</span>
             </button>
           </div>
         </div>
@@ -80,7 +81,7 @@ const AddressSection = () => {
               <h1 className="font-semibold text-xl text-center">
                 No Address Saved
               </h1>
-              <p className="text-[#616161]">
+              <p className="text-[#616161] text-center">
                 Add a delivery address to proceed with your order.
               </p>
               <div className="tracking-[1px] text-lg">
