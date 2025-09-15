@@ -78,7 +78,10 @@ const AccountForm = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 mt-3 gap-x-3">
               <div className="flex flex-col mt-2 flex-1">
                 <label className="font-semibold">First Name:</label>
-                <div className="flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[7px] rounded-lg">
+                <div
+                  className={`flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[7px] rounded-lg ${
+                    formik.errors.firstName ? "border-red-500" : ""
+                  }`}>
                   <IconUser
                     className="sm:block hidden"
                     size={20}
@@ -102,7 +105,10 @@ const AccountForm = () => {
               </div>
               <div className="flex flex-col mt-2 flex-1">
                 <label className="font-semibold">Last Name:</label>
-                <div className="flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[7px] rounded-lg">
+                <div
+                  className={`flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[7px] rounded-lg ${
+                    formik.errors.lastName ? "border-red-500" : ""
+                  }`}>
                   <IconUser
                     className="sm:block hidden"
                     size={20}
@@ -127,7 +133,10 @@ const AccountForm = () => {
             </div>
             <div className="flex flex-col mt-1">
               <label className="font-semibold">Email:</label>
-              <div className="flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[7px] rounded-lg">
+              <div
+                className={`flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[7px] rounded-lg ${
+                  formik.errors.email ? "border-red-500" : ""
+                }`}>
                 <IconMail
                   className="sm:block hidden"
                   size={20}
@@ -149,7 +158,10 @@ const AccountForm = () => {
             </div>
             <div className="flex flex-col mt-1">
               <label className="font-semibold">Password:</label>
-              <div className="flex gap-x-0 sm:gap-x-3 items-center w-full border border-[#adadad] px-3 py-[7px] rounded-lg">
+              <div
+                className={`flex gap-x-0 sm:gap-x-3 items-center w-full border border-[#adadad] px-3 py-[7px] rounded-lg ${
+                  formik.errors.password ? "border-red-500" : ""
+                }`}>
                 <IconPhone
                   className="sm:block hidden"
                   size={20}
@@ -182,7 +194,10 @@ const AccountForm = () => {
             </div>
             <div className="flex flex-col mt-1">
               <label className="font-semibold">Confirm Password:</label>
-              <div className="flex gap-x-0 sm:gap-x-3 items-center w-full border border-[#adadad] px-3 py-[7px] rounded-lg">
+              <div
+                className={`flex gap-x-0 sm:gap-x-3 items-center w-full border border-[#adadad] px-3 py-[7px] rounded-lg ${
+                  formik.errors.confirmPassword ? "border-red-500" : ""
+                }`}>
                 <IconPhone
                   className="sm:block hidden"
                   size={20}

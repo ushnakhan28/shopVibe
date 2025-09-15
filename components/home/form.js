@@ -44,7 +44,7 @@ const Form = () => {
               <input
                 type="email"
                 className={`border-2 rounded-lg w-full md:w-96 px-3 py-2 outline-0 ${
-                  para ? "border-red-400" : "border-[#bdbdbd]"
+                  para ? "border-red-500" : "border-[#bdbdbd]"
                 }`}
                 placeholder="Enter your email address"
                 onChange={formik.handleChange}
@@ -55,7 +55,7 @@ const Form = () => {
             </form>
             <center>
               {para && (
-                <p className="text-red-400 mt-3">Please enter your email</p>
+                <p className="text-red-500 mt-3">Please enter your email</p>
               )}
             </center>
           </div>

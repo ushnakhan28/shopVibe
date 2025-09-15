@@ -73,7 +73,10 @@ const LoginForm = () => {
             {/* Username */}
             <div className="flex flex-col mt-2">
               <label className="font-semibold">Username:</label>
-              <div className="flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[8px] rounded-lg">
+              <div
+                className={`flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[8px] rounded-lg ${
+                  formik.errors.username ? "border-red-500" : ""
+                }`}>
                 <IconUser
                   className="sm:block hidden"
                   size={20}
@@ -96,7 +99,10 @@ const LoginForm = () => {
             {/* Email */}
             <div className="flex flex-col mt-2">
               <label className="font-semibold">Email:</label>
-              <div className="flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[8px] rounded-lg">
+              <div
+                className={`flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[8px] rounded-lg ${
+                  formik.errors.email ? "border-red-500" : ""
+                }`}>
                 <IconMail
                   className="sm:block hidden"
                   size={20}
@@ -120,7 +126,10 @@ const LoginForm = () => {
             {/* Password */}
             <div className="flex flex-col mt-2">
               <label className="font-semibold">Password:</label>
-              <div className="flex gap-x-0 sm:gap-x-3 items-center w-full border border-[#adadad] px-3 py-[8px] rounded-lg">
+              <div
+                className={`flex gap-x-0 sm:gap-x-3 items-center w-full border border-[#adadad] px-3 py-[8px] rounded-lg ${
+                  formik.errors.password ? "border-red-500" : ""
+                }`}>
                 <IconPhone
                   className="sm:block hidden"
                   size={20}
