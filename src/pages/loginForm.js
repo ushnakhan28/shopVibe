@@ -74,8 +74,10 @@ const LoginForm = () => {
             <div className="flex flex-col mt-2">
               <label className="font-semibold">Username:</label>
               <div
-                className={`flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[8px] rounded-lg ${
-                  formik.errors.username ? "border-red-500" : ""
+                className={`flex gap-x-3 items-center w-full border px-3 py-[8px] rounded-lg ${
+                  formik.touched.username && formik.errors.username
+                    ? "border-red-500"
+                    : "border-[#adadad]"
                 }`}>
                 <IconUser
                   className="sm:block hidden"
@@ -100,8 +102,10 @@ const LoginForm = () => {
             <div className="flex flex-col mt-2">
               <label className="font-semibold">Email:</label>
               <div
-                className={`flex gap-x-3 items-center w-full border border-[#adadad] px-3 py-[8px] rounded-lg ${
-                  formik.errors.email ? "border-red-500" : ""
+                className={`flex gap-x-3 items-center w-full border px-3 py-[8px] rounded-lg ${
+                  formik.touched.email && formik.errors.email
+                    ? "border-red-500"
+                    : "border-[#adadad]"
                 }`}>
                 <IconMail
                   className="sm:block hidden"
@@ -127,8 +131,10 @@ const LoginForm = () => {
             <div className="flex flex-col mt-2">
               <label className="font-semibold">Password:</label>
               <div
-                className={`flex gap-x-0 sm:gap-x-3 items-center w-full border border-[#adadad] px-3 py-[8px] rounded-lg ${
-                  formik.errors.password ? "border-red-500" : ""
+                className={`flex gap-x-0 sm:gap-x-3 items-center w-full border px-3 py-[8px] rounded-lg ${
+                  formik.touched.password && formik.errors.password
+                    ? "border-red-500"
+                    : "border-[#adadad]"
                 }`}>
                 <IconPhone
                   className="sm:block hidden"
