@@ -201,7 +201,7 @@ const AddToCart = () => {
             <WithOutLogin
               icon={<IconShoppingCart size={60} color="#7e22ce" />}
               type="Sign In to View Your Cart"
-              para="Create an account or sign in to save your favorite items and access them from any device."
+              para="Create an account or sign in to save your cart items and access them from any device."
               btn1="Sign In"
               btn2="Create Account"
               btn1path="/loginForm"

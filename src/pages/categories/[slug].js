@@ -239,7 +239,7 @@ export default function CategoryPage() {
             {finalFilteredProducts?.length > 0 ? (
               finalFilteredProducts?.map((product) => (
                 <div key={product?.id} className="h-[380px]">
-                  <div className="h-full flex flex-col justify-between border border-[#d3d3d3] p-3 rounded-lg group hover:shadow-xl duration-300">
+                  <div className="h-full flex flex-col justify-between border border-[#d3d3d3] p-3 rounded-lg hover:scale-105 group hover:shadow-xl duration-300">
                     <div className="relative overflow-hidden rounded-lg">
                       <img
                         src={product.img}
